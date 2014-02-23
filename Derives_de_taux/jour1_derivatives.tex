@@ -1,0 +1,348 @@
+\documentclass{beamer}
+\usepackage[english,francais]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{multicol}
+
+\usepackage{graphicx}
+\graphicspath{{./Derives_de_taux/}}
+
+\newcommand{\FIG}[2]{\includegraphics[width=#1]{#2}}
+
+\usetheme{Warsaw}
+\title[Pdts dérivés de taux]{Principaux produits derivés de taux. \\ Formules de valorisation et de quotation}
+\author{Antonin Chaix - Richard Guillemot}
+\institute{Master IFMA}
+\date{7 Février 2014}
+
+\setbeamertemplate{sidebar right}{}
+\setbeamertemplate{footline}{%
+\hfill\usebeamertemplate***{navigation symbols}
+\hspace{1cm}\insertframenumber{}/\inserttotalframenumber}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\begin{figure}[h]
+\centering \FIG{5cm}{figures/UPMC_IFMA.jpg}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}{Le taux monétaire, dépot ou money market}
+
+Voici l'échéancier de l'EURIBOR 6M:
+\begin{figure}[h]
+\vspace{2mm}
+\FIG{7cm}{figures/schema_euribor.jpg} 
+\vspace{1mm}
+\end{figure}
+Le taux monétaire est défini comme:
+\[
+R=L(t,T_\text{start}, T_\text{end})=\frac{1}{\delta}\left(\frac{B(t,T_\text{start})}{B(t,T_\text{end})}-1\right)
+\]
+La période est caculée avec la convention Act 360:
+\[
+\delta = \frac{T_\text{end} - T_\text{start}} {360}
+\]
+\end{frame}
+
+\begin{frame}{Le Forward Rate Agreement (FRA)}
+Le FRA permet de garantir un taux futur.\\
+Voici l'échéancier d'un FRA sur EURIBOR 6M de maturité 1 an:
+\begin{figure}[h]
+\FIG{7cm}{figures/schema_fra.jpg} 
+\end{figure}
+Le FRA est un contrat de gré à gré.\\
+Le flux payé à la date $T_1$ d'un FRA receveur de taux fixe est:
+\[
+\frac{[K-L(T_f,T_1,T_2)]\times\delta}{1+\delta L(T_f,T_1,T_2)}
+\]
+Soit $K^*$, le taux négocié aujourd'hui tel que la valeur du contrat soit nulle:
+
+\[
+K^*=L(t,T_1, T_2)=\frac{1}{\delta}\left(\frac{B(t,T_1)}{B(t,T_2)}-1\right)
+\]
+\end{frame}
+
+\begin{frame}{Le Future}
+
+Le Future est la version standardisée du FRA. Il est échangé sur un marché organisé et dispose d'une chambre de compensation.\\
+Le contrat se base sur LIBOR 3M en dollar et EURIBOR 3M en euro aux dates IMM (3ème mercredi des mois de Mars, Juin, Septembre et Décembre).\\
+\begin{center}
+\begin{tabular}{|c|r|r|}
+  \hline
+  \textbf{Future} & \textbf{$T_{start}$} & \textbf{$T_{end}$} \\
+  \hline
+  \textbf{MAR14} & 19 Mars 2014 & 18 Juin 2014 \\
+  \textbf{JUN14} & 18 Juin 2014 & 17 Septembre 2014 \\
+  \textbf{SEP14} & 17 Septembre 2014 & 17 Décembre 2014 \\
+  \textbf{DEC14} & 17 Décembre 2014 &  18 Mars 2015 \\
+  \hline
+\end{tabular}
+\end{center}
+A la maturité du contrat, R est égal au taux LIBOR 3M ou EURIBOR 3M qui prévaut à cette date.
+\end{frame}
+
+\begin{frame}{Le Future}
+Le nominal du contrat est de 1,000,000 de dollars ou d'euros.\\
+Le contrat est quoté de la façon suivante:
+\[
+100\times(1 - R)
+\] 
+avec R le taux de référence du contrat (LIBOR 3M ou EURIBOR 3M)\\
+La valeur du contrat:
+\[
+1,000,000\times(1-0.25\times R)
+\]
+Tout d'abord on achète sans frais un contrat.\\
+Ensuite on reçoit (ou paie) 25 dollars ou euros lorsque le taux de référence diminue de 1bp (ou augmente de 1bp) sous forme d'appel de marge.
+\end{frame}
+
+\begin{frame}{Le Swap}
+A traite avec B un swap \textbf{payeur} de taux fixe et B traite avec A un swap \textbf{receveur} de taux fixe. Le nominal vaut N.
+\begin{figure}[h]
+\FIG{5cm}{figures/schema_swap_1.jpg}
+\end{figure}
+Pour un swap EURIBOR standard le taux fixe est payé ou reçu annuellement et le taux variable (EURIBOR 6M) semestriellement.
+\begin{figure}[h]
+\FIG{7cm}{figures/schema_swap_2.jpg}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Le Swap}
+La valeur actuelle de la jambe fixe:
+\[
+\textbf{PV}_F(t) = \sum_{i=1}^{n}\delta_i^F \times K  \times  N  \times  B(t,T_i^F)
+\]
+$\delta_i^F$ est calculé avec la convention Bond Basis ou 30/360 (1 an=1).
+La valeur de la jambe variable:
+\[
+\textbf{PV}_V(t) = \sum_{i=1}^{m}\delta_i^V \times \frac{1}{\delta_i^V}\left(\frac{B(t,T_{i-1}^V)}{B(t,T_i^V)}-1\right)  \times  N  \times  B(t,T_i^V)
+\]
+$\delta_i^V$ est calculé avec la convention Act 360.\\
+Après simplification (formule du double nominal) :
+\[
+\textbf{PV}_V(t) = N \times \Big(B(t,T_0^V)-B(t,T_m^V)\Big)
+\]
+On remarque que la valeur de la jambe variable est indépendante de sa fréquence.
+\end{frame}
+
+\begin{frame}{Le Swap}
+La valeur actuelle du swap receveur de taux fixe est:
+\[
+\textbf{PV}_{Swap}(t) = \textbf{PV}_F(t)-\textbf{PV}_V(t)
+\]
+On appelle le taux de swap $K^*$ le taux qui rend la valeur actuelle du swap nulle:
+\[
+K^*=S(t,T_0,T_n)=\frac{B(t,T_0)-B(t,T_n)}{ \sum_{i=1}^{n}\delta_i^F \;B(t,T_i^F)}
+\]
+La quantité ${LVL}(t,T_0,T_n)$, le level ou l'annuité permet de determiner simplement le changement de valorisation d'un swap pour un mouvement du taux de swap de marché:
+\[
+\text{LVL}(t,T_0,T_n)=  \sum_{i=1}^{n}\delta_i^F \;B(t,T_i^F)
+\]
+\end{frame}
+
+\begin{frame}{Calage de la courbe des taux}
+Voici la courbe des taux interbancaires EURIBOR qui prévaut au 29/01/2014 (t la date de valeur ou asofdate):
+
+\begin{center}
+\begin{tabular}{|c|r|r|c|r|r|}
+  \hline
+  & Plots & Quote & & Plots & Quote \\
+  \hline
+  MM & 2D & 0.16\% & SWAP & 5Y & 1.08\%\\
+  MM & 1M & 0.24\% & SWAP & 7Y & 1.43\%\\
+  MM & 3M & 0.30\% & SWAP & 10Y & 1.95\%\\
+  MM & 6M & 0.40\% & SWAP & 12Y & 2.02\%\\
+  MM & 12M & 0.57\% & SWAP & 15Y & 2.13\%\\
+  SWAP & 2Y & 0.48\% & SWAP & 20Y & 2.29\%\\
+  SWAP & 3Y & 0.64\% & SWAP & 25Y & 2.43\%\\
+  SWAP & 4Y & 0.86\% & SWAP & 30Y & 2.57\%\\
+  \hline
+\end{tabular}
+\end{center}
+Comment calculer les facteurs d'actualisation et les taux zéro coupon associés aux 16 dates suivantes ? \\
+2D, 2D+1M, 2D+3M, 2D+6M, 2D+12M, 2D+1Y, 2D+2Y, 2D+3Y, 2D+4Y, 2D+5Y, 2D+7Y, 2D+10Y, 2D+12Y, 2D+15Y, 2D+20Y, 2D+25Y, 2D+30Y.
+\end{frame}
+
+\begin{frame}{Calage de la courbe des taux}
+On utilisera la composition continu pour définir de taux zéro coupon:
+\[
+B(t,T)=e^{-r(t,T) \times \delta }	
+\]
+On utlisera la convention Act 365 pour le calcul de la fraction d'année:
+\[
+\delta = \frac{T-t}{365}
+\]
+Si on a besoin d'un facteur d'actualisation qui ne fait pas partie des plots, on peut interpoler linéairement le taux zéro coupon:
+\[
+r(T)=\frac{T_{i}-T}{T_{i}-T_{i-1}}\times r(T_{i-1})+\frac{T-T_{i-1}}{T_{i}-T_{i-1}} \times r(T_{i})
+\]
+$T$ est compris entre $T_{i-1}$ et $T_{i}$ 2 plots de la courbe.
+\end{frame}
+\begin{frame}{Calage de la courbe des taux}
+A titre d'exemple calculons les plots 2D et 2D+1M:\\
+\[
+B(t,2D)=\frac{1}{1+\frac{2}{360} \times 0.16\%}=0.999991
+\]
+\[r(t,2D)=-\frac{365}{2}*\ln(0.999991)=0.16\%
+\]
+Attention le taux 1M comme tous les autres taux monétaires (sauf le taux 2D) commence dans 2 jours !
+\[
+B(t,2D+1M)=B(t,2D)\frac{1}{1+\frac{1}{12} \times \frac{365}{360}  \times 0.24\%}=0.999788
+\]
+\[r(t,2D+1M)=-\frac{1}{\frac{2}{365}+\frac{1}{12}}*\ln(0.999788)=0.24\%
+\]
+\end{frame}
+
+\begin{frame}{Remarque sur les calculs de fraction d'année}
+Par souci de simplicité et pour s'affranchir des problèmes de calendrier, nous considérons que la convention Act 365 est identique à la convention Bond Basis. Par ailleurs Act 360 est égale à la convention Bond Basis multipliée par le facteur $\frac{365}{360}$.
+\newline
+\newline
+\begin{tabular}{|c|r|r|r|c|r|r|r|}
+  \hline
+   Plot & A360 & BBasis & A365 & Plot & A360 & BBasis & A365 \\
+  \hline
+ 2D & 0.0056 & 0.0055 & 0.055 & 5Y & 5.0694 & 5 & 5\\
+ 1M & 0.0845 & 0.0833 & 0.0833 & 7Y & 7.0972 & 7 & 7 \\
+ 3M & 0.2535 & 0.25 & 0.25 & 10Y & 10.1389 & 10 & 10 \\
+ 6M & 0.5069 & 0.5 & .05  & 12Y & 12.1667 & 12 & 12 \\
+ 12M & 1.0139 & 1 & 1 & 15Y & 15.2083 & 15 & 15 \\
+ 2Y & 2.0278 & 2 & 2 & 20Y & 20.2778 & 20 & 20 \\
+ 3Y & 3.0417 & 3 & 3 & 25Y & 25.3472 & 25 & 25 \\
+ 4Y & 4.0556 & 4 & 4 & 30Y & 30.4167 & 30 & 30 \\
+  \hline
+\end{tabular}
+
+\end{frame}
+
+\begin{frame}{Algorithme de Newton Raphson}
+Le but de cet algorithme est de résoudre l'équation suivante:
+\[
+	f(x)=0
+\]
+Pour qu'il converge de façon certaine, la fonction $f$ doit être convexe.
+On choisit un point de départ quelconque $(x_0,f(x_0))$ et on calcul l'intersection ($x_1$,0) de la tangeante en ce point de la fonction $f$ avec avec l'axe des abcisses ($y=0$).
+
+\begin{center}
+\begin{tabular}{c c}
+%\begin{align}
+$\frac{f(x_0)}{x_0-x_1}=f'(x_0)$
+%\end{align} 
+&
+%\begin{align}
+$x_1=x_0-\frac{f(x_0)}{f'(x_0)}$
+%\end{align}
+\end{tabular}
+\end{center}
+
+$x_1$ est plus proche de la solution que $x_0$. On récommence en partant du point $(x_1,f(x_1))$. On réitère cette étape jusqu'à atteindre une erreur satisfaisante.\\
+On pourra approximer la fonction f par différence finie:
+\[
+f'(x_0) \simeq \frac{f(x_0+\epsilon)-f(x_0)}{\epsilon}
+\]
+\end{frame}
+
+\begin{frame}{Algorithme de Newton Raphson}
+Exemple pour la fonction $f(x)=e^{-x}-1$ avec comme point de départ $x_0=1$. 2 itérations de l'algorithme.
+\begin{center}
+\begin{figure}[h]
+\FIG{4in}{figures/newtonraphson.png}
+\end{figure}
+\end{center}
+\end{frame}
+
+\begin{frame}{Réplication d'un emprunt future}
+\begin{center}
+\begin{figure}[h]
+\FIG{4in}{figures/fwd_replic1.png}
+\end{figure}
+\end{center}
+Soit un emprunt à taux fixe qui démarre dans le futur. Nous allons le répliquer par 2 emprunts qui démarrent aujourd'hui.
+\end{frame}
+
+\begin{frame}{Réplication d'un emprunt future}
+\begin{center}
+\begin{figure}[h]
+\FIG{4in}{figures/fwd_replic2.png}
+\end{figure}
+\end{center}
+On prête aujourd'hui $B(t,T_{start})$ qui sera remboursé avec les intérêts en $T_{start}$ par un flux de 1.
+\end{frame}
+
+\begin{frame}{Réplication d'un emprunt future}
+\begin{center}
+\begin{figure}[h]
+\FIG{4in}{figures/fwd_replic3.png}
+\end{figure}
+\end{center}
+On emprunte aujourd'hui $(1+\delta K)B(t,T_{end})$ qui nous sera remboursé avec les intérêts en $T_{end}$ par un flux de $1+\delta K$.
+\end{frame}
+
+\begin{frame}{Réplication d'un emprunt future}
+Il n'y a maintenant plus de flux futures nous allons donc calculer le taux fixe $K^*$ qui égalise les flux aujourd'hui :
+\[
+K^*=L(t,T_{start}, T_{end})=\frac{1}{\delta}\left(\frac{B(t,T_{start})}{B(t,T_{end})}-1\right)
+\]
+On retrouve ainsi le taux forward précédemment défini.
+\end{frame}
+
+\begin{frame}{Quizz}
+Quel est le Payoff d'un FRA receveur de taux Fixe K ?\\
+\vspace{0.5cm}
+Le flux:
+\begin{itemize}
+\item a) $K - L(T_f,T_{1},T_{2})$ payé en $T_1$
+\item b) $\frac{K - L(t,T_{1},T_{2})}{1+\delta  L(t,T_{1},T_{2})}$ payé en $T_1$
+\item c) $\frac{K - L(T_f,T_{1},T_{2})}{1+\delta  L(T_f,T_{1},T_{2})}$ payé en $T_1$
+\item d) $\frac{K - L(T_f,T_{1},T_{2})}{1+\delta  L(t,T_{1},T_{2})}$ payé en $T_1$
+\end{itemize}
+\begin{figure}[h]
+\FIG{10cm}{figures/schema_fra.jpg}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}{Quizz}
+Le 29 Janvier 2014 j'achète un contrat futur Eurodollar (contrat en dollar sur LIBOR 3M) Mars 2014 à \textbf{99.84}.\\
+Aujourd'hui le LIBOR 3M vaut \textbf{0.22\%}, le 19 Mars 2014 le LIBOR 3M a augmenté de \textbf{40bp}.\\
+\vspace{0.5cm}
+Entre le 29 Janvier et le 19 Mars,\\
+\begin{itemize}
+\item a) j'ai reçu 1 000 euros d'appels de marge.
+\item b) j'ai payé 1 150 euros d'appels de marge.
+\item c) j'ai payé 1 000 euros d'appels de marge.
+\item d) j'ai reçu 1 150 euros d'appels de marge.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Quizz}
+Soit un emprunt qui sur nominal $N$.\\ 
+On reçoit un nominal $N$ en $T_0$.\\
+On ne paie aucun intérêt tout au long de la vie de l'emprunt.\\
+On rembourse le nominal $N$ à l'échéance $T_n$.\\
+\vspace{0.5cm}
+La valeur de cet emprunt est égale à:
+\begin{itemize}
+\item a) la jambe fixe du swap de marché (pour cet échéancier).
+\item b) 0.
+\item c) la jambe variable du swap de marché (pour cet échéancier).
+\item d) 100.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Quizz}
+Je suis "long" (sous entendu long des obligations), c'est à dire que je gagne de l'argent quand les taux baissent,:
+\begin{itemize}
+\item a) si j'ai emprunté à taux fixe.
+\item b) si j'ai prêté à taux fixe.
+\item c) si j'ai emprunté à taux variable.
+\item d) si j'ai prêté à taux variable.
+\item e) si j'ai contracté un swap où je paie le taux fixe.
+\item f) si j'ai contracté un swap où je reçois le taux fixe.
+\end{itemize}
+\end{frame}
+
+\end{document}

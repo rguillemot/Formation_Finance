@@ -1,0 +1,345 @@
+\documentclass{beamer}
+\usepackage[english,francais]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{multicol}
+\usepackage{color}
+
+\usepackage{graphicx}
+\graphicspath{{Derives_de_taux/}}
+
+\newcommand{\FIG}[2]{\includegraphics[width=#1]{#2}}
+
+\usetheme{Warsaw}
+\title[Produits dérivés de taux]{Options de taux}
+\author{Antonin Chaix - Richard Guillemot}
+\institute{Master IFMA}
+\date{20 Février 2014}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\begin{figure}[h]
+\centering \FIG{5cm}{figures/UPMC_IFMA.jpg}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}{Quizz}
+Soit une courbe de taux constante égale à 2\% (taux actuariel à composition annuelle).\\
+\vspace{0.5cm}
+Quel est le nominal et le sens d'un swap de marché payeur de taux fixe, de maturité 20 ans dont la sensibilité est égale à 328 kEUR/bp?\\
+\vspace{0.5cm}
+a) 50 Mios d'euros payeur de taux fixe.\\
+b) 100 Mios d'euros receveur de taux fixe.\\
+c) 150 Mios d'euros receveur de taux fixe.\\
+d) 200 Mios d'euros payeur de taux fixe.\\
+\end{frame}
+
+
+\begin{frame}{Quizz}
+Soit une courbe de taux constante égale à 2\% (taux actuariel à composition annuelle).\\
+\vspace{0.5cm}
+Quel est le tenor d'un swap de marché payeur de taux fixe de nominal 100 Mios d'euros dont la sensibilité est égale à 128 kEUR/bp?\\
+\vspace{0.5cm}
+a) 10 ans.\\
+b) 15 ans.\\
+c) 20 ans.\\
+d) 30 ans.\\
+\end{frame}
+
+\begin{frame}{Quizz}
+Soit un swap dont la sensibilité est de -90kEUR/bp et la convexité est de 94 EUR bp/bp.\\
+\vspace{0.5cm}
+Quelle est sa sensibilité si les taux augmente de 100bp ?\\
+a) -81 kEUR/bp.\\
+b) -99 kEUR/bp.\\
+c) -85 kEUR/bp.\\
+d) -95 kEUR/bp.\\
+\end{frame}
+
+\begin{frame}{Quizz}
+Quel est le produit qui apporte le plus de convexité/concavité de taux (pour une maturité, un sens et un nominal donné) ?\\
+\vspace{0.5cm}
+a) Une jambe variable de swap.\\
+b) Une jambe fixe de swap.\\
+c) Un swap.\\
+d) Une obligation à taux variable.\\
+\end{frame}
+
+\begin{frame}{Taux Stochastiques}
+En l'absence d'opportunités d'arbitrage il existe une probabilité $Q$ où la valeur actualisée d'un actif financier est une martingale, c'est à dire si $X_t$ est la valeur d'un actif financier à la date $t$:
+\[
+	M_t = e^{-\int_0^t r_s ds}X_t
+\]
+est une $Q$ martingale.\\
+Par conséquent la valeur actuelle de l'actif est:
+\[
+	X_t=\mathbb{E}^Q_t[\color{red} e^{-\int_0^T r_s} \color{black} X_T]
+\]
+Lorsque \color{red}\textbf{les taux sont stochastiques}\color{black}, on ne peut pas sortir le facteur d'actualisation de l'espérance!!!!
+\end{frame}
+
+\begin{frame}{Changement de numéraire}
+Un numéraire est un actif financier $N_t$:
+\begin{itemize}
+\item ne distribuant pas de dividendes.
+\item toujours strictement positif.
+\end{itemize}
+\vspace{0.5cm}
+$N_t$ est associé à une une mesure de probabilité $Q^N$.\\
+\vspace{0.5cm}
+Pour tout actif X de marché de valeur $X_t$,\\
+ $\frac{X_t}{N_t}$ est une $Q^N$-martingale donc:
+\[
+\frac{X_t}{N_t}=\mathbb{E}^{Q^N}_t\left[\frac{X_T}{N_T}\right]
+\]
+\vspace{0.5cm}
+Par conséquent si on considère 2 numéraires $N_t$ et $N'_t$:
+\[
+X_t=N_t\mathbb{E}^{Q^N}_t\left[\frac{X_T}{N_T}\right]=N'_t\mathbb{E}^{Q^{N'}}_t\left[\frac{X_T}{N'_T}\right]
+\]
+\end{frame}
+
+\begin{frame}{Les probabilités risque-neutre et forward-neutre}
+\begin{itemize}
+\item La probabilité \textbf{risque-neutre} $Q$ est associée au numéraire:
+\[
+N_t=e^{\int_0^t r_s ds }
+\]
+qui correspond à 1 euro capitalisé jusqu'en t de façon continue.
+\vspace{0.5cm}\\
+\item La probabilité \textbf{forward-neutre} $Q^T$ est associée au numéraire:
+\[
+N_t=B(t,T)=\mathbb{E}^Q_t[e^{-\int_0^T r_s}]
+\]
+qui correspond à recevoir 1 euro en T.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Exemple "classique" de changement de numéraire}
+Soit X un call sur un sous-jacent de valeur $S_t$ de maturité $T$. Il paie donc en $T$ le flux suivant $(S_t-K)_+$.\\
+Sa valeur est en $t$ est:
+\[
+X_t=\mathbb{E}[e^{-\int_0^t r_s ds}(S_t-K)_+]
+\]
+Si l'on passe sous la probabilité forward-neutre $Q^T$:
+\[
+X_t=\mathbb{E}^{Q^T}\left[\frac{(S_t-K)_+}{B(T,T)}\right]
+\]
+On ne considère plus l'actif $S_T$ mais le forward $F_t=\frac{S_t}{B(t,T)}$  qui par construction est une martingale sous $Q^T$ (pas de drift dans la diffusion).\\
+$F_t$ est la valeur de S exprimée dans le numéraire $B(t,T)$.
+\end{frame}
+\begin{frame}{Exemple "classique" de changement de numéraire}
+On modélise alors $F_t$ de la façon suivante:
+\[
+\left\{
+\begin{split}
+&dF_t=\sigma\; F_t \;dW_t^{Q^T}\\
+&\text{où } W^{Q^T}\text{est un mouvement brownien standard sous la mesure }Q^T
+\end{split}
+\right.
+\]
+On valorise alors l'option au moyen de la formule de Black \& Scholes :
+\[
+X_t=B(t,T)\;\text{\textbf{BS}}_\text{call}(T-t,K,F_t,\sigma)
+\]
+avec:
+\[
+\left\{
+\begin{split}
+&\text{\textbf{BS}}_\text{call}(\tau,K,F,\sigma)=F\mathcal{N}(d_1)-K \mathcal{N}(d_2)\\
+&\text{\textbf{BS}}_\text{put}(\tau,K,F,\sigma)=K\mathcal{N}(-d_2)-F \mathcal{N}(-d_1)\\
+&\mathcal{N} : \text{fonction de répartition de la loi normale centrée réduite}\\
+&d_1=\frac{\ln\left(\frac{F}{K}\right)+\frac{1}{2}\sigma^2\tau}{\sigma\sqrt{\tau}}\\
+&d_2=d_1-\sigma\sqrt{\tau}
+\end{split}
+\right.
+\]
+\end{frame}
+
+\begin{frame}{Caps et Floors}
+Considérons un cap sur EURIBOR 6m de strike $K$ qui démarre en $T_0$ et mature en $T_n$.
+\begin{figure}[h]
+\FIG{10cm}{figures/schema_cap.jpg}
+\end{figure}
+A chaque date $T_i$, le cap verse le flux suivant:
+\[
+\delta_i\; \max \big(L(T_{i -1}^f,T_{i -1},T_i) - K, 0\big)
+\]
+avec:
+\begin {itemize}
+\item $T_{i -1}^f$: la date de fixing de l'EURIBOR 6M qui demarre en $T_{i -1}$ et mature en $T_{i}$.
+\item $\delta_i$: la fraction d'année exprimée dans la convention Act 360.
+\end {itemize}
+\end{frame}
+
+\begin{frame}{Caps et Floors}
+Un cap est un panier de caplets. On peut valoriser un caplet ainsi:
+\[
+\textbf{PV}_\text{Caplet}^i(t)=\delta_i \mathbb{E}_t^{Q}\Big(e^{-\int_0^{T_i} r_s ds}\big(L(T_ {i-1}^f,T_{i-1},T_i)-K\big)^+\Big)
+\]
+en passant sous le mesure forward neutre $Q^{T_i}$:
+\[
+\textbf{PV}_\text{Caplet}^i(t)=\delta_i \;B(t,T_i)\;\mathbb{E}_t^{Q^{T_i}}\Big(\big(L(T_ {i-1}^f,T_{i-1},T_i)-K\big)^+\Big)
+\]
+Nous allons reproduire le raisonnement de l'exemple classique, en effet $L(T_ {i-1}^f,T_{i-1},T_i)$ est une martingale sous $Q^{T_i}$:
+\[
+L(t,T_{i-1},T_i)= \frac{B(t,T_{i-1})-B(t,T_i)}{B(t,T_i)}
+\]
+C'est la valeur d'un prêt forward qui démarre en $T_{i-1}$ et mature en $T_i$ exprimée dans le numéraire forward $T_i$.
+\end{frame}
+
+\begin{frame}{Caps et Floors}
+Si on suppose une dynamique log-normale sur le LIBOR :
+\[
+\left\{
+\begin{split}
+&dL(t,T_{i-1},T_i)=\sigma\;L(t,T_{i-1},T_i) \;dW_t^{Q^{T_i}}\\
+&\text{où } W^{Q^{T_i}}\text{est un mouvement brownien standard sous la mesure }Q^{T_i}
+\end{split}
+\right.
+\]
+
+On peut exprimer la valeur actuelle du caplet au moyen de la formule de Black \& Scholes  :
+\[
+\textbf{PV}_\text{Caplet}^i(t)=\delta_i B(t,T_i) \;\text{\textbf{BS}}_\text{call}\big(T_{i-1}^f-t,K,L(t,T_{i-1},T_i),\sigma\big)
+\]
+
+\end{frame}
+
+\begin{frame}{Swaption}
+Soit l'échéancier d'un swap standard qui démarre en $T_0$ et mature en $T_n$\\
+Le détenteur de la swaption associée payeuse de strike K est l'option d'entrer, à la date de maturité $T_f=T_0-2\text{ jours ouvrés}$,  dans ce swap sans frais quelque soit le niveau de marché.
+\begin{figure}[h]
+\FIG{10cm}{figures/schema_swaption.jpg}
+\end{figure}
+\end{frame}
+\begin{frame}{Swaption}
+On valorise la swaption de la façon suivante:
+\[
+\textbf{PV}_\text{Sw}^P(t)=B(t,T_f)\;\mathbb{E}_t^{Q^{T_f}}\Big(\big(\textbf{PV}_V(T_f)-\textbf{PV}_F(T_f)\big)^+\Big)
+\]
+que l'on peut réécrire en fonction du taux de swap et de l'annuité:
+\[
+\textbf{PV}_\text{Sw}^P(t)=B(t,T_f)\;\mathbb{E}_t^{Q^{T_f}}\Big(\text{LVL}(T_f,T_0,T_n)\;\big(S(T_f,T_0,T_n)-K\big)^+\Big)
+\]
+avec:
+\[
+\text{LVL}(t,T_0,T_n)=\sum_{i=1}^{n}\delta_i \;B(t,T_i)
+\]
+\[
+S(t,T_0,T_n)= \frac{B(t,T_0)-B(t,T_n)}{\text{LVL}(t,T_0,T_n)}
+\]
+\end{frame}
+
+\begin{frame}{Swaption}
+On passe sous la mesure Level $Q^{\text{LVL}}$ aussi dite \textbf{swap-neutre}, la mesure du numéraire Level:
+\[
+\textbf{PV}_\text{Sw}^P(t)=\text{LVL}(t,T_0,T_n)\;\mathbb{E}_t^{Q^{\text{LVL}}}\Big(\big(S(T_f,T_0,T_n)-K\big)^+\Big)
+\]
+sous laquelle le taux de swap est naturellement martingale.\\
+On suppose une dynamique lorgnormale pour le taux de swap:
+\[
+\left\{
+\begin{split}
+&dS(t,T_0,T_n)=\sigma S(t,T_0,T_n) \;dW_t^{Q^{\text{LVL}}}\\
+&\text{où } W^{Q^{\text{LVL}}}\text{est un mouvement brownien standard sous la mesure }Q^{\text{LVL}}
+\end{split}
+\right.
+\]
+ce qui nous donne:
+\[
+\textbf{PV}_\text{Sw}^P(t)=\text{LVL}(t,T_0,T_n) \;\text{\textbf{BS}}_\text{call}\big(T_f-t,K,S(t,T_{0},T_n),\sigma\big)
+\]
+\end{frame}
+
+\begin{frame}{Le modèle normal}
+La dynamique du taux est la suivante:
+\[
+dF_t=\sigma\; dW_t
+\]
+Son intégration est immédiate:
+\[
+F_t = F_0 + \sigma W_t
+\]
+On peut facilement calculer la valeur actuelle d'un call ou d'un put:
+\[
+\begin{split}
+&\text{\textbf{N}}_\text{call}(\tau,K,F,\sigma)=\sigma\sqrt{\tau}\Big(d^+\mathcal{N}(d^+)+\mathcal{N}'(d^+)\Big)\\
+&\text{\textbf{N}}_\text{put}(\tau,K,F,\sigma)=\sigma\sqrt{\tau}\Big(d^-\mathcal{N}(d^-)+\mathcal{N}'(d^-)\Big)\\
+\end{split}
+\]
+avec :
+\[
+d^\pm = \pm \frac{F-K}{\sigma\sqrt{\tau}}
+\]
+\end{frame}
+
+\begin{frame}{Le modèle normal}
+Il produit un smile décroissant:
+\begin{figure}[h]
+\FIG{8cm}{figures/smile_normal.jpg}
+\end{figure}
+Le taux forward est 5\%. La volatilité normale $\sigma$ est égale à 0,90\%. 
+\end{frame}
+
+\begin{frame}{Le modèle Lognormal décalé}
+La dynamique du taux est la suivante:
+\[
+dF_t=\sigma (F_t + d)dW_t
+\]
+On l'intègre facilement:
+\[
+F_t = (F_0+d)\exp\left(-\frac{1}{2}\sigma^2t+\sigma W_{t} \right)-d
+\]
+On peut facilement calculer la valeur d'un call ou d'un put en adaptant la formule de Black \& Scholes:
+\[
+\mathbf{SL}_\text{call/put}(\tau,K,F,\sigma,d)=\mathbf{BS}_\text{call/put}(\tau,K+d,F+d,\sigma)
+\]
+\end{frame}
+
+\begin{frame}{Le modèle Lognormal décalé}
+Le modèle lornormal décalé permet de contrôler la pente du smile gràce au paramètre de décalage:\\
+\begin{figure}[h]
+\FIG{7cm}{figures/smile_shifted_log.jpg}
+\end{figure}
+Le forward est égal à 5\%. Le paramètre $\sigma$ est calibré de telle sorte que la volatilité à la monnaie (strike 5\%) demeure égale à 18\%. 
+\end{frame}
+
+\begin{frame}{Le modèle SABR}
+SABR est l'acronyme de Sigma-Alpha-Beta-Rho, le noms de ses paramètres.\\
+Sa diffusion est la suivante:
+
+\[
+\left\{
+\begin{split}
+dF_t &= \sigma_t \;F_t^\beta dW_t^1\\
+\frac{d\sigma_t}{\sigma_t} &= \alpha \; dW_t^2
+\end{split}
+\right.
+\]
+
+Le modèle SABR est défini par quatre paramètres:
+
+\begin{itemize}
+\item $\sigma_0$ : valeur initiale de la volatilité
+
+\item $\alpha$ : volatilité (log-normale) de la volatilité (\textit{volvol})
+
+\item $\beta$ : exposant CEV, compris entre 0 et 1%; on l'appelle parfois le \textit{backbone}.
+
+\item $\rho$ : corrélation entre les deux browniens ($d<W^1,W^2>_t = \rho dt$, $\rho\in[-1,1]$)
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Le modèle SABR}
+\begin{figure}[h]
+\FIG{7cm}{figures/sabr_impact_param.jpg}
+\end{figure}
+On considère une option de maturité 1 an sur un taux sous-jacent de forward $F_0=5.00\%$. On part du jeu de paramètres SABR suivant: $\sigma_0=0.03$, $\alpha=0.60$, $\rho=-0.10$, $\beta=0.40$.
+\end{frame}
+
+\end{document}

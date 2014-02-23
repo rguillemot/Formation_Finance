@@ -1,0 +1,524 @@
+\documentclass{beamer}
+\usepackage[english,francais]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{multirow}
+\usepackage{color}
+
+\usepackage{graphicx}
+\graphicspath{{Derives_de_taux/}}
+
+\newcommand{\FIG}[2]{\includegraphics[width=#1]{#2}}
+\usetheme{Warsaw}
+\title[Produits dérivés de taux]{Calage de la courbe des taux et couverture.}
+\author{Antonin Chaix - Richard Guillemot}
+\institute{Master IFMA}
+\date{7 Février 2014}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\begin{figure}[h]
+\centering \FIG{5cm}{figures/UPMC_IFMA.jpg}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}{Quizz}
+Quel est le Payoff d'un FRA receveur de taux Fixe K ?\\
+\vspace{0.5cm}
+Le flux:
+\begin{itemize}
+\item a) $K - L(T_f,T_{1},T_{2})$ payé en $T_1$ \textbf{\color{red}FAUX}
+\item b) $\frac{K - L(t,T_{1},T_{2})}{1+\delta  L(t,T_{1},T_{2})}$ payé en $T_1$ \textbf{\color{red}FAUX}
+\item c) $\frac{K - L(T_f,T_{1},T_{2})}{1+\delta  L(T_f,T_{1},T_{2})}$ payé en $T_1$ \textbf{\color{green}VRAI!}
+\item d) $\frac{K - L(T_f,T_{1},T_{2})}{1+\delta  L(t,T_{1},T_{2})}$ payé en $T_1$ \textbf{\color{red}FAUX}
+\end{itemize}
+\begin{figure}[h]
+\FIG{10cm}{figures/schema_fra.jpg}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}{Quizz}
+Le 29 Janvier 2014 j'achète un contrat futur Eurodollar (contrat en dollar sur LIBOR 3M) Mars 2014 à \textbf{99.84}.\\
+Aujourd'hui le LIBOR 3M vaut \textbf{0.22\%}, le 19 Mars 2014 le LIBOR 3M a augmenté de \textbf{40bp}.\\
+\vspace{0.5cm}
+Entre le 29 Janvier et le 19 Mars,\\
+\begin{itemize}
+\item a) j'ai reçu 1 000 euros d'appels de marge. \textbf{\color{red}FAUX}
+\item b) j'ai payé 1 150 euros d'appels de marge. \textbf{\color{green}VRAI!}
+\item c) j'ai payé 1 000 euros d'appels de marge. \textbf{\color{red}FAUX}
+\item d) j'ai reçu 1 150 euros d'appels de marge. \textbf{\color{red}FAUX}
+
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Quizz}
+Soit un emprunt qui sur nominal $N$.\\ 
+On reçoit un nominal $N$ en $T_0$.\\
+On ne paie aucun intérêt tout au long de la vie de l'emprunt.\\
+On rembourse le nominal $N$ à l'échéance $T_n$.\\
+\vspace{0.5cm}
+La valeur de cet emprunt est égale à:
+\begin{itemize}
+\item a) la jambe fixe du swap de marché (pour cet échéancier). \textbf{\color{green}VRAI!}
+\item b) 0. \textbf{\color{red}FAUX}
+\item c) la jambe variable du swap de marché (pour cet échéancier). \textbf{\color{green}VRAI!}
+\item d) 100. \textbf{\color{red}FAUX}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Quizz}
+Je suis "long" (sous entendu long des obligations), c'est à dire que je gagne de l'argent quand les taux baissent,:
+\begin{itemize}
+\item a) si j'ai emprunté à taux fixe. \textbf{\color{red}FAUX}
+\item b) si j'ai prêté à taux fixe. \textbf{\color{green}VRAI!}
+\item c) si j'ai emprunté à taux variable \textbf{Insensible aux taux}. 
+\item d) si j'ai prêté à taux variable \textbf{Insensible aux taux}.
+\item e) si j'ai contracté un swap où je paie le taux fixe. \textbf{\color{red}FAUX}
+\item f) si j'ai contracté un swap où je reçois le taux fixe. \textbf{\color{green}VRAI!}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{La courbe des taux : le problème}
+Voici la courbe des taux interbancaires EURIBOR qui prévaut au 29/01/2014 (t la date de valeur ou asofdate):
+
+\begin{center}
+\begin{tabular}{|c|r|r|c|r|r|}
+  \hline
+  & Plots & Quote & & Plots & Quote \\
+  \hline
+  MM & 2D & 0.16\% & SWAP & 5Y & 1.08\%\\
+  MM & 1M & 0.24\% & SWAP & 7Y & 1.43\%\\
+  MM & 3M & 0.30\% & SWAP & 10Y & 1.95\%\\
+  MM & 6M & 0.40\% & SWAP & 12Y & 2.02\%\\
+  MM & 12M & 0.57\% & SWAP & 15Y & 2.13\%\\
+  SWAP & 2Y & 0.48\% & SWAP & 20Y & 2.29\%\\
+  SWAP & 3Y & 0.64\% & SWAP & 25Y & 2.43\%\\
+  SWAP & 4Y & 0.86\% & SWAP & 30Y & 2.57\%\\
+  \hline
+\end{tabular}
+\end{center}
+Comment calculer les facteurs d'actualisation et les taux zéro coupon associés aux 16 dates suivantes ? \\
+2D, 2D+1M, 2D+3M, 2D+6M, 2D+12M, 2D+1Y, 2D+2Y, 2D+3Y, 2D+4Y, 2D+5Y, 2D+7Y, 2D+10Y, 2D+12Y, 2D+15Y, 2D+20Y, 2D+25Y, 2D+30Y.
+\end{frame}
+
+\begin{frame}{L'interpolation linéaire}
+On utilisera la composition continue pour définir les taux zéro coupon:
+\[
+B(t,T)=e^{-r(t,T) \times \delta }	
+\]
+On utlisera la convention Act 365 pour le calcul de la fraction d'année:
+\[
+\delta = \frac{T-t}{365}
+\]
+Si on a besoin d'un facteur d'actualisation qui ne fait pas partie des plots, on peut interpoler linéairement le taux zéro coupon:
+\[
+r(T)=\frac{T_{i}-T}{T_{i}-T_{i-1}}\times r(T_{i-1})+\frac{T-T_{i-1}}{T_{i}-T_{i-1}} \times r(T_{i})
+\]
+$T$ est compris entre $T_{i-1}$ et $T_{i}$, 2 plots de la courbe.
+\end{frame}
+
+\begin{frame}{Algorithme Bootstrap : les taux monétaires}
+Le plot 2D est particulier car démarre aujourd'hui:\\
+\[
+B(t,2D)=\frac{1}{1+\frac{2}{360} \times 0.16\%}=0.999991
+\]
+\[r(t,2D)=-\frac{365}{2}*\ln(0.999991)=0.162\%
+\]
+Attention le taux 1M comme tous les autres taux monétaires (sauf le taux 2D) commence dans 2 jours !
+\[
+B(t,2D+1M)=B(t,2D)\frac{1}{1+\frac{1}{12} \times \frac{365}{360}  \times 0.24\%}=0.999788
+\]
+\[r(t,2D+1M)=-\frac{1}{\frac{2}{365}+\frac{1}{12}}*\ln(0.999788)=0.238\%
+\]
+\end{frame}
+
+\begin{frame}{Algorithme Bootstrap : les taux monétaires}
+Le taux 3M:
+\[
+B(t,2D+3M)=B(t,2D)\frac{1}{1+\frac{1}{4} \times \frac{365}{360}  \times 0.30\%}=0.999231
+\]
+\[r(t,2D+3M)=-\frac{1}{\frac{2}{365}+\frac{1}{4}}*\ln(0.999231)=0.301\%
+\]
+Le taux 6M:
+\[
+B(t,2D+6M)=B(t,2D)\frac{1}{1+\frac{1}{2} \times \frac{365}{360}  \times 0.40\%}=0.997967
+\]
+\[r(t,2D+6M)=-\frac{1}{\frac{2}{365}+\frac{1}{2}}*\ln(0.997967)=0.403\%
+\]
+\end{frame}
+
+\begin{frame}{Algorithme Bootstrap : les taux monétaires}
+Le taux 9M:
+\[
+B(t,2D+9M)=B(t,2D)\frac{1}{1+\frac{3}{4} \times \frac{365}{360}  \times 0.48\%}=0.996354
+\]
+\[r(t,2D+9M)=-\frac{1}{\frac{2}{365}+\frac{3}{4}}*\ln(0.996354)=0.483\%
+\]
+Le taux 12M:
+\[
+B(t,2D+12M)=B(t,2D)\frac{1}{1+1 \times \frac{365}{360}  \times 0.57\%}=0.994245
+\]
+\[r(t,2D+12M)=-\frac{1}{\frac{2}{365}+1}*\ln(0.994245)=0.574\%
+\]
+\end{frame}
+
+\begin{frame}{Algorithme bootstrap : Les taux de swap}
+Rappelons la formule du taux de swap:
+\[
+S(t,T_0,T_n)=\frac{B(t,T_0)-B(t,T_n)}{ \sum_{i=1}^{n}\delta_i^F \;B(t,T_i^F)}
+\]
+Par invertion on obtient la formule suivante du dernier facteur d'actualisation en fonction des autres zéro coupons (a priori déja calculés) et du taux de swap:
+\[
+B(t,T_n)=\frac{B(t,T_0)-S(t,T_0,T_n)\sum_{i=1}^{n-1}\delta_i^F \;B(t,T_i^F)}{1+S(t,T_0,T_n)}
+\]
+\end{frame}
+
+\begin{frame}{Algorithme bootstrap : Les taux de swap}
+Le taux 2Y:
+\[
+B(t,2D+2Y)=\frac{0.999991-0.48\% \times 0.994245}{1+0.48\%}=0.990465
+\]
+\[
+r(t,2D+2Y)=-\frac{1}{\frac{2}{365}+2} \times \ln(0.990465)=0.477\%
+\]
+Le taux 3Y:
+\[
+\begin{split}
+B(t,2D+3Y)&=\frac{0.999991-0.64\% \times (0.994245 + 0.990465)}{1+0.64\%}\\
+&=0.981011
+\end{split}
+\]
+\[
+r(t,2D+3Y)=-\frac{1}{\frac{2}{365}+3} \times \ln(0.981011)=0.638\%
+\]
+\end{frame}
+
+\begin{frame}{Algorithme bootstrap : Les taux de swap}
+Le taux 4Y:
+\[
+\begin{split}
+B(t,2D+4Y)&=\frac{0.999991-0.86\%  \times (0.994245 + ... + 0.981011)}{1+0.86\%}\\
+&=0.966177\\
+\end{split}
+\]
+\[
+r(t,2D+4Y)=-\frac{1}{\frac{2}{365}+4} \times \ln(0.966177)=0.859\%
+\]
+Le taux 5Y:
+\[
+\begin{split}
+B(t,2D+5Y)&=\frac{0.999991-1.08\% \times \left(0.994245 + ... + 0.966177\right)}{1+1.08\%}\\
+&=0.947295\\
+\end{split}
+\]
+\[
+r(t,2D+5Y)=-\frac{1}{\frac{2}{365}+5} \times \ln(0.947295)=1.081\%
+\]
+\end{frame}
+
+\begin{frame}{Algorithme bootstrap : Les taux de swap}
+Dans le cas du plot 7Y cela se complique un peu car nous ne disposons pas du plot 6Y.\\
+Il va falloir l'interpoler. Attention le résultat de l'interpolation dépend de la valeur du taux zéro coupon lui même.\\
+Nous allons alors directement résoudre l'équation suivante:
+\[
+Swap(7Y)=f(r(2D+7Y))
+\]
+\vspace{0.5cm}
+Nous n'échapperons pas à une résolution numérique de l'équation.\\
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+$r(2D+7Y)$ & $r(2D+6Y)$ & $B(t,2D+5Y)$ & $Swap(7Y)$ & $f'$\\
+\hline
+5.000\% & 3.041\% & 0.833087 & 4.605 & 0.822\\ 
+1.140\% & 1.111\% & 0.935472 & 1.139 & 0.976\\ 
+1.438\% & 1.260\% & 0.927125 & 1.428 & 0.963\\ 
+1.440\% & 1.261\% & 0.927072 & 1.430 & 0.963\\ 
+\hline
+\end{tabular}
+\end{frame}
+
+\begin{frame}{Algorithme bootstrap : Les taux de swap}
+De la même façon on calcule les taux zéro coupons restant:
+\begin{tabular}{|c|c|c|c|}
+\hline
+plot & taux zéro & zéro coupon & taux de swap \\
+\hline
+10Y & 1.990\% & 0.819465 & 1.95\% \\ 
+12Y & 2.058\% & 0.781042 & 2.02\% \\ 
+15Y & 2.173\% & 0.721734 & 2.13\% \\ 
+20Y & 2.350\% & 0.624867 & 2.29\% \\ 
+25Y & 2.518\% & 0.532775 & 2.43\% \\ 
+30Y & 2.704\% & 0.444290 & 2.57\% \\ 
+\hline
+\end{tabular}
+\end{frame}
+
+\begin{frame}{Les ratios de couverture}
+Un opérateur de marché gère une portefeuille. Afin de réduire le risque de marché, il doit réduire le plus possible son exposition aux taux d'intérêts.\\
+Pour cela il va calculer des \textbf{ratios de couverture}.\\
+Soit un portefeuille, sa valeur, le PNL (Profit and Loss), est la somme des valeurs $P_i$ des $M$ produits qui le compose:
+\[
+PNL=\sum_{i=1}^{M}P_i=f(t,Q_1,Q_2,...Q_N)
+\]
+Le portefeuille, comme ses composants, est une fonction de N quotations de marché. Dans le cas des taux d'intérêts, ce sont les quotations des instruments qui composent la courbe des taux.
+\end{frame}
+
+\begin{frame}{Les ratios de couverture }
+Les \textbf{sensibilités} correspondent aux dérivés de la fonction f relativement quotations de marché.\\
+En pratique pour calculer les sensibilités on utilise une des 2 méthodes suivantes:
+\begin{itemize}
+\item La méthode \textbf{cumulative}:
+\[
+\begin{split}
+H_i=f&(Q_1+1\text{bp},...,Q_i+1\text{bp},Q_{i+1},...,Q_{N})-\\
+&f(Q_1+1\text{bp},...,Q_i,Q_{i+1},...,Q_{N})
+\end{split}
+\]
+\item La méthode \textbf{itérative}:
+\[
+\begin{split}
+H_i=f&(Q_1,...,Q_i+1\text{bp},Q_{i+1},...,Q_{N})-\\
+&f(Q_1,...,Q_i,Q_{i+1},...,Q_{N})
+\end{split}
+\]
+\end{itemize}
+Dans les 2 cas, la courbe est recalée après chaque \textbf{bump} de 1bp (1e-4).
+\end{frame}
+
+\begin{frame}{Les ratios de couveture}
+Par construction de la méthode de calcul de sensibilité, un produit (money market ou swap) qui fait partie la courbe des taux n'est sensible qu'à sa propre quotation. Nous appellerons $h_i$ cette sensibilité pour un nominal unitaire.\\
+\vspace{0.5cm}
+Les ratios $r_i$ de couverture du portefeuille sont définis ainsi:
+\[
+r_i=\frac{H_i}{h_i}
+\]
+Ils réprésentent le nominal de chacun des produits de marché qu'il faudrait traiter pour totalement neutraliser le risque de taux du portefeuille.
+\end{frame}
+
+\begin{frame}{Exemple de ratios de couverture.}
+Sensibilités et ratios de couverture d'un swap de marché receveur de taux fixe, de nominal 100 Mios EUR, de maturité 10 ans.
+\begin{figure}[h]
+\FIG{10cm}{figures/hedgeratio1.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Exemple de ratios de couverture.}
+Sensibilités et ratios de couverture d'un swap de marché receveur de taux fixe, de nominal 100 Mios EUR, de maturité 9 ans. On remarque ici l'influence de l'interpolation linéaire.
+\begin{figure}[h]
+\FIG{10cm}{figures/hedgeratio2.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Exemple de ratios de couverture.}
+Sensibilités et ratios de couverture d'un swap de marché \textbf{forward} receveur de taux fixe, de nominal 100 Mios EUR, qui démarre dans 5 ans et mature dans 5 ans.
+\begin{figure}[h]
+\FIG{10cm}{figures/hedgeratio3.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Bump de la courbe des taux}
+Ci de dessous l'impact sur les taux zéro coupon d'un bump de 1bp des taux de marché.\\
+\vspace{0.5cm}
+\tiny
+\scalebox{0.7}{
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline 
+&2D&1M&3M&6M&9M&12M&2Y&3Y&4Y&5Y&7Y&10Y&12Y&15Y&20Y&25Y&30Y\\
+\hline 
+TOTAL&1.01&1.01&1.01&1.01&1.01&1.01&0.99&0.99&1.00&1.00&1.00&1.01&1.01&1.01&1.02&1.03&1.05\\ 
+2D&1.01&0.06&0.02&0.01&&&&&&&&&&&&&\\ 
+1M&&0.95&&&&&&&&&&&&&&&\\ 
+3M&&&0.99&&&&&&&&&&&&&&\\ 
+6M&&&&1.00&&&&&&&&&&&&&\\ 
+9M&&&&&1.00&&&&&&&&&&&&\\ 
+12M&&&&&&1.00&&&&&&&&&&&\\ 
+2Y&&&&&&&0.99&&&&&&&&&&\\ 
+3Y&&&&&&&&1.00&&&&&&&&&\\ 
+4Y&&&&&&&&&1.01&&&&&&&&\\ 
+5Y&&&&&&&&&&1.02&(0.02)&(0.02)&(0.01)&(0.01)&(0.01)&&\\ 
+7Y&&&&&&&&&&&1.04&(0.04)&(0.03)&(0.03)&(0.02)&(0.02)&(0.02)\\ 
+10Y&&&&&&&&&&&&1.09&(0.05)&(0.04)&(0.03)&(0.03)&(0.03)\\ 
+12Y&&&&&&&&&&&&&1.12&(0.05)&(0.04)&(0.04)&(0.03)\\ 
+15Y&&&&&&&&&&&&&&1.16&(0.09)&(0.08)&(0.07)\\ 
+20Y&&&&&&&&&&&&&&&1.23&(0.13)&(0.12)\\ 
+25Y&&&&&&&&&&&&&&&&1.35&(0.16)\\ 
+30Y&&&&&&&&&&&&&&&&&1.50\\ 
+\hline 
+\end{tabular}}\\
+\normalsize
+\vspace{0.5cm}
+Un bump de 1bp de tous les taux de marché est à peu prêt équivalent à un bump de 1bp des taux zéros coupons.
+\end{frame}
+
+\begin{frame}{Sensibilité et convexité}
+Si on considère une courbe de taux zéro coupon constant et égal à $R$ au format actuariel à composition annuelle:
+\[
+B(t,T)=\frac{1}{(1+R)^{T-t}}
+\]
+On peut facilement exprimer la valeur d'un swap standard EUR (fréquence fixe annuelle et fréquence variable semestrielle), de tenor $N$ années, receveur de taux fixe $K$ et de nominal unitaire.
+\begin{center}
+\begin{tabular}{c c} 
+$\textbf{PV}_F(t) = K \times \underbrace{\sum_{i=1}^{n} \frac{1}{(1+R)^i}}_{LVL}$ 
+$\textbf{PV}_V(t) = 1-\frac{1}{(1+R)^N}$
+\end{tabular}
+\end{center}
+Par souci de simplicité:\\
+\begin{itemize}
+\item on considère qu'avec la convention Bond Basis une année est exactement égale à 1.
+\item on ignore les 2 jours ouvrés qui précèdent le démarrage du swap.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Sensibilité et convexité}
+Dans cet environment le taux de swap se simplifie:
+\[
+\begin{split}
+S&=\frac{1-\frac{1}{(1+R)^N}}{\sum_{i=1}^{n} \frac{1}{(1+R)^i}}\\
+&=R
+\end{split}
+\]
+R et le taux de swap ($S$) s'identifient parfaitement.\\
+La valeur d'un swap de marché receveur de taux fixe s'écrie alors:
+\[
+\textbf{PV}_{Swap}(t)=(K-S) \times LVL 
+\]
+On peut alors calculer la sensibilité du swap de marché de la façon suivante:
+\[
+\frac{\partial \textbf{PV}_{Swap}}{\partial \text{S}}=LVL+\underbrace{(K-S)}_{=0} \times \frac{\partial LVL}{\partial S}=LVL 
+\]
+
+\end{frame}
+
+\begin{frame}{Sensibilité et convexité}
+On peut facilement exprimer la sensibilité et la convexité par rapport au taux de swap lui même:\\
+\begin{center}
+\begin{tabular}{ l l}
+$\frac{\partial \textbf{PV}_F(t)}{\partial S}=K \times \frac{\partial LVL}{\partial S} $&
+$\frac{\partial \textbf{PV}_V(t)}{\partial S}=LVL+S \times \frac{\partial LVL}{\partial S} $\\
+$\frac{\partial^2 \textbf{PV}_F(t)}{\partial S^2}=K \times \frac{\partial^2 LVL}{\partial S^2} $&
+$\frac{\partial^2 \textbf{PV}_V(t)}{\partial S^2}=2 \times \frac{\partial LVL}{\partial S} + S \times \frac{\partial^2 LVL}{\partial S^2}$\\
+\end{tabular}
+\end{center}
+avec:\\
+\vspace{0.5cm}
+\begin{tabular}{c c}
+$\frac{\partial LVL}{\partial S}=-\sum_{i=1}^{n} \frac{i}{(1+R)^{i+2}}$&
+$\frac{\partial^2 LVL}{\partial S^2}=\sum_{i=1}^{n} \frac{i^2}{(1+R)^{i+2}}$
+\end{tabular}\\
+\vspace{0.5cm}
+Application numérique:\\
+On considère:
+\begin{itemize}
+\item nominal : 100 000 000 d'euros.\\
+\item un swap receveur de taux fixe.
+\item 3 tenor 10Y, 20Y, 30 c'est à dire N = 10,20,30.
+\item 2 niveaux de marché $R=K=$2\% et 3\%.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Sensibilité et convexité avec des taux à 2\%}
+\small
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+&&PV&Sensi&Convexité  \\ 
+\hline
+\multirow{4}{*}{10Y}&LVL& 90 kEUR &  -47 EUR/bp & 0 EUR/bp/bp \\ 
+&Fixe& 18 Mios EUR/bp &  -9 kEUR/bp & 7 EUR/bp/bp \\ 
+&Variable& 18 Mios EUR/bp & 80 kEUR/bp & -87 EUR/bp/bp \\ 
+&Swap& 0 Mios EUR/bp & -90 kEUR/bp & 94 EUR/bp/bp \\ 
+\hline
+\multirow{4}{*}{20Y}&LVL& 164 kEUR &  -158 EUR/bp & 0 EUR/bp/bp \\ 
+&Fixe& 33 Mios EUR/bp &  -32 kEUR/bp & 44 EUR/bp/bp \\ 
+&Variable& 33 Mios EUR/bp & 132 kEUR/bp & -272 EUR/bp/bp \\ 
+&Swap& 0 Mios EUR/bp & -163 kEUR/bp & 316 EUR/bp/bp \\ 
+\hline
+\multirow{4}{*}{30Y}&LVL& 224 kEUR &  -308 EUR/bp & 1 EUR/bp/bp \\ 
+&Fixe& 45 Mios EUR/bp &  -62 kEUR/bp & 122 EUR/bp/bp \\ 
+&Variable& 45 Mios EUR/bp & 162 kEUR/bp & -493 EUR/bp/bp \\ 
+&Swap& 0 Mios EUR/bp & -224 kEUR/bp & 616 EUR/bp/bp \\ 
+\hline
+\end{tabular}
+\normalsize
+\end{frame}
+
+\begin{frame}{Sensibilité et convexité avec des taux  à 3\%.}
+\small 
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+&&PV&Sensi&Convexité  \\ 
+\hline
+\multirow{4}{*}{10Y}&LVL& 85 kEUR &  -44 EUR/bp & 0 EUR/bp/bp \\ 
+&Fixe& 26 Mios EUR/bp &  -13 kEUR/bp & 10 EUR/bp/bp \\ 
+&Variable& 26 Mios EUR/bp & 72 kEUR/bp & -77 EUR/bp/bp \\ 
+&Swap& 0 Mios EUR/bp & -85 kEUR/bp & 87 EUR/bp/bp \\ 
+\hline
+\multirow{4}{*}{20Y}&LVL& 149 kEUR &  -137 EUR/bp & 0 EUR/bp/bp \\ 
+&Fixe& 45 Mios EUR/bp &  -41 kEUR/bp & 56 EUR/bp/bp \\ 
+&Variable& 45 Mios EUR/bp & 107 kEUR/bp & -219 EUR/bp/bp \\ 
+&Swap& 0 Mios EUR/bp & -149 kEUR/bp & 275 EUR/bp/bp \\ 
+\hline
+\multirow{4}{*}{30Y}&LVL& 196 kEUR &  -253 EUR/bp & 0 EUR/bp/bp \\ 
+&Fixe& 59 Mios EUR/bp &  -76 kEUR/bp & 146 EUR/bp/bp \\ 
+&Variable& 59 Mios EUR/bp & 120 kEUR/bp & -361 EUR/bp/bp \\ 
+&Swap& 0 Mios EUR/bp & -196 kEUR/bp & 507 EUR/bp/bp \\ 
+\hline
+\end{tabular}
+\normalsize
+\end{frame}
+
+\begin{frame}{Illustration de la convexité.}
+La courbe des taux est constante égal au taux acturariel à composition annuelle 2\%.\\
+\vspace{0.5cm}
+Notre portefeuille contient un seul swap 10 ans receveur de taux fixe 100bp au dessus du taux de marché (\textbf{Swap 1}) de nominal 100 millions d'euros. Nous allons le couvrir avec un swap de même maturité payeur de taux fixe égale au niveau de marché (\textbf{Swap 2}).\\
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+Swap&Sensibilité \\ 
+\hline
+\textbf{Swap 1} &-179 kEUR/bp \\ 
+\textbf{Swap 2} &-163 kEUR/bp \\ 
+\hline
+\end{tabular}
+\end{center}
+Il nous faut donc traiter 110 Mios ($\frac{179}{163} \times$ 100 Mios EUR)  d'euros de swap de marché (\textbf{Swap 2}).
+\end{frame}
+
+\begin{frame}{Illustration de la convexité}
+Si le taux d'intérêt augmente brusquement (nous ignorons le passage du temps)  de 50bp.
+La valeur de notre portefeuille couvert au premier ordre diminue de 10 kEUR.\\
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+R&PNL&$\Delta$PNL \\
+\hline
+2\% &16.351 Mios EUR& \\ 
+3\% &16.341 Mios EUR&-10.072 kEUR\\
+1\% &16.340 Mios EUR&-11.205 kEUR\\
+\hline
+\hline
+\end{tabular}
+\end{center}
+En effet ce portefeuille possède une convexité négative de -8.5 euros bp/bp du a décalage de taux fixe.
+On explique assez précisément ($<1$ kEUR inexpliqué) ce mouvement de PNL par un développement limité:
+\[
+\Delta \text{PNL}=\underbrace{\text{Sensi}}_{0} \times \Delta R + \frac{1}{2} \times \underbrace{\text{Convexité}}_{-8.5} \times \underbrace{\Delta R^2}_{2500}=-10.5 kEUR
+\]
+\end{frame}
+
+\begin{frame}{Illustration de la convexité}
+On remarque dans notre exemple, que le swap de marché "sous-couvre" notre position initiale.\\
+\vspace{0.5 cm}
+Problème :
+\begin{itemize}
+\item Que se passe t-il, dans notre exemple précédent, à l'inverse si le taux fixe du swap initial est décalé de 100bp à la baisse par rapport au marché.
+\item Appliquer la même analyse à la courverture d'un swap de marché 20 ans pour 100 Mios de nominal par un swap de marché de maturité 10 ans puis par un swap de marché de maturité 30 ans.
+\end{itemize}
+\end{frame}
+
+
+\end{document}
