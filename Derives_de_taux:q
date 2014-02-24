@@ -30,7 +30,7 @@ Quelles sont les quantités qui sont martingale sous la mesure risque neutre.
 \begin{itemize}
 \item a) $B(t,T)$
 \item b) $L(t,T_1,T_2)=\frac{1}{\delta}\big(\frac{B(t,T_1)}{B(t,T_2)}-1 \big)$
-\item c) $S(t,T_0,T_n)$
+\item c) $S(t,T_0,T_n)=\frac{}$
 \item
 \end{itemize}
 \end{frame}
