@@ -488,6 +488,35 @@ Swap&Sensibilité \\
 Il nous faut donc traiter 110 Mios ($\frac{179}{163} \times$ 100 Mios EUR)  d'euros de swap de marché (\textbf{Swap 2}).
 \end{frame}
 
+\begin{frame}{Illustration de la convexité.}
+\small
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+&&PV&Sensi&Convexité  \\ 
+\hline
+\multirow{3}{*}{-100bp}&Fixe& 16 Mios EUR/bp &  -16 kEUR/bp & 22 EUR/bp/bp \\ 
+&Variable& 33 Mios EUR/bp & 132 kEUR/bp & -272 EUR/bp/bp \\ 
+&Swap& -16 Mios EUR/bp & -148 kEUR/bp & 294 EUR/bp/bp \\ 
+\hline
+\multirow{3}{*}{0bp}&Fixe& 33 Mios EUR/bp &  -32 kEUR/bp & 44 EUR/bp/bp \\ 
+&Variable& 33 Mios EUR/bp & 132 kEUR/bp & -272 EUR/bp/bp \\ 
+&Swap& 0 Mios EUR/bp & -163 kEUR/bp & 316 EUR/bp/bp \\ 
+\hline
+\multirow{3}{*}{100bp}&Fixe& 49 Mios EUR/bp &  -47 kEUR/bp & 66 EUR/bp/bp \\ 
+&Variable& 33 Mios EUR/bp & 132 kEUR/bp & -272 EUR/bp/bp \\ 
+&Swap& 16 Mios EUR/bp & -179 kEUR/bp & 338 EUR/bp/bp \\ 
+\hline
+\end{tabular}\\
+\normalsize
+\vspace{0.5cm}
+La convexité du portefeuille couvert:
+\[
+316 - \frac{179}{163} \times 338 = -8.5\text{ EUR/bp/bp}
+\]
+\end{frame}
+
+
+
 \begin{frame}{Illustration de la convexité}
 Si le taux d'intérêt augmente brusquement (nous ignorons le passage du temps)  de 50bp.
 La valeur de notre portefeuille couvert au premier ordre diminue de 10 kEUR.\\

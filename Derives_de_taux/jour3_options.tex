@@ -28,12 +28,12 @@
 \begin{frame}{Quizz}
 Soit une courbe de taux constante égale à 2\% (taux actuariel à composition annuelle).\\
 \vspace{0.5cm}
-Quel est le nominal et le sens d'un swap de marché payeur de taux fixe, de maturité 20 ans dont la sensibilité est égale à 328 kEUR/bp?\\
+Quel est le nominal et le sens d'un swap de marché, de maturité 20 ans dont la sensibilité est égale à 328 kEUR/bp?\\
 \vspace{0.5cm}
-a) 50 Mios d'euros payeur de taux fixe.\\
-b) 100 Mios d'euros receveur de taux fixe.\\
-c) 150 Mios d'euros receveur de taux fixe.\\
-d) 200 Mios d'euros payeur de taux fixe.\\
+a) 50 Mios d'euros payeur de taux fixe.\textbf{\color{red}FAUX}\\
+b) 100 Mios d'euros receveur de taux fixe.\textbf{\color{red}FAUX}\\
+c) 150 Mios d'euros receveur de taux fixe.\textbf{\color{red}FAUX}\\
+d) 200 Mios d'euros payeur de taux fixe.\textbf{\color{green}VRAI}\\
 \end{frame}
 
 
@@ -42,29 +42,29 @@ Soit une courbe de taux constante égale à 2\% (taux actuariel à composition a
 \vspace{0.5cm}
 Quel est le tenor d'un swap de marché payeur de taux fixe de nominal 100 Mios d'euros dont la sensibilité est égale à 128 kEUR/bp?\\
 \vspace{0.5cm}
-a) 10 ans.\\
-b) 15 ans.\\
-c) 20 ans.\\
-d) 30 ans.\\
+a) 10 ans.\textbf{\color{red}FAUX}\\
+b) 15 ans.\textbf{\color{green}VRAI}\\
+c) 20 ans.\textbf{\color{red}FAUX}\\
+d) 30 ans.\textbf{\color{red}FAUX}\\
 \end{frame}
 
 \begin{frame}{Quizz}
 Soit un swap dont la sensibilité est de -90kEUR/bp et la convexité est de 94 EUR bp/bp.\\
 \vspace{0.5cm}
 Quelle est sa sensibilité si les taux augmente de 100bp ?\\
-a) -81 kEUR/bp.\\
-b) -99 kEUR/bp.\\
-c) -85 kEUR/bp.\\
-d) -95 kEUR/bp.\\
+a) -81 kEUR/bp.\textbf{\color{green}VRAI}\\
+b) -99 kEUR/bp.\textbf{\color{red}FAUX}\\
+c) -85 kEUR/bp.\textbf{\color{red}FAUX}\\
+d) -95 kEUR/bp.\textbf{\color{red}FAUX}\\
 \end{frame}
 
 \begin{frame}{Quizz}
 Quel est le produit qui apporte le plus de convexité/concavité de taux (pour une maturité, un sens et un nominal donné) ?\\
 \vspace{0.5cm}
-a) Une jambe variable de swap.\\
-b) Une jambe fixe de swap.\\
-c) Un swap.\\
-d) Une obligation à taux variable.\\
+a) Une jambe variable de swap.\textbf{\color{red}FAUX}\\
+b) Une jambe fixe de swap.\textbf{\color{red}FAUX}\\
+c) Un swap.\textbf{\color{green}VRAI}\\
+d) Une obligation à taux variable.\textbf{\color{red}FAUX}\\
 \end{frame}
 
 \begin{frame}{Taux Stochastiques}
@@ -95,7 +95,7 @@ Pour tout actif X de marché de valeur $X_t$,\\
 \frac{X_t}{N_t}=\mathbb{E}^{Q^N}_t\left[\frac{X_T}{N_T}\right]
 \]
 \vspace{0.5cm}
-Par conséquent si on considère 2 numéraires $N_t$ et $N'_t$:
+Par conséquent si on considère 2 numéraires $N_t$ et $N'_t$:\\
 \[
 X_t=N_t\mathbb{E}^{Q^N}_t\left[\frac{X_T}{N_T}\right]=N'_t\mathbb{E}^{Q^{N'}}_t\left[\frac{X_T}{N'_T}\right]
 \]
@@ -180,7 +180,7 @@ Un cap est un panier de caplets. On peut valoriser un caplet ainsi:
 \[
 \textbf{PV}_\text{Caplet}^i(t)=\delta_i \mathbb{E}_t^{Q}\Big(e^{-\int_0^{T_i} r_s ds}\big(L(T_ {i-1}^f,T_{i-1},T_i)-K\big)^+\Big)
 \]
-en passant sous le mesure forward neutre $Q^{T_i}$:
+en passant sous la mesure forward neutre $Q^{T_i}$:
 \[
 \textbf{PV}_\text{Caplet}^i(t)=\delta_i \;B(t,T_i)\;\mathbb{E}_t^{Q^{T_i}}\Big(\big(L(T_ {i-1}^f,T_{i-1},T_i)-K\big)^+\Big)
 \]
@@ -189,6 +189,18 @@ Nous allons reproduire le raisonnement de l'exemple classique, en effet $L(T_ {i
 L(t,T_{i-1},T_i)= \frac{B(t,T_{i-1})-B(t,T_i)}{B(t,T_i)}
 \]
 C'est la valeur d'un prêt forward qui démarre en $T_{i-1}$ et mature en $T_i$ exprimée dans le numéraire forward $T_i$.
+\end{frame}
+
+\begin{frame}{Caps et Floors}
+On peut aussi réécrire la valeur d'un caplet ainsi:
+\[
+\textbf{PV}_\text{Caplet}^i(t)= \mathbb{E}_t^{Q}\Big(e^{-\int_0^{T_i} r_s ds}\big(\color{red}1+\delta_i\color{black}L(T_ {i-1}^f,T_{i-1},T_i)-\color{red}1+\delta_i\color{black}K\big)^+\Big)
+\]
+Nous passons sous la mesure forward neutre $Q^{T_{i-1}}$:\\
+\[
+\textbf{PV}_\text{Caplet}^i(t)= B(t,T_{i-1})\mathbb{E}_t^{Q^{T_{i-1}}}\Big(\big(1-\underbrace{\frac{1+\delta_iK}{1+\delta_iL(T_ {i-1}^f,T_{i-1},T_i)}}_{\text{Obligation zéro coupon de taux fixe K}}\big)^+\Big)
+\]
+On peut exprimer le caplet comme un "put" sur une obligation zéro coupon de taux fixe K, martingale sous la probabilité $Q^{T_{i-1}}$.
 \end{frame}
 
 \begin{frame}{Caps et Floors}
@@ -253,6 +265,16 @@ ce qui nous donne:
 \[
 \textbf{PV}_\text{Sw}^P(t)=\text{LVL}(t,T_0,T_n) \;\text{\textbf{BS}}_\text{call}\big(T_f-t,K,S(t,T_{0},T_n),\sigma\big)
 \]
+\end{frame}
+
+\begin{frame}{Swaption}
+Sans changer de mesure, on peut réécrire la valeur d'une swaption:
+\[
+\textbf{PV}_\text{Sw}^P(t)=B(t,T_f)\;\mathbb{E}_t^{Q^{T_f}}\Big(\big(B(T_f,T_0)-\underbrace{B(T_f,T_n)-K\text{LVL}(T_f,T_0,T_n)}_{\text{Obligation de taux fixe K}}\big)^+\Big)
+\]
+La swaption peut être exprimée comme un put de strike $B(T_f,T_0)\simeq1$ sur une obligation de de taux fixe K.\\
+\vspace{0.5cm}
+Cette obligation est naturellement martingale sous la probabilité $Q^{T_f}$.
 \end{frame}
 
 \begin{frame}{Le modèle normal}
