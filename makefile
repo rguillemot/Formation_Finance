@@ -6,7 +6,9 @@ DERIVES_DE_TAUX = \
 		Derives_de_taux/jour1_derivatives.pdf \
 		Derives_de_taux/jour2_curve_hedge.pdf \
 		Derives_de_taux/jour3_options.pdf \
-		Derives_de_taux/jour4_convexity_adj.pdf
+		Derives_de_taux/jour4_convexity_adj.pdf \
+		Derives_de_taux/jour4_multi_curve.pdf \
+		Derives_de_taux/multi_courbe.pdf
 
 %.pdf: %.tex
 	$(TEX) $<

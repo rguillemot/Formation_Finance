@@ -1,0 +1,195 @@
+\documentclass{article}
+\usepackage[english,francais]{babel}
+\usepackage{multirow}
+\usepackage[english,francais]{babel}\usepackage[utf8]{inputenc}
+\usepackage{amssymb,amsmath}
+\usepackage{color}
+\usepackage{graphicx}
+\graphicspath{{./Derives_de_taux/}}
+
+\newcommand{\FIG}[2]{\includegraphics[width=#1]{#2}}
+
+
+\begin{document}
+
+\section*{L'unicité de la courbe des taux}
+
+Jusqu’à présent nous avons supposé l’existence d’une “unique” courbe des taux dite sans risque. Cette hypothèse a 2 conséquences très pratiques sur la méthode de valorisation:\\
+\begin{itemize}
+
+\item Première conséquence, il existe une structure des taux. Si on connaît le continuum des taux zéro coupon au comptant (c’est à dire les dire les taux zéro coupons qui fixent aujourd’hui et pour un tenor quelconque), il est possible fixer le taux d’un emprunt forward, que l'on le réplique par 2 emprunts au comptant.\\
+
+\item Seconde conséquence, toutes les jambes variables de swap qui débutent et se terminent à la même date de fréquence quelconque ont la même valeur. Elles sont équivalentes à recevoir le nominal en date de départ et à le rembourser à la fin: c’est la formule du double nominal. Ainsi le prix d’une obligation qui paie un coupon égal au LIBOR ou EURIBOR vaut toujours 100 aux dates de son échéancier. Bien entendu les taux variables doivent être payés en fin de période en utilisant la base de calcul Exact 360. Dans le cas particulier d’une obligation qui paie quotidiennement le taux EONIA/OIS (le taux du jour au lendemain ou overnight), l’obligation est tous les jours au pair (elle vaut 100).\\ 
+
+\end{itemize}
+
+Le taux sans risque signifie sans risque de crédit. Chacune des 2 contreparties respectera ses engagement financiers. Dans le cas d’un prêt/emprunt, cette responsabilité repose sur l’emprunteur. Une fois qu’il a reçu le nominal, tous les flux suivants, le paiement des intérêts et le remboursement, sont à sa charge. Dans le cas des produits dérivés, par exemple un swap de taux, de taux la situation est symétrique et dépend de l’évolution des taux d’intérêts relativement au taux fixe du swap.\\
+
+Les taux LIBOR et EURIBOR ont été classiquement considérées sans risque de crédit. Les courbes était utilisées comme courbe unique pour valoriser tous les produits dérivés. La crise de 2008 a remis en cause cette notion de taux sans risque et donc par consqéquent l’unicité de la courbe des taux.\\
+
+\section*{Multiples courbes des taux et risque de liquidité}
+
+Dans le cas d’un prêt emprunt le risque de crédit est principalement supporté par le prêteur, en effet le paiement des flux à venir est la responsabilité de l’emprunteur. En échange l’emprunteur fait face à un nouveau problème: le manque de liquidité. En d’autres termes, le prêteur peut ne pas vouloir lui prêter pour une échéance trop longue. Le risque de liquidité et le risque de crédit sont les 2 factettes d’un même problème: le prêteur doit avoir confiance dans l’emprunteur ne doit pas trahir cette confiance.\\
+
+Ce risque de liquidité se matérialise sur le marché des taux d’intérêts sous la formes de swap de basis. 2 parties s’échangent 2 jambes variables de fréquence et de tenor différent. Par exemple un swap 10Y EURIBOR 3M contre EURIBOR 6M - Xbps. La valeur théorique du taux 6M, obtenue par composition des taux 3M, doit être réduit d’une certaine marge, la \textbf{marge de basis}, afin que la valeur du swap lors de sa mise en place soit nulle. Cette marge nous indique l’existence de plusieurs courbes de taux associées à chaque tenor 1D, 1M, 3M, 6M, 12M.\\
+
+La courbe 1D ou \textbf{EONIA/OIS} joue un role bien particulier. Elle est associée au prêt/emprunt à taux variable qui paie le taux EONIA/OIS chaque jour. C’est le prêt/emprunt qui présente le moins de risque de crédit pour le prêteur et qui a le plus faible côut de liquidité pour l’emprunteur. Chaque jour le prêteur récupère le nominal prêté il est donc moins enclin à faire payer de forts coûts de liquidité. Il apparaît donc comme une bonne solution, de considérer cette courbe comme la courbe sans risque.
+
+
+\section*{L’usage du collatéral et l’actualisation OIS/EONIA}
+
+L’usage du collatéral (ou hypothèque) est la méthode en pratique la plus utilisée pour supprimer ou tout au moins réduire le risque de crédit. Le débiteur met en gage de l’argent ou des actifs financiers, le collatéral, à hauteur de sa dête. Chaque jour on constate l’évolution de la valeur du produit et chacune des partie poste ou reçoit des appels de marge en conséquence. Le détenteur du collatéral doit rémunéré sa contrepartie à un taux dit taux de collatéral. Du fait des échanges quotidiens ce taux est le plus souvent le taux OIS/EONIA (le taux du jour au lendemain). On remarque que le futur est un cas particulier de la collatéralisation dans lequel le taux de collatéral est nul.\\
+
+En pratique l’usage du collatéral est régi par le Credit Support Annex (CSA) du contrat ISDA (International Swaps and Derivatives Associations), le contrat standard entre 2 contrepartie qui traitent des swaps. Le CSA définit tous les aspects techniques des échanges de collatéral et particulier la fréquence, la devise de paiement et  le taux de collatéral.\\
+
+En pratique l’usage du collatéral ne supprime pas complètement le risque de contrepartie pour 2 raisons:
+\begin{itemize}
+
+\item Le suivi du collatéral et le paiement des appels de marge n’est pas effectué en continu. Ainsi peu de temps avant le défaut, l’exposition de crédit peut fortement se dégrader, sans que les mouvements de valeurs soient capturés par les appels de marge.\\
+
+\item Les valeurs des actifs financiers mis en gage comme collatéral peuvent parfois être négativement corrélées avec le défaut de la contrepartie. Ainsi la valeur du collatéral ne couvre le montant emprunté par créditeur une fois son défaut survenu. On parle alors de “Wrong Way Risk” (risque de mauvais sens). Ce problème n’existe pas si le collatéral est posté en argent dans la devise de l’opération collatéralisée.\\
+
+\end{itemize}
+
+Valdimir Piterbarg propose une adaptation du cadre “classique” de valorisation des produits dérivés. Il démontre que le drift d’un actif collatéralisé doit être le taux de collatéral sous la probabilité risque neutre. Par conséquent les flux des produits dérivés doivent être actualisés au taux de collatéral. Les taux OIS en dollar et EONIA en euros sont utlisés de façon standard dans le contrats CSA. Nous devons donc actualiser les flux des dérivés standards (Money market, FRA, Swap) au taux OIS. Ce nouveau choix d'actualisation nécessite une adaptation de l'algorithme de calibration de la courbe présenté précédemment.\\
+
+\section*{Calibration des différentes courbes}
+
+Du fait du phénomène de liquidité nous diposons de plusieurs cotation pour un même tenor. On peut distinguer 2 catégories parmi les produits disponibles sur le marché:
+\begin{itemize}
+\item \textbf{les swaps à taux fixe}: on distingue les différentes cotations de ce swap suivant la fréquence de la jambe variable $K^f$. Nous supposerons que la fréquence jambe fixe est toujours la même (annuelle en euro et semi-annuelle en dollar).\\
+
+\item \textbf{les swaps de basis}: ces produits échangent des jambes variables de fréquence différente. On retire une marge $m^{f_1-f_2}$ à la jambe de la fréquence la plus faible afin que la valeur du swap soit nulle lors de sa mise en place.\\ 
+
+\end{itemize}
+
+Le tableau ci dessous illustre les différentes cotations possible pour un tenor donné.
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+Jambe&Fixe&OIS&1M&3M&6M&12M\\
+\hline
+Fixe&&$K^{OIS}$&$K^{1M}$&$K^{3M}$&$K^{6M}$&$K^{12M}$\\
+OIS&&&$m^{OIS-1M}$&$m^{OIS-3M}$&$m^{OIS-6M}$&$m^{OIS-12M}$\\
+1M&&&&$m^{1M-3M}$&$m^{1M-6M}$&$m^{1M-12M}$\\
+3M&&&&&$m^{3M-6M}$&$m^{3M-12M}$\\
+6M&&&&&&$m^{6M-12M}$\\
+\hline
+\end{tabular}
+\end{center}
+
+Ces cotations sont rédondantes et peuvent être réliées les unes aux autres par des arguments de réplication. L'achat et la vente de 2 swaps payeurs de taux fixe, de fréquence de jambe variable, et de même tenor, permet de synthétiser un swap de basis.\\
+
+Soient 2 échéanciers de fréquence différentes et synchronisés. Nous supposons que le premier échéancier contient $n$ flux et le second $m$ flux. Nous disposons des 3 équations suivantes:
+\[
+\begin{split}
+\sum_{i=1}^{n} \delta^n_i L(T^n_{i-1},T^n_{i}) B(t,T^n_{i})&=K^n LVL(T_0,T_n)\\
+\sum_{i=1}^{m} \delta^m_i L(T^m_{i-1},T^m_{i}) B(t,T^m_{i})&=K^m LVL(T_0,T_m)\\
+\sum_{i=1}^{n} \delta^n_i L(T^n_{i-1},T^n_{i}) B(t,T^n_{i})&=\sum_{i=1}^{m} \delta^m_i [L(T^m_{i-1},T^m_{i})-m^{n,m}] B(t,T^m_{i})
+\end{split}
+\]
+\begin{itemize}
+\item les quantité avec un  \textbf{exposant n} sont associées à la jambe variable de la fréquence la plus grande.\\
+\item les quantité avec un \textbf{exposant m} sont associées à la jambe variable de la fréquence la plus faible.\\
+\item les quantité \textbf{sans exposant} sont associées à la jambe variable de la fréquence la plus faible.\\
+\end{itemize}
+
+\begin{center}
+\begin{figure}[h]
+\vspace{2mm}
+\FIG{15cm}{figures/basis.png} 
+\vspace{1mm}
+\caption{Les différents échéanciers.}
+\end{figure}
+\end{center}
+
+
+On en déduit ainsi que:
+\[
+K^m-K^n=\frac{LVL^m(T^m_0,T^m_m)}{LVL(T_0,T_n)} m^{n,m}
+\]
+On peut approximer cette relation:
+\[
+K^m-K^n \simeq m^{n,m}
+\]
+On en déduit une "sorte" de relation de Chasles pour les marges de basis:
+\[
+m^{n,m}+m^{m,p} \simeq m^{n,p}
+\]
+$m$,$n$ et $p$ correspondent à trois fréquences différentes.\\
+
+Pour établir les relations précédentes nous n'avons fait aucune hypothèse les la courbe d'actualisation, c'est à dire comment sont calculés, le facteur d'actualisation $B(t,T_i)$ ou les différents levels $LVL^n(T_0,T_n)$,$LVL^m(T_0,T_n)$,$LVL(T_0,T_n)$.\\
+
+On peut considérer ces quantités comme indépendantes du mode de collatéral et elles vont être utilisées comme valeurs cibles pour l'algorithme de calibration des courbes. L'objectif de l'algorithme est de construire une courbe pour chaque fréquence EONIA,1M,3M,6M et 12M, que l'on utlisera pour estimer les taux forward des jambes variables associés. Le niveaux de taux sera déteriné afin que la valeur de ces swaps de marché soit nulle.\\
+
+La courbe EONIA joue un rôle bien particulier dans l'algorithme. En effet on utilisera la même courbe pour estimer les taux forwards et actualiser les flux. Par conséquent l'algorithme classique sera utilisée. C'est la première étape de l'algorithme.\\
+
+Nous allons illustrer l'algorithme avec un exemple très simple. On considère les 2 Money Market 6M et 12M et le swap 12M vs 6M (la jambe fixe est payée annuellement et la jambe variable semi-annuellement).\\
+
+\begin{center}
+\begin{tabular}{|l|c|c|}
+\hline
+Produit & Taux (\%) & Symbole\\
+\hline
+MM 6M & 0.50\% & $R_1$ \\
+MM 12M & 0.50\% & $R_2$ \\
+SWAP 12M vs 6M & 1.5\% & $R$ \\
+FRA 6M dans 6M & \textbf{??} & F \\
+\hline
+\end{tabular}
+\end{center}
+
+On veut calculer le taux forward 6M dans 6M, c'est à dire F, avec une actualisation OIS. Il nous faut donc résoudre l'équation suivante:\\
+\[
+\delta_1 \times B^{OIS}(t,T_1) \times R_1 + \delta_2 \times B^{OIS}(t,T_2) \times F = (\delta_1 + \delta_2) \times R \times B^{OIS}(t,T_2)
+\]
+
+Par souci de simplicité, on considère que les bases de calcul des fractions d'années sont les mêmes sur la jambe variable et la jambe fixe.\\
+
+On remarque que les Money Market ou emprunts au comptant ne font pas intervenir de taux forward. Ils correspondent donc aux taux OIS. On considère aussi les taux BOR calculé avec les taux forwad de tenor 6M.
+
+\begin{center}
+\begin{tabular}{r l r l}
+$B^{OIS}(t,T_1)=$ & $\frac{1}{1+\delta_1 R_1}$ & $B^{BOR}(t,T_1)=$ & $\frac{1}{1+\delta_1 R_1}$ \\
+$B^{OIS}(t,T_2)=$ & $\frac{1}{1+(\delta_1 + \delta_2) R_2}$ & $B^{BOR}(t,T_2)=$ & $\frac{1}{1+(\delta_1 + \delta_2) R}$ \\
+\end{tabular}
+\end{center}
+
+On calcule le taux forward OIS, c'est à dire le taux forward calculé avec la formule classique et les taux OIS:\\
+
+\[
+L^{OIS}(t,T_1,T_2)=\frac{1}{\delta_2}\big(\frac{B^{OIS}(t,T_1)}{B^{OIS}(t,T_2)}-1\big)\\
+\]
+
+On calcule le taux forward BOR, c'est à dire le taux forward calculé avec la formule classique et les taux BOR:\\
+
+\[
+L^{BOR}(t,T_1,T_2)=\frac{1}{\delta_2}\big(\frac{B^{BOR}(t,T_1)}{B^{BOR}(t,T_2)}-1\big)\\
+\]
+
+Après simplification:
+
+\[
+F=L^{BOR}(t,T_1,T_2)+\underbrace{\delta_1 \times R_1 (L^{BOR}(t,T_1,T_2)-L^{OIS}(t,T_1,T_2))}_{\textbf{Ajustement}} \\
+\]
+
+La formule précédente nous indique que plus la marge OIS 6 mois plus l'ajustement du FRA 6 mois dans 6 mois est élevé. Par ailleurs l'ajustement par rapport au taux classique est relativement faible, une fraction de bp comme ont peut le voir sur le tableau suivant.
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}  
+\hline  
+$\boldsymbol{R_2}$ & \textbf{BOR-OIS} & \textbf{F} & \textbf{Ajustement} \\ 
+\hline  
+\textbf{\color{red}0.50\%} & \textbf{\color{red}50 bps} & \textbf{\color{red}1.4988\%} & \textbf{\color{red}0.25bps}\\ 
+0.60\% & 40 bps & 1.4983\% & 0.20bps\\ 
+0.70\% & 30 bps & 1.4978\% & 0.15bps\\ 
+0.80\% & 20 bps & 1.4973\% & 0.10bps\\ 
+0.90\% & 10 bps & 1.4968\% & 0.05bps\\ 
+1.00\% & 0 bps & 1.4963\% & 0.00bps\\ 
+\hline  
+\end{tabular}
+\end{center}
+
+
+\end{document}

@@ -11,7 +11,7 @@
 \newcommand{\FIG}[2]{\includegraphics[width=#1]{#2}}
 
 \usetheme{Warsaw}
-\title[Produits dérivés de taux]{Valorisation multi courbes. }
+\title[Produits dérivés de taux]{Valorisation multi-courbe. }
 \author{Antonin Chaix - Richard Guillemot}
 \institute{Master IFMA}
 \date{27 Février 2014}
@@ -24,5 +24,199 @@
 \centering \FIG{5cm}{figures/UPMC_IFMA.jpg}
 \end{figure}
 \end{frame}
+
+\begin{frame}{Unicité de la courbe des taux}
+Nous supposons qu'il existe une \textbf{unique courbe} des taux dite \textbf{sans risque}, cela a 2 conséquences:
+\begin{itemize}
+\item On peut déduire les taux forwards à partir des taux au comptant.
+\[
+L(t,T_1, T_2)=\frac{1}{\delta}\left(\frac{B(t,T_1)}{B(t,T_2)}-1\right)
+\]
+\item La valeur d'une jambe variable de swap est indépendante de sa fréquence.
+\[
+\sum_{i=1}^{n}\delta_i \times L(t,T_{i-1}, T_i) \times  B(t,T_i)=B(t,T_0)-B(t,T_n)
+\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Risque de crédit et liquidité}
+Cette méthode de valorisation avec une unique courbe des taux ignore 2 risques:
+\begin{itemize}
+\item le risque \textbf{de crédit}: L'emprunteur va t'il rembourser sa créance et payer les intérets au prêteur?
+\item le risque \textbf{de liquidité}: Le prêteur va t'il prêter à un emprunteur pour la maturité demandée?
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Collatéralisation}
+$V_t$ le prix d'un actif collatéralisé.\\
+\vspace{0.5cm}
+Les flux d'un actif collatéralisé à la date $t+dt$:\\
+\vspace{0.5cm}
+\begin{tabular}{l|r}
+On rembourse le collatéral livré en $t$. & $-V_t$ \\
+On paie les intérêts au taux de collatéral $c$.& $-c V_t dt$\\
+On reçoit la nouvelle valeur du collatéral.& $V_t$ \\
+\end{tabular}
+\vspace{0.5cm}\\
+Le flux résultant : $dV_t - c \times V_t \times dt$
+\end{frame}
+
+\begin{frame}{Collatéralisation et actualisation}
+Soient les prix de 2 actifs sous la probabilité historique $P$:
+\[
+\begin{split}
+dV^1_t&=\mu_1 V^1_t dt + \sigma_1 V^1_t dW_t\\
+dV^2_t&=\mu_2 V^2_t dt + \sigma_2 V^2_t dW_t
+\end{split}
+\]
+On constitue un portefeuille en vue de neutraliser l'aléa. Il génère le flux suivant en $t+dt$:
+\[
+\sigma_2 V_2 \times (dV^1_t - c V^1_t dt)-\sigma_1 V_1 \times (dV^2_t - c V^2_t dt)
+\]
+En l'absence d'opportunité d'arbitrage, un tel portefeuille a une valeur nulle, par conséquent son drift est aussi nul:
+\[
+\lambda=\frac{\mu_1-c}{\sigma_1}=\frac{\mu_2-c}{\sigma_2}
+\]
+\end{frame}
+
+\begin{frame}{Collatéralisation et actualisation}
+On définit une nouvelle probabilité dite risque neutre $Q$:\\
+\[
+d\widetilde{W}_t=dW_t+\lambda dt
+\]
+Sous cette probabilité les actifs on drift égal au taux de collatéral:\\
+\[
+\begin{split}
+dV^1_t&=c V^1_t dt + \sigma_1 V^1_t d\widetilde{W}_t\\
+dV^2_t&=c V^2_t dt + \sigma_2 V^2_t d\widetilde{W}_t
+\end{split}
+\]
+Il nous faut donc actualiser les flux des actifs collatéralisés au taux de collatéral $c$.
+
+\end{frame}
+
+\begin{frame}{Les produits de liquidité}
+Sur le marché on peut traiter de catégories de produits de liquidité:
+\begin{itemize}
+\item \textbf{les swaps à taux fixe}: on distingue les différentes cotations de ce swap $K^f$ suivant la fréquence $f$ de la jambe variable.\\
+\item \textbf{les swaps de basis}: ces produits échangent des jambes variables de fréquences différentes. $m^{f_1-f_2}$ est la marge à ajouter à la jambe de la fréquence la plus faible qui rend le swap nulle.\\ 
+\end{itemize}
+\small
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+Jambe&Fixe&OIS&1M&3M&6M&12M\\
+\hline
+Fixe&&$K^{OIS}$&$K^{1M}$&$K^{3M}$&$K^{6M}$&$K^{12M}$\\
+\hline
+OIS&&&$m^{OIS-1M}$&$m^{OIS-3M}$&$m^{OIS-6M}$&$m^{OIS-12M}$\\
+1M&&&&$m^{1M-3M}$&$m^{1M-6M}$&$m^{1M-12M}$\\
+3M&&&&&$m^{3M-6M}$&$m^{3M-12M}$\\
+6M&&&&&&$m^{6M-12M}$\\
+\hline
+\end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}{Les produits de liquidité}
+\begin{figure}[h]
+\vspace{2mm}
+\FIG{13cm}{figures/basis.png} 
+\vspace{1mm}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Les produits de liquidité}
+Toutes ces cotations sont liées les unes aux autres:\\
+\[
+K^m-K^n=\frac{LVL^m(T^m_0,T^m_m)}{LVL(T_0,T_n)} m^{n,m}
+\]
+On peut approximer cette relation:
+\[
+K^m-K^n \simeq m^{n,m}
+\]
+On en déduit une "sorte" de relation de Chasles pour les marges de basis:
+\[
+m^{n,m}+m^{m,p} \simeq m^{n,p}
+\]
+$m$,$n$ et $p$ correspondent à trois fréquences différentes.
+\end{frame}
+
+\begin{frame}{Algorithme de callage \textbf{"des"} courbes.}
+Il nous faut construire un algorithme, 
+\begin{itemize}
+\item où tous les flux sont actualisés au taux de collatéral standard, c'est à dire l'OIS de la devise,
+\item consistant avec les cotations de tous les produits de liquidité.
+\end{itemize}
+\vspace{0.5cm}
+Algorithme en 2 étapes:
+\begin{itemize}
+\item \textbf{Etape 1}: On calibre la courbe OIS avec l'algorithme classique, en effet une jambe variable OIS utilise la même courbe calculer les taux forwards et actualiser les flux.
+\item \textbf{Etape 2}: On calibre une courbe pour chacune des fréquences 1M, 3M, 6M et 12M afin de reproduire les cotations de marchés $K^f$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Exemple de callage}
+\begin{center}
+\begin{tabular}{|l|c|c|}
+\hline
+Produit & Taux (\%) & Symbole\\
+\hline
+EURIBOR 6M & 1\% & $R_1$ \\
+EURIBOR 12M & 1.5\% & $R_2$ \\
+EONIA vs BOR 6M & 50bps & $m$\\
+EONIA vs BOR 12M & 50bps & $m$\\
+SWAP 12M vs 6M & 1.5\% & $R_2$ \\
+FRA 6M dans 6M & \textbf{??} & F \\
+\hline
+\end{tabular}
+\end{center}
+Il nous faut résoudre l'équation suivante
+\[
+\delta_1 \times B^{OIS}(t,T_1) \times R_1 + \delta_2 \times B^{OIS}(t,T_2) \times F = (\delta_1 + \delta_2) \times R_2 \times B^{OIS}(t,T_2)
+\]
+\end{frame}
+
+\begin{frame}{Exemple de callage}
+\small
+Les différents facteurs d'actualisation:
+\begin{center}
+\begin{tabular}{r l}
+$B^{OIS}(t,T_1)=$ & $\frac{1}{1+\delta_1 i(R_1-m)}$ \\
+$B^{OIS}(t,T_2)=$ & $\frac{1}{1+(\delta_1 + \delta_2) (R_2-m)}$ \\
+\end{tabular}
+\end{center}
+Le taux forward classique:
+\[
+L(t,T_{6M},T_{12M})=\frac{1}{\delta_2}\big(\frac{1+(\delta_1+\delta_2) R_2}{1+\delta_1 R_1}-1\big)
+\]
+La solution de l'équation est la suivante:
+\[
+F=\frac{(\delta_1+\delta_2) R_2}{\delta_2}-R_1 \delta_1 \frac{1+(\delta_1+\delta_2) (R_2-m))}{\delta_2 (1+\delta_1 (R_1-m))}
+\]
+\[
+\text{Ajustement}=F-L(t,T_{6M},T_{12M})
+\]
+\end{frame}
+
+\begin{frame}{Exemple de callage}
+
+\begin{center}
+\begin{tabular}{|c|c|c|}  
+\hline  
+OIS-BOR & $F$ & Ajustement \\ 
+\hline  
+0 bps & 1.9900\%&0.00bps\\ 
+10 bps & 1.9905\%&0.05bps\\ 
+20 bps & 1.9910\%&0.10bps\\ 
+30 bps & 1.9915\%&0.15bps\\ 
+40 bps & 1.9920\%&0.20bps\\ 
+\textbf{\color{red}50 bps} & \textbf{\color{red}1.9925\%}&\textbf{\color{red}0.25bps}\\ 
+\hline 
+\end{tabular}
+\end{center}
+
+\end{frame}
+
 
 \end{document}
