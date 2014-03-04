@@ -202,7 +202,7 @@ La formule précédente nous indique que le nouveau taux F, prenant en compte l'
 \hline 
 \end{tabular}
 \end{center}
-\section{Gestion dans un environement multi courbes}
+\section*{Gestion dans un environement multi courbes}
 Nous avons vu précédemment que les produits dérivés collatéralisés doivent être actualisés au taux de collatéral standard OIS. L'algorithme calage des courbes des taux doit être adapté en conséquence. En pratique la formule de calcul des taux forward est légèrement ajustée. Si l'on gère un portefeuille qui ne contient que des produits dérivés collatéralisés, l'actualisation OIS a peu d'impact. Un banque se collatéralise seulement avec ses contreparties bancaires. En effet le client d'une banque qui traite un swap adossé à une obligation ne souhaite pas que sa trésorerie soit perturbée par des appels de marges, sur lequel il n'a aucun contrôle. La banque devra alors couvir des opérations non collatéralisés avec des opérations collatéralisées.
 
 Une opération non collatéralisée ne sera pas actalisée au taux OIS mais au taux de financement de la banque plus proche de l'EURIBOR.  
