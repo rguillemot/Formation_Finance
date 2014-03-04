@@ -157,7 +157,7 @@ FRA 6M dans 6M & \textbf{??} & F \\
 On veut calculer le taux forward 6M dans 6M, que l'on notera F. On actualisera tous les flux avec la courbe OIS. Il nous faut donc résoudre l'équation suivante:\\
 \begin{equation}
 \label{eq:multicurvefra}
-\delta_1 \times B^{OIS}(t,T_1) \times R_1 + \delta_2 \times B^{OIS}(t,T_2) \times F = (\delta_1 + \delta_2) \times R \times B^{OIS}(t,T_2)
+\delta_1 B^{OIS}(t,T_{6M}) R_1 + \delta_2 B^{OIS}(t,T_{12M}) \times F = (\delta_1 + \delta_2) R B^{OIS}(t,T_{12M})
 \end{equation}
 
 Par souci de simplicité, on considère que les conventions de calcul des fractions d'années sont les mêmes sur les jambes variables et les jambes fixes.\\
@@ -166,8 +166,8 @@ Par souci de simplicité, on considère que les conventions de calcul des fracti
 
 \begin{center}
 \begin{tabular}{r l}
-$B^{OIS}(t,T_1)=$ & $\frac{1}{1+\delta_1 (R_1-m)}$ \\
-$B^{OIS}(t,T_2)=$ & $\frac{1}{1+(\delta_1 + \delta_2) (R_2-m)}$ \\
+$B^{OIS}(t,T_{6M})=$ & $\frac{1}{1+\delta_1 (R_1-m)}$ \\
+$B^{OIS}(t,T_{12M})=$ & $\frac{1}{1+(\delta_1 + \delta_2) (R_2-m)}$ \\
 \end{tabular}
 \end{center}
 
@@ -178,16 +178,16 @@ F=\frac{(\delta_1+\delta_2) R_2}{\delta_2}-R_1 \delta_1 \frac{1+(\delta_1+\delta
 \]
 Après quelques simplifications:\\
 \[
-F=L^{OIS}(t,T_1,T_2)+m \big[ 1 - \delta_1 L^{OIS}(t,T_1,T_2) \big] \simeq L(t,T_1,T_2) \\
+F=L^{OIS}(t,T_{6M},T_{12M})+m \big[ 1 - \delta_1 L^{OIS}(t,T_{6M},T_{12M}) \big] \simeq L(t,T_{6M},T_{12M}) \\
 \]
 avec:\\
 \begin{center}
 \begin{tabular}{c c}
-$L^{OIS}=\frac{1}{\delta_2}\big[ \frac{B^{OIS}(t,T_1)}{B^{OIS}(t,T_2)}-1 \big]$&
-$L=\frac{1}{\delta_2}\big[ \frac{B(t,T_1)}{B(t,T_2)}-1 \big]=\frac{1}{\delta_2}\big[\frac{1+(\delta_1+\delta_2) R_2}{1+\delta_1 R_1}-1\big]$\\
+$L^{OIS}=\frac{1}{\delta_2}\big[ \frac{B^{OIS}(t,T_{6M})}{B^{OIS}(t,T_{12M})}-1 \big]$&
+$L=\frac{1}{\delta_2}\big[ \frac{B(t,T_{6M})}{B(t,T_{12M})}-1 \big]=\frac{1}{\delta_2}\big[\frac{1+(\delta_1+\delta_2) R_2}{1+\delta_1 R_1}-1\big]$\\
 \end{tabular}
 \end{center}
-La formule précédente nous indique que le nouveau taux F, prenant en compte l'actualisation OIS, est très proche de la formule classique du forward $L(T_1,T_2)$. Le tableau suivant illustre que l'ajustement, c'est à dire $F-L(T_1,T_2)$, est une fraction de point de base.
+La formule précédente nous indique que le nouveau taux F, prenant en compte l'actualisation OIS, est très proche de la formule classique du forward $L(T_{6M},T_{12M})$. Le tableau suivant illustre que l'ajustement, c'est à dire $F-L(T_{6M},T_{12M})$, est une fraction de point de base.
 \begin{center}
 \begin{tabular}{|c|c|c|}  
 \hline  

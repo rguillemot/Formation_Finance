@@ -11,8 +11,8 @@
 \newcommand{\FIG}[2]{\includegraphics[width=#1]{#2}}
 
 \usetheme{Warsaw}
-\title[Produits dérivés de taux]{Valorisation multi-courbe. }
-\author{Antonin Chaix - Richard Guillemot}
+\title[Produits dérivés de taux]{Valorisation multi courbe. }
+\author{Richard Guillemot}
 \institute{Master IFMA}
 \date{27 Février 2014}
 
@@ -61,7 +61,7 @@ On reçoit la nouvelle valeur du collatéral.& $V_t$ \\
 Le flux résultant : $dV_t - c \times V_t \times dt$
 \end{frame}
 
-\begin{frame}{Collatéralisation et actualisation}
+\begin{frame}{Collatéralisation et actualisation OIS}
 Soient les prix de 2 actifs sous la probabilité historique $P$:
 \[
 \begin{split}
@@ -79,12 +79,12 @@ En l'absence d'opportunité d'arbitrage, un tel portefeuille a une valeur nulle,
 \]
 \end{frame}
 
-\begin{frame}{Collatéralisation et actualisation}
+\begin{frame}{Collatéralisation et actualisation OIS}
 On définit une nouvelle probabilité dite risque neutre $Q$:\\
 \[
 d\widetilde{W}_t=dW_t+\lambda dt
 \]
-Sous cette probabilité les actifs on drift égal au taux de collatéral:\\
+Sous cette probabilité les actifs on un drift égal au taux de collatéral:\\
 \[
 \begin{split}
 dV^1_t&=c V^1_t dt + \sigma_1 V^1_t d\widetilde{W}_t\\
@@ -121,7 +121,7 @@ OIS&&&$m^{OIS-1M}$&$m^{OIS-3M}$&$m^{OIS-6M}$&$m^{OIS-12M}$\\
 \begin{frame}{Les produits de liquidité}
 \begin{figure}[h]
 \vspace{2mm}
-\FIG{13cm}{figures/basis.png} 
+\FIG{12cm}{figures/basis.png} 
 \vspace{1mm}
 \end{figure}
 \end{frame}
@@ -171,19 +171,20 @@ FRA 6M dans 6M & \textbf{??} & F \\
 \hline
 \end{tabular}
 \end{center}
-Il nous faut résoudre l'équation suivante
+Il nous faut résoudre l'équation suivante:
+\small
 \[
-\delta_1 \times B^{OIS}(t,T_1) \times R_1 + \delta_2 \times B^{OIS}(t,T_2) \times F = (\delta_1 + \delta_2) \times R_2 \times B^{OIS}(t,T_2)
+\delta_1 \times B^{OIS}(t,T_{6M}) \times R_1 + \delta_2 \times B^{OIS}(t,T_{12M}) \times F = (\delta_1 + \delta_2) \times R_2 \times B^{OIS}(t,T_{6M})
 \]
 \end{frame}
 
 \begin{frame}{Exemple de callage}
 \small
-Les différents facteurs d'actualisation:
+Les facteurs d'actualisation OIS:
 \begin{center}
 \begin{tabular}{r l}
-$B^{OIS}(t,T_1)=$ & $\frac{1}{1+\delta_1 i(R_1-m)}$ \\
-$B^{OIS}(t,T_2)=$ & $\frac{1}{1+(\delta_1 + \delta_2) (R_2-m)}$ \\
+$B^{OIS}(t,T_{6M})=$ & $\frac{1}{1+\delta_1 i(R_1-m)}$ \\
+$B^{OIS}(t,T_{12M})=$ & $\frac{1}{1+(\delta_1 + \delta_2) (R_2-m)}$ \\
 \end{tabular}
 \end{center}
 Le taux forward classique:
@@ -192,15 +193,18 @@ L(t,T_{6M},T_{12M})=\frac{1}{\delta_2}\big(\frac{1+(\delta_1+\delta_2) R_2}{1+\d
 \]
 La solution de l'équation est la suivante:
 \[
-F=\frac{(\delta_1+\delta_2) R_2}{\delta_2}-R_1 \delta_1 \frac{1+(\delta_1+\delta_2) (R_2-m))}{\delta_2 (1+\delta_1 (R_1-m))}
+F=L^{OIS}(t,T_1,T_2)+m \big[ 1 - \delta_1 L^{OIS}(t,T_{6M},T_{12M}) \big] \simeq L(t,T_{6M},T_{12M})
 \]
+avec:
 \[
-\text{Ajustement}=F-L(t,T_{6M},T_{12M})
+L^{OIS}(t,T_{6M},T_{12M})=\frac{1}{\delta_2}\big(\frac{1+(\delta_1+\delta_2) (R_2-m)}{1+\delta_1 (R_1-m)}-1\big)
 \]
 \end{frame}
 
 \begin{frame}{Exemple de callage}
-
+\[
+\text{Ajustement}=F-L(t,T_{6M},T_{12M})
+\]
 \begin{center}
 \begin{tabular}{|c|c|c|}  
 \hline  
@@ -215,7 +219,57 @@ OIS-BOR & $F$ & Ajustement \\
 \hline 
 \end{tabular}
 \end{center}
+\end{frame}
 
+\begin{frame}{Gestion dans un environement multi courbes}
+\small
+Couvrir un swap client par un swap de marché:\\
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{Marché} &20 ans&Receveur&Non Collatéralisé&100 Mios EUR \\ 
+\hline
+\textbf{Client} &20 ans&Payeur&Collatéralisé&\textbf{??} \\ 
+\hline
+\end{tabular}
+\end{center}
+Le marché:\\
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{EURIBOR} & 2\% \\
+\hline
+\textbf{OIS vs EURIBOR} & 50 bps \\
+\hline
+\end{tabular}
+\end{center}
+Sensibilités et convexités:
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+&\textbf{PV}&\textbf{Sensi}& \textbf{Convexité}  \\ 
+\hline
+\textbf{Marché} & 0&-172 kEUR/bp&-333 EUR/bp/bp \\ 
+\hline
+\textbf{Client} & 2&166 kEUR/bp&315 EUR/bp/bp \\ 
+\hline
+\end{tabular}
+\end{center}
+
+\end{frame}
+\begin{frame}{Gestion dans un environement multi courbes}
+Il faudra traiter 96.5 millions d'euros:\\
+\[
+\frac{166}{172} \times 100 = 96.5 \text{ millions d'euros}
+\]  
+Le portefeuille a une convexité négative de 6 euros bp$^2$:\\
+\[
+- \frac{166}{172} \times 333 + 315 = -6 \text{ euro bp}^2 
+\]
+Un mouvement de taux à la hausse ou à la baisse de 100 points de base entraine une perte de 30 kEUR:\\
+\[
+- \frac{1}{2} \times 6 \times 10000 = -30\text{ kEUR}  
+\]
 \end{frame}
 
 
