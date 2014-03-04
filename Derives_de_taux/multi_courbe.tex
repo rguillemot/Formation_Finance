@@ -57,13 +57,13 @@ Vladimir Piterbarg propose une adaptation du cadre classique de valorisation des
 
 La liquidité entraîne des cotations distinctes pour des swaps de même maturité mais faisant intervenir des taux de tenors différents. On peut distinguer 2 catégories parmi les produits disponibles sur le marché:\\
 \begin{itemize}
-\item \textbf{les swaps à taux fixe}: on distingue les différentes cotations de ce swap suivant la fréquence de la jambe variable $K^f$. Nous supposerons que la fréquence jambe fixe est toujours la même (annuelle en euro et semi-annuelle en dollar).\\
+\item \textbf{les swaps à taux fixe}: on distingue les différentes cotations de ce swap suivant la fréquence de la jambe variable $K^f$. Nous supposerons que la fréquence de la jambe fixe est toujours la même (annuelle en euro et semi-annuelle en dollar).\\
 
 \item \textbf{les swaps de basis}: ces produits échangent des jambes variables de fréquences différentes. On retire une marge $m^{f_1-f_2}$ à la jambe de la fréquence la plus faible afin que la valeur du swap soit nulle lors de sa mise en place.\\ 
 
 \end{itemize}
 
-Le tableau ci dessous illustre les différentes cotations possible pour un tenor donné.
+Le tableau ci dessous illustre les différentes cotations possibles pour un tenor donné.
 
 \begin{center}
 \begin{tabular}{|c|c|c|c|c|c|c|}
@@ -79,9 +79,9 @@ OIS&&&$m^{OIS-1M}$&$m^{OIS-3M}$&$m^{OIS-6M}$&$m^{OIS-12M}$\\
 \end{tabular}
 \end{center}
 
-Ces cotations sont rédondantes et peuvent être réliées les unes aux autres par des arguments de réplication. L'achat et la vente de 2 swaps payeurs de taux fixe, de fréquences variables distinctes, réplique un swap de basis.\\
+Ces cotations sont redondantes et peuvent être reliées les unes aux autres par des arguments de réplication. L'achat et la vente de 2 swaps payeurs de taux fixe et de fréquences variables distinctes, réplique un swap de basis.\\
 
-Soient 2 échéanciers de fréquence différentes et synchronisés. Nous supposons que le premier échéancier contient $n$ flux et le second $m$ flux. Nous disposons des 3 équations suivantes:
+Soient 2 échéanciers de fréquences différentes et synchronisées. Nous supposons que le premier échéancier contient $n$ flux et le second $m$ flux. Nous disposons des 3 équations suivantes:
 \[
 \begin{split}
 \sum_{i=1}^{n} \delta^n_i L(T^n_{i-1},T^n_{i}) B(t,T^n_{i})&=K^n LVL(T_0,T_n)\\
@@ -90,9 +90,9 @@ Soient 2 échéanciers de fréquence différentes et synchronisés. Nous supposo
 \end{split}
 \]
 \begin{itemize}
-\item les quantité avec un  \textbf{exposant n} sont associées à la jambe variable de la fréquence la plus grande.\\
-\item les quantité avec un \textbf{exposant m} sont associées à la jambe variable de la fréquence la plus faible.\\
-\item les quantité \textbf{sans exposant} sont associées à la jambe fixe des 2 swaps.\\
+\item les quantités avec un  \textbf{exposant n} sont associées à la jambe variable de la fréquence la plus grande.\\
+\item les quantités avec un \textbf{exposant m} sont associées à la jambe variable de la fréquence la plus faible.\\
+\item les quantités \textbf{sans exposant} sont associées à la jambe fixe des 2 swaps.\\
 \end{itemize}
 
 \begin{center}
@@ -109,7 +109,7 @@ On en déduit ainsi que:
 \[
 K^m-K^n=\frac{LVL^m(T^m_0,T^m_m)}{LVL(T_0,T_n)} m^{n,m}
 \]
-On peut approximer cette relation:
+On peut approcher cette relation:
 \[
 K^m-K^n \simeq m^{n,m}
 \]
@@ -121,21 +121,21 @@ $m$,$n$ et $p$ correspondent à trois fréquences différentes.\\
 
 Pour établir les relations précédentes nous n'avons fait aucune hypothèse sur la courbe d'actualisation, c'est à dire comment sont calculés les facteurs d'actualisation $B(t,T_i)$ ou les différents levels $LVL^n(T_0,T_n)$,$LVL^m(T_0,T_n)$,$LVL(T_0,T_n)$.\\
 
-On peut considérer les cotation des swaps comme des invariants et elles vont être utilisées comme valeurs cibles pour l'algorithme de calibration des courbes. L'objectif de l'algorithme est de construire une courbe pour chaque fréquence OIS,1M,3M,6M et 12M, que l'on utilisera pour estimer les taux forward des jambes variables associées. Le niveau des taux sera déterminé afin que la valeur de ces swaps de marché soit nulle.\\
+On peut considérer les cotations des swaps comme des invariants et elles vont être utilisées comme valeurs cibles pour l'algorithme de calibration des courbes. L'objectif de l'algorithme est de construire une courbe pour chaque fréquence OIS,1M,3M,6M et 12M, que l'on utilisera pour estimer les taux forward des jambes variables associées. Le niveau des taux sera déterminé afin que la valeur de ces swaps de marché soit nulle.\\
 
 L'algorithme:\\
 \begin{itemize}
 \item \textbf{Etape 1 : la courbe OIS}\\
-La courbe OIS joue un rôle bien particulier dans l'algorithme. En effet on utilisera la même courbe pour estimer les taux forwards des swaps OIS et actualiser leurs flux. Par conséquent l'algorithme classique sera utilisé.\\
+La courbe OIS joue un rôle bien particulier dans l'algorithme. En effet on utilisera la même courbe pour estimer les taux forward des swaps OIS et actualiser leurs flux. Par conséquent l'algorithme classique sera utilisé.\\
 \item{\textbf{Etape 2 : les courbes de forward}}\\
-Si l'on utilise l'algorihme classique de construction de la courbe des taux pour les index non OIS, on ne respectera pas les cotations de marché du fait de l'actualisation. Le nouvel algorithme déterminera donc de nouveaux taux forwards pour chaque index (1M,3M,6M,12M) afin que les swaps de marché soient au pair.\\ 
+Si l'on utilise l'algorihme classique de construction de la courbe des taux pour les index non OIS, on ne respectera pas les cotations de marché du fait de l'actualisation. Le nouvel algorithme déterminera donc de nouveaux taux forward pour chaque index (1M, 3M, 6M, 12M) afin que les swaps de marché soient au pair.\\ 
 \end{itemize}
 
 Nous allons illustrer l'algorithme avec un exemple très simple.
 On considère:\\
 \begin{itemize}
 \item les 2 Money Market EURIBOR 6M et EURIBOR 12M,\\
-\item les 2 swaps de basis 6M vs EONIA et 12M vs EONIA avec la même marge de basis,\\ 
+\item les 2 swaps de basis 6M vs. EONIA et 12M vs. EONIA, qui ont la même marge de basis,\\ 
 \item et enfin le swap taux fixe de maturité 12M et de tenor 6M (la jambe fixe est payée annuellement et la jambe variable semi-annuellement). Son taux est égal à l'EURIBOR 12M. On remarque que dans cet exemple la marge 12M vs 6M est nulle.\\
 \end{itemize}
 
@@ -154,7 +154,7 @@ FRA 6M dans 6M & \textbf{??} & F \\
 \end{tabular}
 \end{center}
 
-On veut calculer le taux forward 6M dans 6M, que l'on notera F. On actalisera tous les flux avec la courbe OIS. Il nous faut donc résoudre l'équation suivante:\\
+On veut calculer le taux forward 6M dans 6M, que l'on notera F. On actualisera tous les flux avec la courbe OIS. Il nous faut donc résoudre l'équation suivante:\\
 \begin{equation}
 \label{eq:multicurvefra}
 \delta_1 \times B^{OIS}(t,T_1) \times R_1 + \delta_2 \times B^{OIS}(t,T_2) \times F = (\delta_1 + \delta_2) \times R \times B^{OIS}(t,T_2)
@@ -202,8 +202,25 @@ La formule précédente nous indique que le nouveau taux F, prenant en compte l'
 \hline 
 \end{tabular}
 \end{center}
-\section*{Gestion dans un environement multi courbes}
-Nous avons vu précédemment que les produits dérivés collatéralisés doivent être actualisés au taux de collatéral standard OIS. L'algorithme calage des courbes des taux doit être adapté en conséquence. En pratique la formule de calcul des taux forward est légèrement ajustée. Si l'on gère un portefeuille qui ne contient que des produits dérivés collatéralisés, l'actualisation OIS a peu d'impact. Un banque se collatéralise seulement avec ses contreparties bancaires. En effet le client d'une banque qui traite un swap adossé à une obligation ne souhaite pas que sa trésorerie soit perturbée par des appels de marges, sur lequel il n'a aucun contrôle. La banque devra alors couvir des opérations non collatéralisés avec des opérations collatéralisées.
+\section*{Gestion dans un environement multi courbe}
 
-Une opération non collatéralisée ne sera pas actalisée au taux OIS mais au taux de financement de la banque plus proche de l'EURIBOR.  
+Nous avons vu précédemment que les produits dérivés collatéralisés doivent être actualisés au taux de collatéral standard OIS. L'algorithme de calage des courbes des taux doit être adapté en conséquence. En pratique la formule de calcul des taux forward est légèrement ajustée. Si l'on gère un portefeuille qui ne contient que des produits dérivés collatéralisés, l'actualisation OIS a peu d'impact. Un banque se collatéralise seulement avec ses contreparties bancaires. En effet le client d'une banque qui traite un swap adossé à une obligation ne souhaite pas que sa trésorerie soit perturbée par des appels de marge sur lesquels il n'a aucun contrôle. La banque devra alors couvrir des opérations non collatéralisées avec des opérations collatéralisées. Une opération non collatéralisée ne sera pas actualisée au taux OIS mais au taux de financement de la banque plus proche de l'EURIBOR.\\
+
+Considérons un swap 20 ans, standard, non collatéralisé, d'un nominal de 100 Millions d'euros payeur de taux fixe (\textbf{Swap Client}) couvert par un swap 20 ans, collatéralisé, receveur de taux fixe (\textbf{Swap de Marché}). Les taux d'intérêts valent 2\% et la marge OIS vs EURIBOR 50 points de base.\\
+
+Le swap client sera actualisé au taux EURIBOR et le swap de marché au taux OIS. Ci-dessous la sensibilité et la convexité de chacune des 2 opérations:
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+&\textbf{PV (Mios EUR)}&\textbf{Sensi (kEUR)}& \textbf{Convexité (EUR)}  \\ 
+\hline
+\textbf{Swap de Marché} & 0&172&-333 \\ 
+\hline
+\textbf{Swap Client} & 2&-166&315 \\ 
+\hline
+\end{tabular}
+\end{center}
+
+Il faudra traiter 96.5 millions ($=\frac{166}{172} \times $ 100 millions d'euros ) d'euros du swap de marché pour couvrir le swap du client. Le portefeuille couvert au premier ordre génère une convexité négative de 6 euros bp$^2$, c'est à dire pour un mouvement de taux une perte de 30 kEUR ($\frac{1}{2} \times 6 \times 10000 $) pour un mouvement de taux à la hausse ou à la baisse de 100 points de base.    
+  
 \end{document}
