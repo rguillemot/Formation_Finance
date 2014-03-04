@@ -131,7 +131,14 @@ La courbe OIS joue un rôle bien particulier dans l'algorithme. En effet on util
 Si l'on utilise l'algorihme classique de construction de la courbe des taux pour les index non OIS, on ne respectera pas les cotations de marché du fait de l'actualisation. Le nouvel algorithme déterminera donc de nouveaux taux forwards pour chaque index (1M,3M,6M,12M) afin que les swaps de marché soient au pair.\\ 
 \end{itemize}
 
-Nous allons illustrer l'algorithme avec un exemple très simple. On considère les 2 Money Market 6M et 12M, les 2 swaps de basis 6M vs EONIA et 12M vs EONIA et enfin le swap 12M vs 6M (la jambe fixe est payée annuellement et la jambe variable semi-annuellement).\\
+Nous allons illustrer l'algorithme avec un exemple très simple.
+On considère:\\
+\begin{itemize}
+\item les 2 Money Market EURIBOR 6M et EURIBOR 12M,\\
+\item les 2 swaps de basis 6M vs EONIA et 12M vs EONIA avec la même marge de basis,\\ 
+\item et enfin le swap taux fixe de maturité 12M et de tenor 6M (la jambe fixe est payée annuellement et la jambe variable semi-annuellement). Son taux est égal à l'EURIBOR 12M. On remarque que dans cet exemple la marge 12M vs 6M est nulle.\\
+\end{itemize}
+
 \begin{center}
 \begin{tabular}{|l|c|c|}
 \hline
@@ -148,55 +155,55 @@ FRA 6M dans 6M & \textbf{??} & F \\
 \end{center}
 
 On veut calculer le taux forward 6M dans 6M, que l'on notera F. On actalisera tous les flux avec la courbe OIS. Il nous faut donc résoudre l'équation suivante:\\
-\[
+\begin{equation}
+\label{eq:multicurvefra}
 \delta_1 \times B^{OIS}(t,T_1) \times R_1 + \delta_2 \times B^{OIS}(t,T_2) \times F = (\delta_1 + \delta_2) \times R \times B^{OIS}(t,T_2)
-\]
+\end{equation}
 
-Par souci de simplicité, on considère que les conventions de calcul des fractions d'années sont les mêmes sur les jambes variables et les jambes fixe.\\
+Par souci de simplicité, on considère que les conventions de calcul des fractions d'années sont les mêmes sur les jambes variables et les jambes fixes.\\
 
-On remarque que les Money Market ou emprunts au comptant ne font pas intervenir de taux forward. Ils correspondent donc aux taux OIS. On considère aussi les taux BOR calculé avec les taux forwad de tenor 6M.
+\textbf{L'étape 1} consiste à déterminer les facteurs d'actualisation à partir des swaps OIS. Le choix de la courbe OIS pour l'actualisation permet de les déduire directement par les formules classiques: 
 
 \begin{center}
-\begin{tabular}{r l r l}
-$B^{OIS}(t,T_1)=$ & $\frac{1}{1+\delta_1 R_1}$ & $B^{BOR}(t,T_1)=$ & $\frac{1}{1+\delta_1 R_1}$ \\
-$B^{OIS}(t,T_2)=$ & $\frac{1}{1+(\delta_1 + \delta_2) R_2}$ & $B^{BOR}(t,T_2)=$ & $\frac{1}{1+(\delta_1 + \delta_2) R}$ \\
+\begin{tabular}{r l}
+$B^{OIS}(t,T_1)=$ & $\frac{1}{1+\delta_1 (R_1-m)}$ \\
+$B^{OIS}(t,T_2)=$ & $\frac{1}{1+(\delta_1 + \delta_2) (R_2-m)}$ \\
 \end{tabular}
 \end{center}
 
-On calcule le taux forward OIS, c'est à dire le taux forward calculé avec la formule classique et les taux OIS:\\
+\textbf{L'étape 2} consiste simplement à résoudre l'équation (\ref{eq:multicurvefra}):\\
 
 \[
-L^{OIS}(t,T_1,T_2)=\frac{1}{\delta_2}\big(\frac{B^{OIS}(t,T_1)}{B^{OIS}(t,T_2)}-1\big)\\
+F=\frac{(\delta_1+\delta_2) R_2}{\delta_2}-R_1 \delta_1 \frac{1+(\delta_1+\delta_2) (R_2-m)}{\delta_2 (1+\delta_1 (R_1-m))}
 \]
-
-On calcule le taux forward BOR, c'est à dire le taux forward calculé avec la formule classique et les taux BOR:\\
-
+Après quelques simplifications:\\
 \[
-L^{BOR}(t,T_1,T_2)=\frac{1}{\delta_2}\big(\frac{B^{BOR}(t,T_1)}{B^{BOR}(t,T_2)}-1\big)\\
+F=L^{OIS}(t,T_1,T_2)+m \big[ 1 - \delta_1 L^{OIS}(t,T_1,T_2) \big] \simeq L(t,T_1,T_2) \\
 \]
-
-Après simplification:
-
-\[
-F=L^{BOR}(t,T_1,T_2)+\underbrace{\delta_1 \times R_1 (L^{BOR}(t,T_1,T_2)-L^{OIS}(t,T_1,T_2))}_{\textbf{Ajustement}} \\
-\]
-
-La formule précédente nous indique que plus la marge OIS 6 mois plus l'ajustement du FRA 6 mois dans 6 mois est élevé. Par ailleurs l'ajustement par rapport au taux classique est relativement faible, une fraction de bp comme ont peut le voir sur le tableau suivant.
-
+avec:\\
 \begin{center}
-\begin{tabular}{|c|c|c|c|}  
-\hline  
-$\boldsymbol{R_2}$ & \textbf{BOR-OIS} & \textbf{F} & \textbf{Ajustement} \\ 
-\hline  
-\textbf{\color{red}0.50\%} & \textbf{\color{red}50 bps} & \textbf{\color{red}1.4988\%} & \textbf{\color{red}0.25bps}\\ 
-0.60\% & 40 bps & 1.4983\% & 0.20bps\\ 
-0.70\% & 30 bps & 1.4978\% & 0.15bps\\ 
-0.80\% & 20 bps & 1.4973\% & 0.10bps\\ 
-0.90\% & 10 bps & 1.4968\% & 0.05bps\\ 
-1.00\% & 0 bps & 1.4963\% & 0.00bps\\ 
-\hline  
+\begin{tabular}{c c}
+$L^{OIS}=\frac{1}{\delta_2}\big[ \frac{B^{OIS}(t,T_1)}{B^{OIS}(t,T_2)}-1 \big]$&
+$L=\frac{1}{\delta_2}\big[ \frac{B(t,T_1)}{B(t,T_2)}-1 \big]=\frac{1}{\delta_2}\big[\frac{1+(\delta_1+\delta_2) R_2}{1+\delta_1 R_1}-1\big]$\\
 \end{tabular}
 \end{center}
+La formule précédente nous indique que le nouveau taux F, prenant en compte l'actualisation OIS, est très proche de la formule classique du forward $L(T_1,T_2)$. Le tableau suivant illustre que l'ajustement, c'est à dire $F-L(T_1,T_2)$, est une fraction de point de base.
+\begin{center}
+\begin{tabular}{|c|c|c|}  
+\hline  
+\textbf{m=OIS-BOR} & $\textbf{F}$ & \textbf{Ajustement} \\ 
+\hline  
+0 bps & 1.9900\%&0.00 bps\\ 
+10 bps & 1.9905\%&0.05 bps\\ 
+20 bps & 1.9910\%&0.10 bps\\ 
+30 bps & 1.9915\%&0.15 bps\\ 
+40 bps & 1.9920\%&0.20 bps\\ 
+\textbf{\color{red}50 bps} & \textbf{\color{red}1.9925\%}&\textbf{\color{red}0.25 bps}\\ 
+\hline 
+\end{tabular}
+\end{center}
+\section{Gestion dans un environement multi courbes}
+Nous avons vu précédemment que les produits dérivés collatéralisés doivent être actualisés au taux de collatéral standard OIS. L'algorithme calage des courbes des taux doit être adapté en conséquence. En pratique la formule de calcul des taux forward est légèrement ajustée. Si l'on gère un portefeuille qui ne contient que des produits dérivés collatéralisés, l'actualisation OIS a peu d'impact. Un banque se collatéralise seulement avec ses contreparties bancaires. En effet le client d'une banque qui traite un swap adossé à une obligation ne souhaite pas que sa trésorerie soit perturbée par des appels de marges, sur lequel il n'a aucun contrôle. La banque devra alors couvir des opérations non collatéralisés avec des opérations collatéralisées.
 
-
+Une opération non collatéralisée ne sera pas actalisée au taux OIS mais au taux de financement de la banque plus proche de l'EURIBOR.  
 \end{document}
