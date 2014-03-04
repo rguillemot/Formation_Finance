@@ -36,7 +36,7 @@ Ce risque de liquidité se matérialise sur le marché des taux d’intérêt so
 La courbe un jour, "one day", 1D ou \textbf{OIS} \footnote{\textbf{OIS} (Overnight Indexed Swap) est un terme générique pour qualifier les swaps ou les taux d'intérêt de fréquence quotidienne (EONIA ou bien Federal Funds).} joue un rôle bien particulier. Elle est associée au prêt/emprunt à taux variable OIS. C’est le prêt/emprunt qui présente le moins de risque de crédit pour le prêteur et qui par conséquent a le plus faible coût de liquidité pour l’emprunteur. Chaque jour le prêteur récupère son nominal et il est libre de choisir une nouvelle contrepartie moins risquée. Il apparaît donc comme une bonne solution de considérer cette courbe comme la courbe sans risque.
 
 
-\section*{L’usage du collatéral et l’actualisation OIS/EONIA}
+\section*{L’usage du collatéral et l’actualisation OIS}
 
 L’usage du collatéral (ou hypothèque) est la méthode en pratique la plus utilisée pour supprimer ou tout au moins réduire le risque de crédit d'un produit dérivé. Le débiteur met en gage de l’argent ou des actifs financiers à hauteur de sa dette. Chaque jour on constate l’évolution de la valeur du produit et chacune des parties poste ou reçoit le montant qui couvre la nouvelle exposition, ce sont les \textbf{appels de marge}. Le détenteur du collatéral doit rémunérer sa contrepartie à un taux dit \textbf{taux de collatéral}. Du fait des échanges quotidiens ce taux est le plus souvent le taux OIS. On remarque que le futur est un cas particulier de la collatéralisation dans lequel le taux de collatéral est nul.\\
 
@@ -51,7 +51,7 @@ En pratique l’usage du collatéral ne supprime pas complètement le risque de 
 
 \end{itemize}
 
-Vladimir Piterbarg propose une adaptation du cadre classique de valorisation des produits dérivés. Il démontre que le drift d’un actif collatéralisé doit être le taux de collatéral sous la probabilité risque neutre. Par conséquent les flux des produits dérivés doivent être actualisés au taux de collatéral. Le taux OIS est utlisé de façon standard dans les contrats CSA. Nous devons donc actualiser les flux des dérivés standards (Money market, FRA, Swap) avec la courbe OIS. Ce nouveau choix d'actualisation nécessite une adaptation de l'algorithme de calibration de la courbe présenté précédemment.\\
+Vladimir Piterbarg propose une adaptation du cadre classique de valorisation des produits dérivés. Il démontre que le drift d’un actif collatéralisé doit être le taux de collatéral sous la probabilité risque neutre. Par conséquent les flux des produits dérivés doivent être actualisés au taux de collatéral. Le taux OIS est utlisé de façon standard dans les contrats CSA. Nous devons donc actualiser les flux des dérivés standards (Money market, FRA, Swap) avec la courbe OIS. Ce nouveau choix d'actualisation nécessite une adaptation de l'algorithme de calibration de la courbe présenté précédemment. On appelle généralement cette technique \textbf{actualisation OIS} ou \textbf{OIS discounting}.\\
 
 \section*{Calibration des différentes courbes}
 
