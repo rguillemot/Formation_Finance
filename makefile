@@ -9,7 +9,8 @@ DERIVES_DE_TAUX = \
 		Derives_de_taux/jour4_convexity_adj.pdf \
 		Derives_de_taux/jour4_multi_curve.pdf \
 		Derives_de_taux/multi_courbe.pdf \
-		Derives_de_taux/jour4_multi_curve.pdf
+		Derives_de_taux/jour4_multi_curve.pdf \
+		Derives_de_taux/evaluation.pdf
 
 %.pdf: %.tex
 	$(TEX) $<

@@ -1,0 +1,80 @@
+\documentclass{article}
+\usepackage[english,francais]{babel}
+\usepackage{multirow}
+\usepackage[english,francais]{babel}\usepackage[utf8]{inputenc}
+\usepackage{amssymb,amsmath}
+\usepackage{color}
+\usepackage{graphicx}
+\graphicspath{{./Derives_de_taux/}}
+
+\newcommand{\FIG}[2]{\includegraphics[width=#1]{#2}}
+
+
+\begin{document}
+\title{Evaluation - Produits Dérivés de taux}
+\date{}
+\maketitle
+\section*{Conventions et standards de marché}
+Remplir le tableau suivant avec les caractéristiques d'un swap standard euro et dollar.
+\begin{center}
+\begin{tabular}{|l|l|c|c|}
+\hline
+&&\textbf{Euro}&\textbf{Dollar}\\
+\hline
+&Date de départ&??&??\\
+\hline
+\multirow{2}{*}{\textbf{Jambe Fixe}}&Base de calcul&??&??\\
+&Fréquence de paiement&??&??\\
+&Date de paiement&??&??\\
+&Ajustement au calendrier&??&??\\
+\hline
+\multirow{2}{*}{\textbf{Jambe Variable}}&Base de calcul&??&??\\
+&Fréquence de paiement&??&??\\
+&Fréquence de fixing&??&??\\
+&Date de paiement&??&??\\
+&Date de fixing&??&??\\ 
+&Ajustement au calendrier&??&??\\
+\hline
+\end{tabular}
+\end{center}
+
+\section*{Swaps exotiques}
+Soient 2 swaps exotiques en euros, traités entre une banque et son client, avec les caractistiques suivantes:
+\begin{itemize}
+\item Swap \textbf{ARREARS}:\\
+Le client reçoit une jambe fixe euros standard. En échange il paie une jambe variable avec toutes les caractéristiques standards en euro à l'exception du taux variable \textbf{qui est fixé 2 jours avant fin de période}.
+\item Swap \textbf{Capped \& Floored}:\\
+Le client paie une jambe variable euro standard. En échange il recoit quasiment la même jambe variable à l'exception des taux qui sont bornés (capped \& floored). Le client reçoit au maximum un taux \textbf{10\% plus élevé} (respectivement \textbf{10 \% moins élevé}) qu'un certains niveau fixe $K$. On appellera $K$ le taux fixe du swap \textbf{Capped \& Floored}. 
+\end{itemize}
+
+\vspace{0.5cm}
+
+On considère les données de marché suivantes:\\
+\begin{tabular}{|l|c|l|}
+\hline
+&&\textbf{Convention}\\
+\hline
+\textbf{Taux constant} ($R$) & 2\%&Actuariel à composition semi-annuelle\\
+\hline
+\textbf{Volatilité à monnaie} ($\sigma_{ATM}$)&20\%&lognormal \\
+\hline
+\end{tabular}
+
+\vspace{0.5cm}
+
+On suppose de façon classique, que chacun des taux est martingal sous sa probabilité de paiement.On considère les 3 modèles suivants:
+\begin{itemize}
+\item le modèle lognormal
+\item le modèle normal
+\item le modèle lognormal décalé
+\end{itemize}
+\vspace{0.5cm}
+On suppose que ces 3 modèles sont cohérents avec les données de marché.
+\begin{enumerate}
+\item \textbf{Valorisation}: Etablir les formules de valorisation des ces 2 produits pour chacun des 3 modèles.
+\item \textbf{Application numérique}: Calculer le taux fixe de ces swaps pour les 3 maturités 10Y, 20Y et 30Y, afin que le swap soit au pair (valeur nulle). Dans le cas du modèle lognormal décalé on considérera 4 niveaux de décalage $m$ ($10\% \times R$, $50\% \times R$, $100\% \times R$ et $200\% \times R$).
+\item \textbf{Analyse}: A partir des résultats précedents discuter de l'intérêt de prendre en compte la pente du smile pour valoriser chacun de ces 2 produits. 
+\end{enumerate}
+Pour les questions 1 et 2 donner les résultats sans justifications en reprennant les notations que vous trouverez dans l'exercice et le polycopié du cours.
+
+\end{document}
