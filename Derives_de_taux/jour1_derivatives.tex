@@ -9,7 +9,7 @@
 \newcommand{\FIG}[2]{\includegraphics[width=#1]{#2}}
 
 \usetheme{Warsaw}
-\title[Pdts dérivés de taux]{Principaux produits derivés de taux. \\ Formules de valorisation et de quotation}
+\title[Pdts dérivés de taux]{Principaux produits derivés de taux. \\ Formules de valorisation et de cotation}
 \author{Antonin Chaix - Richard Guillemot}
 \institute{Master IFMA}
 \date{7 Février 2014}
@@ -29,7 +29,7 @@
 
 \end{frame}
 
-\begin{frame}{Le taux monétaire, dépot ou money market}
+\begin{frame}{Le taux monétaire, dépôt ou money market}
 
 Voici l'échéancier de l'EURIBOR 6M:
 \begin{figure}[h]
@@ -65,14 +65,14 @@ K^*=L(t,T_1, T_2)=\frac{1}{\delta}\left(\frac{B(t,T_1)}{B(t,T_2)}-1\right)
 \]
 \end{frame}
 
-\begin{frame}{Le Future}
+\begin{frame}{Le Futur}
 
-Le Future est la version standardisée du FRA. Il est échangé sur un marché organisé et dispose d'une chambre de compensation.\\
+Le Futur est la version standardisée du FRA. Il est échangé sur un marché organisé et dispose d'une chambre de compensation.\\
 Le contrat se base sur LIBOR 3M en dollar et EURIBOR 3M en euro aux dates IMM (3ème mercredi des mois de Mars, Juin, Septembre et Décembre).\\
 \begin{center}
 \begin{tabular}{|c|r|r|}
   \hline
-  \textbf{Future} & \textbf{$T_{start}$} & \textbf{$T_{end}$} \\
+  \textbf{Futur} & \textbf{$T_{start}$} & \textbf{$T_{end}$} \\
   \hline
   \textbf{MAR14} & 19 Mars 2014 & 18 Juin 2014 \\
   \textbf{JUN14} & 18 Juin 2014 & 17 Septembre 2014 \\
@@ -84,9 +84,9 @@ Le contrat se base sur LIBOR 3M en dollar et EURIBOR 3M en euro aux dates IMM (3
 A la maturité du contrat, R est égal au taux LIBOR 3M ou EURIBOR 3M qui prévaut à cette date.
 \end{frame}
 
-\begin{frame}{Le Future}
+\begin{frame}{Le Futur}
 Le nominal du contrat est de 1,000,000 de dollars ou d'euros.\\
-Le contrat est quoté de la façon suivante:
+Le contrat est coté de la façon suivante:
 \[
 100\times(1 - R)
 \] 
@@ -96,7 +96,7 @@ La valeur du contrat:
 1,000,000\times(1-0.25\times R)
 \]
 Tout d'abord on achète sans frais un contrat.\\
-Ensuite on reçoit (ou paie) 25 dollars ou euros lorsque le taux de référence diminue de 1bp (ou augmente de 1bp) sous forme d'appel de marge.
+Ensuite on reçoit (ou on paie) 25 dollars ou euros lorsque le taux de référence diminue de 1 point de base(ou augmente de 1 point de base) sous forme d'appel de marge.
 \end{frame}
 
 \begin{frame}{Le Swap}
@@ -167,7 +167,7 @@ Comment calculer les facteurs d'actualisation et les taux zéro coupon associés
 \end{frame}
 
 \begin{frame}{Calage de la courbe des taux}
-On utilisera la composition continu pour définir de taux zéro coupon:
+On utilisera la composition continue pour définir de taux zéro coupon:
 \[
 B(t,T)=e^{-r(t,T) \times \delta }	
 \]
@@ -223,7 +223,7 @@ Le but de cet algorithme est de résoudre l'équation suivante:
 	f(x)=0
 \]
 Pour qu'il converge de façon certaine, la fonction $f$ doit être convexe.
-On choisit un point de départ quelconque $(x_0,f(x_0))$ et on calcul l'intersection ($x_1$,0) de la tangeante en ce point de la fonction $f$ avec avec l'axe des abcisses ($y=0$).
+On choisit un point de départ quelconque $(x_0,f(x_0))$ et on calcule l'intersection ($x_1$,0) de la tangeante en ce point de la fonction $f$ avec avec l'axe des abscisses ($y=0$).
 
 \begin{center}
 \begin{tabular}{c c}
@@ -237,8 +237,8 @@ $x_1=x_0-\frac{f(x_0)}{f'(x_0)}$
 \end{tabular}
 \end{center}
 
-$x_1$ est plus proche de la solution que $x_0$. On récommence en partant du point $(x_1,f(x_1))$. On réitère cette étape jusqu'à atteindre une erreur satisfaisante.\\
-On pourra approximer la fonction f par différence finie:
+$x_1$ est plus proche de la solution que $x_0$. On recommence en partant du point $(x_1,f(x_1))$. On réitère cette étape jusqu'à atteindre une erreur satisfaisante.\\
+On pourra approcher la fonction f par différence finie:
 \[
 f'(x_0) \simeq \frac{f(x_0+\epsilon)-f(x_0)}{\epsilon}
 \]
@@ -262,7 +262,7 @@ Exemple pour la fonction $f(x)=e^{-x}-1$ avec comme point de départ $x_0=1$. 2 
 Soit un emprunt à taux fixe qui démarre dans le futur. Nous allons le répliquer par 2 emprunts qui démarrent aujourd'hui.
 \end{frame}
 
-\begin{frame}{Réplication d'un emprunt future}
+\begin{frame}{Réplication d'un emprunt futur}
 \begin{center}
 \begin{figure}[h]
 \FIG{4in}{figures/fwd_replic2.png}
@@ -271,7 +271,7 @@ Soit un emprunt à taux fixe qui démarre dans le futur. Nous allons le répliqu
 On prête aujourd'hui $B(t,T_{start})$ qui sera remboursé avec les intérêts en $T_{start}$ par un flux de 1.
 \end{frame}
 
-\begin{frame}{Réplication d'un emprunt future}
+\begin{frame}{Réplication d'un emprunt futur}
 \begin{center}
 \begin{figure}[h]
 \FIG{4in}{figures/fwd_replic3.png}
@@ -280,8 +280,8 @@ On prête aujourd'hui $B(t,T_{start})$ qui sera remboursé avec les intérêts e
 On emprunte aujourd'hui $(1+\delta K)B(t,T_{end})$ qui nous sera remboursé avec les intérêts en $T_{end}$ par un flux de $1+\delta K$.
 \end{frame}
 
-\begin{frame}{Réplication d'un emprunt future}
-Il n'y a maintenant plus de flux futures nous allons donc calculer le taux fixe $K^*$ qui égalise les flux aujourd'hui :
+\begin{frame}{Réplication d'un emprunt futur}
+Il n'y a maintenant plus de flux futurs nous allons donc calculer le taux fixe $K^*$ qui égalise les flux aujourd'hui :
 \[
 K^*=L(t,T_{start}, T_{end})=\frac{1}{\delta}\left(\frac{B(t,T_{start})}{B(t,T_{end})}-1\right)
 \]
@@ -319,7 +319,7 @@ Entre le 29 Janvier et le 19 Mars,\\
 
 
 \begin{frame}{Quizz}
-Soit un emprunt qui sur nominal $N$.\\ 
+Soit un emprunt de nominal $N$.\\ 
 On reçoit un nominal $N$ en $T_0$.\\
 On ne paie aucun intérêt tout au long de la vie de l'emprunt.\\
 On rembourse le nominal $N$ à l'échéance $T_n$.\\
