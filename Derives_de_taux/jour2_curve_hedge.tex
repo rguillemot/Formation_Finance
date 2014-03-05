@@ -172,7 +172,7 @@ Rappelons la formule du taux de swap:
 \[
 S(t,T_0,T_n)=\frac{B(t,T_0)-B(t,T_n)}{ \sum_{i=1}^{n}\delta_i^F \;B(t,T_i^F)}
 \]
-Par invertion on obtient la formule suivante du dernier facteur d'actualisation en fonction des autres zéro coupons (a priori déja calculés) et du taux de swap:
+Par inversion on obtient la formule suivante du dernier facteur d'actualisation en fonction des autres zéro coupons (a priori déjà calculés) et du taux de swap:
 \[
 B(t,T_n)=\frac{B(t,T_0)-S(t,T_0,T_n)\sum_{i=1}^{n-1}\delta_i^F \;B(t,T_i^F)}{1+S(t,T_0,T_n)}
 \]
@@ -243,7 +243,7 @@ $r(2D+7Y)$ & $r(2D+6Y)$ & $B(t,2D+5Y)$ & $Swap(7Y)$ & $f'$\\
 \end{frame}
 
 \begin{frame}{Algorithme bootstrap : Les taux de swap}
-De la même façon on calcule les taux zéro coupons restant:
+De la même façon on calcule les taux zéro coupons restants:
 \begin{tabular}{|c|c|c|c|}
 \hline
 plot & taux zéro & zéro coupon & taux de swap \\
@@ -259,17 +259,17 @@ plot & taux zéro & zéro coupon & taux de swap \\
 \end{frame}
 
 \begin{frame}{Les ratios de couverture}
-Un opérateur de marché gère une portefeuille. Afin de réduire le risque de marché, il doit réduire le plus possible son exposition aux taux d'intérêts.\\
+Un opérateur de marché gère un portefeuille. Afin de minimiser le risque de marché, il doit réduire le plus possible son exposition aux taux d'intérêt.\\
 Pour cela il va calculer des \textbf{ratios de couverture}.\\
 Soit un portefeuille, sa valeur, le PNL (Profit and Loss), est la somme des valeurs $P_i$ des $M$ produits qui le compose:
 \[
 PNL=\sum_{i=1}^{M}P_i=f(t,Q_1,Q_2,...Q_N)
 \]
-Le portefeuille, comme ses composants, est une fonction de N quotations de marché. Dans le cas des taux d'intérêts, ce sont les quotations des instruments qui composent la courbe des taux.
+Le portefeuille, comme ses composants, est une fonction de N cotations de marché. Dans le cas des taux d'intérêts, ce sont les cotations des instruments qui composent la courbe des taux.
 \end{frame}
 
 \begin{frame}{Les ratios de couverture }
-Les \textbf{sensibilités} correspondent aux dérivés de la fonction f relativement quotations de marché.\\
+Les \textbf{sensibilités} correspondent aux dérivées de la fonction f relativement au cotations de marché.\\
 En pratique pour calculer les sensibilités on utilise une des 2 méthodes suivantes:
 \begin{itemize}
 \item La méthode \textbf{cumulative}:
@@ -287,11 +287,11 @@ H_i=f&(Q_1,...,Q_i+1\text{bp},Q_{i+1},...,Q_{N})-\\
 \end{split}
 \]
 \end{itemize}
-Dans les 2 cas, la courbe est recalée après chaque \textbf{bump} de 1bp (1e-4).
+Dans les 2 cas, la courbe est recalée après chaque \textbf{bump} de 1 point de base (1e-4).
 \end{frame}
 
-\begin{frame}{Les ratios de couveture}
-Par construction de la méthode de calcul de sensibilité, un produit (money market ou swap) qui fait partie la courbe des taux n'est sensible qu'à sa propre quotation. Nous appellerons $h_i$ cette sensibilité pour un nominal unitaire.\\
+\begin{frame}{Les ratios de couverture}
+Par construction de la méthode de calcul de sensibilité, un produit (money market ou swap) qui fait partie la courbe des taux n'est sensible qu'à sa propre cotation. Nous appellerons $h_i$ cette sensibilité pour un nominal unitaire.\\
 \vspace{0.5cm}
 Les ratios $r_i$ de couverture du portefeuille sont définis ainsi:
 \[
@@ -322,7 +322,7 @@ Sensibilités et ratios de couverture d'un swap de marché \textbf{forward} rece
 \end{frame}
 
 \begin{frame}{Bump de la courbe des taux}
-Ci de dessous l'impact sur les taux zéro coupon d'un bump de 1bp des taux de marché.\\
+Ci-dessous l'impact sur les taux zéro coupon d'un bump de 1bp des taux de marché.\\
 \vspace{0.5cm}
 \tiny
 \scalebox{0.7}{
@@ -352,11 +352,11 @@ TOTAL&1.01&1.01&1.01&1.01&1.01&1.01&0.99&0.99&1.00&1.00&1.00&1.01&1.01&1.01&1.02
 \end{tabular}}\\
 \normalsize
 \vspace{0.5cm}
-Un bump de 1bp de tous les taux de marché est à peu prêt équivalent à un bump de 1bp des taux zéros coupons.
+Un bump de 1bp de tous les taux de marché est à peu près équivalent à un bump de 1bp des taux zéro coupon.
 \end{frame}
 
 \begin{frame}{Sensibilité et convexité}
-Si on considère une courbe de taux zéro coupon constant et égal à $R$ au format actuariel à composition annuelle:
+Si on considère une courbe de taux zéro coupon constante et égale à $R$ au format actuariel à composition annuelle:
 \[
 B(t,T)=\frac{1}{(1+R)^{T-t}}
 \]
@@ -383,7 +383,7 @@ S&=\frac{1-\frac{1}{(1+R)^N}}{\sum_{i=1}^{n} \frac{1}{(1+R)^i}}\\
 \end{split}
 \]
 R et le taux de swap ($S$) s'identifient parfaitement.\\
-La valeur d'un swap de marché receveur de taux fixe s'écrie alors:
+La valeur d'un swap de marché receveur de taux fixe s'écrit alors:
 \[
 \textbf{PV}_{Swap}(t)=(K-S) \times LVL 
 \]
@@ -416,7 +416,7 @@ On considère:
 \begin{itemize}
 \item nominal : 100 000 000 d'euros.\\
 \item un swap receveur de taux fixe.
-\item 3 tenor 10Y, 20Y, 30 c'est à dire N = 10,20,30.
+\item 3 ténors 10Y, 20Y, 30Y c'est à dire N = 10,20,30.
 \item 2 niveaux de marché $R=K=$2\% et 3\%.
 \end{itemize}
 \end{frame}
@@ -472,9 +472,9 @@ On considère:
 \end{frame}
 
 \begin{frame}{Illustration de la convexité.}
-La courbe des taux est constante égal au taux acturariel à composition annuelle 2\%.\\
+La courbe des taux est constante et égale au taux acturariel à composition annuelle 2\%.\\
 \vspace{0.5cm}
-Notre portefeuille contient un seul swap 10 ans receveur de taux fixe 100bp au dessus du taux de marché (\textbf{Swap 1}) de nominal 100 millions d'euros. Nous allons le couvrir avec un swap de même maturité payeur de taux fixe égale au niveau de marché (\textbf{Swap 2}).\\
+Notre portefeuille contient un seul swap 10 ans receveur de taux fixe 100bp au dessus du taux de marché (\textbf{Swap 1}) de nominal 100 millions d'euros. Nous allons le couvrir avec un swap de même maturité payeur de taux fixe égal au niveau de marché (\textbf{Swap 2}).\\
 \begin{center}
 \begin{tabular}{|c|c|}
 \hline
@@ -518,7 +518,7 @@ La convexité du portefeuille couvert:
 
 
 \begin{frame}{Illustration de la convexité}
-Si le taux d'intérêt augmente brusquement (nous ignorons le passage du temps)  de 50bp.
+Si le taux d'intérêt augmente brusquement de 50bp (nous ignorons le passage du temps).
 La valeur de notre portefeuille couvert au premier ordre diminue de 10 kEUR.\\
 \begin{center}
 \begin{tabular}{|c|c|c|}
@@ -529,11 +529,10 @@ R&PNL&$\Delta$PNL \\
 3\% &16.341 Mios EUR&-10.072 kEUR\\
 1\% &16.340 Mios EUR&-11.205 kEUR\\
 \hline
-\hline
 \end{tabular}
 \end{center}
-En effet ce portefeuille possède une convexité négative de -8.5 euros bp/bp du a décalage de taux fixe.
-On explique assez précisément ($<1$ kEUR inexpliqué) ce mouvement de PNL par un développement limité:
+En effet ce portefeuille possède une convexité négative de -8.5 euros bp$^2$ du au décalage de taux fixe.
+On explique assez précisément  ce mouvement de PNL par un développement limité ($<1$ kEUR inexpliqué):
 \[
 \Delta \text{PNL}=\underbrace{\text{Sensi}}_{0} \times \Delta R + \frac{1}{2} \times \underbrace{\text{Convexité}}_{-8.5} \times \underbrace{\Delta R^2}_{2500}=-10.5 kEUR
 \]
