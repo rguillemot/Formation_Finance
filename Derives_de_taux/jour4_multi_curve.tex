@@ -11,7 +11,7 @@
 \newcommand{\FIG}[2]{\includegraphics[width=#1]{#2}}
 
 \usetheme{Warsaw}
-\title[Produits dérivés de taux]{Valorisation multi courbe. }
+\title[Produits dérivés de taux]{Actualisation OIS. }
 \author{Richard Guillemot}
 \institute{Master IFMA}
 \date{27 Février 2014}
@@ -28,7 +28,7 @@
 \begin{frame}{Unicité de la courbe des taux}
 Nous supposons qu'il existe une \textbf{unique courbe} des taux dite \textbf{sans risque}, cela a 2 conséquences:
 \begin{itemize}
-\item On peut déduire les taux forwards à partir des taux au comptant.
+\item On peut déduire les taux forward à partir des taux au comptant.
 \[
 L(t,T_1, T_2)=\frac{1}{\delta}\left(\frac{B(t,T_1)}{B(t,T_2)}-1\right)
 \]
@@ -55,7 +55,7 @@ Les flux d'un actif collatéralisé à la date $t+dt$:\\
 \begin{tabular}{l|r}
 On rembourse le collatéral livré en $t$. & $-V_t$ \\
 On paie les intérêts au taux de collatéral $c$.& $-c V_t dt$\\
-On reçoit la nouvelle valeur du collatéral.& $V_t$ \\
+On reçoit la nouvelle valeur du collatéral.& $V_{t+dt}$ \\
 \end{tabular}
 \vspace{0.5cm}\\
 Le flux résultant : $dV_t - c \times V_t \times dt$
@@ -80,7 +80,7 @@ En l'absence d'opportunité d'arbitrage, un tel portefeuille a une valeur nulle,
 \end{frame}
 
 \begin{frame}{Collatéralisation et actualisation OIS}
-On définit une nouvelle probabilité dite risque neutre $Q$:\\
+On définit une nouvelle probabilité dite risque-neutre $Q$:\\
 \[
 d\widetilde{W}_t=dW_t+\lambda dt
 \]
@@ -96,10 +96,10 @@ Il nous faut donc actualiser les flux des actifs collatéralisés au taux de col
 \end{frame}
 
 \begin{frame}{Les produits de liquidité}
-Sur le marché on peut traiter de catégories de produits de liquidité:
+Sur le marché on peut traiter 2 catégories de produits de liquidité:
 \begin{itemize}
 \item \textbf{les swaps à taux fixe}: on distingue les différentes cotations de ce swap $K^f$ suivant la fréquence $f$ de la jambe variable.\\
-\item \textbf{les swaps de basis}: ces produits échangent des jambes variables de fréquences différentes. $m^{f_1-f_2}$ est la marge à ajouter à la jambe de la fréquence la plus faible qui rend le swap nulle.\\ 
+\item \textbf{les swaps de basis}: ces produits échangent des jambes variables de fréquences différentes. $m^{f_1-f_2}$ est la marge à ajouter à la jambe de la fréquence la plus faible qui rend le swap nul.\\ 
 \end{itemize}
 \small
 \begin{center}
@@ -131,7 +131,7 @@ Toutes ces cotations sont liées les unes aux autres:\\
 \[
 K^m-K^n=\frac{LVL^m(T^m_0,T^m_m)}{LVL(T_0,T_n)} m^{n,m}
 \]
-On peut approximer cette relation:
+On peut approcher cette relation:
 \[
 K^m-K^n \simeq m^{n,m}
 \]
@@ -142,7 +142,7 @@ m^{n,m}+m^{m,p} \simeq m^{n,p}
 $m$,$n$ et $p$ correspondent à trois fréquences différentes.
 \end{frame}
 
-\begin{frame}{Algorithme de callage \textbf{"des"} courbes.}
+\begin{frame}{Algorithme de calage \textbf{"des"} courbes.}
 Il nous faut construire un algorithme, 
 \begin{itemize}
 \item où tous les flux sont actualisés au taux de collatéral standard, c'est à dire l'OIS de la devise,
@@ -151,12 +151,12 @@ Il nous faut construire un algorithme,
 \vspace{0.5cm}
 Algorithme en 2 étapes:
 \begin{itemize}
-\item \textbf{Etape 1}: On calibre la courbe OIS avec l'algorithme classique, en effet une jambe variable OIS utilise la même courbe calculer les taux forwards et actualiser les flux.
+\item \textbf{Etape 1}: On calibre la courbe OIS avec l'algorithme classique, en effet une jambe variable OIS utilise la même courbe pou calculer les taux forward et actualiser les flux.
 \item \textbf{Etape 2}: On calibre une courbe pour chacune des fréquences 1M, 3M, 6M et 12M afin de reproduire les cotations de marchés $K^f$.
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Exemple de callage}
+\begin{frame}{Exemple de calage}
 \begin{center}
 \begin{tabular}{|l|c|c|}
 \hline
@@ -178,7 +178,7 @@ Il nous faut résoudre l'équation suivante:
 \]
 \end{frame}
 
-\begin{frame}{Exemple de callage}
+\begin{frame}{Exemple de calage}
 \small
 Les facteurs d'actualisation OIS:
 \begin{center}
@@ -201,7 +201,7 @@ L^{OIS}(t,T_{6M},T_{12M})=\frac{1}{\delta_2}\big(\frac{1+(\delta_1+\delta_2) (R_
 \]
 \end{frame}
 
-\begin{frame}{Exemple de callage}
+\begin{frame}{Exemple de calage}
 \[
 \text{Ajustement}=F-L(t,T_{6M},T_{12M})
 \]
@@ -221,7 +221,7 @@ OIS-BOR & $F$ & Ajustement \\
 \end{center}
 \end{frame}
 
-\begin{frame}{Gestion dans un environement multi courbes}
+\begin{frame}{Gestion dans un environement multi courbe}
 \small
 Couvrir un swap client par un swap de marché:\\
 \begin{center}
@@ -257,8 +257,8 @@ Sensibilités et convexités:
 \end{center}
 
 \end{frame}
-\begin{frame}{Gestion dans un environement multi courbes}
-Il faudra traiter 96.5 millions d'euros:\\
+\begin{frame}{Gestion dans un environement multi courbe}
+Il faudra traiter 96.5 millions d'euros de swap de marché:\\
 \[
 \frac{166}{172} \times 100 = 96.5 \text{ millions d'euros}
 \]  

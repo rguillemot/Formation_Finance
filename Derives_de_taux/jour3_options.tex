@@ -51,7 +51,7 @@ d) 30 ans.\textbf{\color{red}FAUX}\\
 \begin{frame}{Quizz}
 Soit un swap dont la sensibilité est de -90kEUR/bp et la convexité est de 94 EUR bp/bp.\\
 \vspace{0.5cm}
-Quelle est sa sensibilité si les taux augmente de 100bp ?\\
+Quelle est sa sensibilité si les taux augmentent de 100bp ?\\
 a) -81 kEUR/bp.\textbf{\color{green}VRAI}\\
 b) -99 kEUR/bp.\textbf{\color{red}FAUX}\\
 c) -85 kEUR/bp.\textbf{\color{red}FAUX}\\
@@ -68,16 +68,15 @@ d) Une obligation à taux variable.\textbf{\color{red}FAUX}\\
 \end{frame}
 
 \begin{frame}{Taux Stochastiques}
-En l'absence d'opportunités d'arbitrage il existe une probabilité $Q$ où la valeur actualisée d'un actif financier est une martingale, c'est à dire si $X_t$ est la valeur d'un actif financier à la date $t$:
+En l'absence d'opportunité d'arbitrage il existe une probabilité $Q$ où la valeur actualisée d'un actif financier est une martingale, c'est à dire si $X_t$ est la valeur d'un actif financier à la date $t$ est une $Q$-martingale:
 \[
 	M_t = e^{-\int_0^t r_s ds}X_t
 \]
-est une $Q$ martingale.\\
 Par conséquent la valeur actuelle de l'actif est:
 \[
 	X_t=\mathbb{E}^Q_t[\color{red} e^{-\int_0^T r_s} \color{black} X_T]
 \]
-Lorsque \color{red}\textbf{les taux sont stochastiques}\color{black}, on ne peut pas sortir le facteur d'actualisation de l'espérance!!!!
+Lorsque \color{red}\textbf{les taux sont stochastiques}\color{black}, on ne peut pas sortir le facteur d'actualisation de l'espérance!!!
 \end{frame}
 
 \begin{frame}{Changement de numéraire}
@@ -87,7 +86,7 @@ Un numéraire est un actif financier $N_t$:
 \item toujours strictement positif.
 \end{itemize}
 \vspace{0.5cm}
-$N_t$ est associé à une une mesure de probabilité $Q^N$.\\
+$N_t$ est associé à une mesure de probabilité $Q^N$.\\
 \vspace{0.5cm}
 Pour tout actif X de marché de valeur $X_t$,\\
  $\frac{X_t}{N_t}$ est une $Q^N$-martingale donc:
@@ -160,7 +159,7 @@ avec:
 \end{frame}
 
 \begin{frame}{Caps et Floors}
-Considérons un cap sur EURIBOR 6m de strike $K$ qui démarre en $T_0$ et mature en $T_n$.
+Considérons un cap sur EURIBOR 6M de strike $K$ qui démarre en $T_0$ et mature en $T_n$.
 \begin{figure}[h]
 \FIG{10cm}{figures/schema_cap.jpg}
 \end{figure}
@@ -170,8 +169,8 @@ A chaque date $T_i$, le cap verse le flux suivant:
 \]
 avec:
 \begin {itemize}
-\item $T_{i -1}^f$: la date de fixing de l'EURIBOR 6M qui demarre en $T_{i -1}$ et mature en $T_{i}$.
-\item $\delta_i$: la fraction d'année exprimée dans la convention Act 360.
+\item $T_{i -1}^f$: la date de fixing de l'EURIBOR 6M qui démarre en $T_{i -1}$ et mature en $T_{i}$.
+\item $\delta_i$: la fraction d'année exprimée dans la convention ACT 360.
 \end {itemize}
 \end{frame}
 
@@ -247,11 +246,11 @@ S(t,T_0,T_n)= \frac{B(t,T_0)-B(t,T_n)}{\text{LVL}(t,T_0,T_n)}
 \end{frame}
 
 \begin{frame}{Swaption}
-On passe sous la mesure Level $Q^{\text{LVL}}$ aussi dite \textbf{swap-neutre}, la mesure du numéraire Level:
+On passe sous la mesure Level $Q^{\text{LVL}}$ aussi dite \textbf{swap-neutre}, la mesure du numéraire Level sous laquelle le taux de swap est naturellement martingale:
 \[
 \textbf{PV}_\text{Sw}^P(t)=\text{LVL}(t,T_0,T_n)\;\mathbb{E}_t^{Q^{\text{LVL}}}\Big(\big(S(T_f,T_0,T_n)-K\big)^+\Big)
 \]
-sous laquelle le taux de swap est naturellement martingale.\\
+\\
 On suppose une dynamique lorgnormale pour le taux de swap:
 \[
 \left\{

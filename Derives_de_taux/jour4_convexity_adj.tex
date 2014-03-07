@@ -26,7 +26,7 @@
 \end{frame}
 
 \begin{frame}{Quizz}
-Quelles sont les quantités qui sont martingales sous la mesure risque neutre $Q$.
+Quelles sont les quantités qui sont martingales sous la mesure risque-neutre $Q$.
 \begin{itemize}
 \item a) $B(t,T)$\textbf{\color{green}VRAI} 
 \item b) $L(t,T_1,T_2)=\frac{1}{\delta}\big(\frac{B(t,T_1)}{B(t,T_2)}-1 \big)$\textbf{\color{red}FAUX}
@@ -39,7 +39,7 @@ Quelles sont les quantités qui sont martingales sous la mesure risque neutre $Q
 
 
 \begin{frame}{Quizz}
-Quelles sont les quantités qui sont martingales sous les mesures forward neutre $Q^{T_0}, Q^{T_1},Q^{T_2}, Q^{T_n}, Q^{T_f}$.
+Quelles sont les quantités qui sont martingales sous les mesures forward-neutre $Q^{T_0}, Q^{T_1},Q^{T_2}, Q^{T_n}, Q^{T_f}$.
 \begin{itemize}
 \item a) $B(t,T)$\textbf{\color{red}FAUX}
 \item b) $L(t,T_1,T_2)=\frac{1}{\delta}\big(\frac{B(t,T_1)}{B(t,T_2)}-1 \big)$\textbf{\color{green}VRAI}$Q^{T_2}$
@@ -51,7 +51,7 @@ Quelles sont les quantités qui sont martingales sous les mesures forward neutre
 \end{frame}
 
 \begin{frame}{Quizz}
-Quelles sont les quantités qui sont martingales sous la mesure swap neutre $Q^{LVL}$.
+Quelles sont les quantités qui sont martingales sous la mesure swap-neutre $Q^{LVL}$.
 \begin{itemize}
 \item a) $B(t,T)$\textbf{\color{red}FAUX}
 \item b) $L(t,T_1,T_2)=\frac{1}{\delta}\big(\frac{B(t,T_1)}{B(t,T_2)}-1 \big)$\textbf{\color{red}FAUX}
@@ -111,7 +111,7 @@ On explique facilement le PNL par le même développement limité.
 \end{frame}
 
 \begin{frame}{Couverture d'un swap 20 ans par un swap 10 ans.}
-On souhaite maintenant couvrir un swap receveur de taux fixe de marché pour un nominal de 100 millions d'euros et de maturité 20 ans par un swap de payeur de taux fixe de marché mais de maturité 10 ans.\\
+On souhaite maintenant couvrir un swap receveur de taux fixe de marché pour un nominal de 100 millions d'euros et de maturité 20 ans par un swap payeur de taux fixe de marché mais de maturité 10 ans.\\
 \begin{center}
 \begin{tabular}{|c|c|}
 \hline
@@ -136,7 +136,7 @@ R&PNL&$\Delta$PNL \\
 \end{center}
 \end{frame}
 \begin{frame}{Couverture d'un swap 20 ans par un swap 10 ans.}
-Les 144 EUR/bp/bp de convexité positive nous font gagner 180 kEUR que les taux augmente ou baisse de 50bp.
+Les 144 EUR/bp/bp de convexité positive nous font gagner 180 kEUR que les taux augmentent ou baissent de 50bp.
 \[
 \Delta \text{PNL}=\underbrace{\text{Sensi}}_{0} \times \Delta R + \frac{1}{2} \times \underbrace{\text{Convexité}}_{144} \times \underbrace{\Delta R^2}_{2500}=180 kEUR
 \]
@@ -168,8 +168,8 @@ R&PNL&$\Delta$PNL \\
 \end{tabular}
 \end{center}
 \end{frame}
-\begin{frame}{Couverture d'un swap 20 ans par un swap 10 ans.}
-Les 133 EUR/bp/bp de convexité négative nous font perdre 166 kEUR que les taux augmente ou baisse de 50bp.
+\begin{frame}{Couverture d'un swap 20 ans par un swap 30 ans.}
+Les 133 EUR/bp/bp de convexité négative nous font perdre 166 kEUR que les taux augmentent ou baissent de 50bp.
 \[
 \Delta \text{PNL}=\underbrace{\text{Sensi}}_{0} \times \Delta R + \frac{1}{2} \times \underbrace{\text{Convexité}}_{-133} \times \underbrace{\Delta R^2}_{2500}=-166 kEUR
 \]
@@ -207,7 +207,7 @@ R_B&=\mathbb{E}_t^{Q^{T_1}}[L(T_f,T_1,T_2)]\\
 \end{frame}
 
 \begin{frame}{LIBOR \it{in arrears} \textnormal{- Valorisation}}
-Si on suppose une dynamique log-normale sur le LIBOR :
+Si on suppose une dynamique lognormale sur le LIBOR :
 \[
 \left\{
 \begin{split}
@@ -227,7 +227,7 @@ R_B&=L(t,T_1,T_2)\underbrace{\frac{1+\delta L(t,T_1,T_2)e^{\sigma^2 (T_f-t)}}{1+
 \begin{frame}{LIBOR \it{in arrears} \textnormal{- Gestion}}
 Considérons une gestion qui ignore les ajustements de convexité.\\
 \vspace{0.5cm}
-Pour simplifier le formules, on suppose que $t=0$ et on note $\delta = T_2-T_1$\\
+Pour simplifier les formules, on suppose que $t=0$ et on note $\delta = T_2-T_1$\\
 \vspace{0.5cm}
 \small
 \begin{tabular}{|c|c|c|c|}
@@ -247,7 +247,7 @@ ARREARS & $\frac{\delta(F-K^*)}{(1+T_1 R)}$ & $H_1=\frac{-T_1 \delta (F-K^*)}{(1
 \end{tabular}\\
 \normalsize
 \vspace{0.5cm}
-Plus la valeur du FRA augmente pour plus il faut en acheter !
+Plus la valeur du FRA augmente plus il faut en acheter !!!
 \end{frame}
 
 
