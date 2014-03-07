@@ -49,16 +49,7 @@ Le client paie une jambe variable euro standard. En échange il recoit quasiment
 
 \vspace{0.5cm}
 
-On considère les données de marché suivantes:\\
-\begin{tabular}{|l|c|l|}
-\hline
-&&\textbf{Convention}\\
-\hline
-\textbf{Taux constant} ($R$) & 2\%&Actuariel à composition semi-annuelle\\
-\hline
-\textbf{Volatilité à la monnaie} ($\sigma_{ATM}$)&20\%&lognormal \\
-\hline
-\end{tabular}
+On considère que les taux zéro coupon sont contants égaux à 2\% au format exponentiel (composition continue):\\
 
 \vspace{0.5cm}
 
@@ -72,8 +63,16 @@ On suppose de façon classique, que chacun des taux est martingal sous sa probab
 On suppose que ces 3 modèles sont cohérents avec les données de marché.
 \begin{enumerate}
 \item \textbf{Valorisation}: Etablir les formules de valorisation des ces 2 produits pour chacun des 3 modèles.
-\item \textbf{Application numérique}: Calculer le taux fixe de ces swaps pour les 3 maturités 10Y, 20Y et 30Y, afin que le swap soit au pair (valeur nulle). Dans le cas du modèle lognormal décalé on considérera 4 niveaux de décalage $m$ ($10\% \times R$, $50\% \times R$, $100\% \times R$ et $200\% \times R$).
-\item \textbf{Analyse}: A partir des résultats précedents discuter de l'intérêt de prendre en compte la pente du smile pour valoriser chacun de ces 2 produits. 
+\item \textbf{Application numérique}: Calculer le taux fixe de ces swaps pour les 3 maturités 10Y, 20Y et 30Y, afin que le swap soit au pair (valeur nulle). Dans le cas du modèle lognormal décalé on considérera:
+\begin{itemize}
+\item 3 niveaux de volatilité monnaie : $\sigma_{ATM}$ (15\%,20\% et 25\%). 
+\item 6 niveaux de décalage $m$ ($1\% \times R$, $10\% \times R$, $100\% \times R$, $10 \times R$, $100 \times R$, $1000 \times R$).
+\end{itemize}
+\item \textbf{Analyse}:
+\begin{itemize}
+\item Quelle est la particularité de la valeur du swap Capped \& Floored dans le cas du modèle normal.
+\item A partir des résultats précedents discuter de l'intérêt de prendre en compte la pente du smile pour valoriser chacun de ces 2 produits.
+\end{itemize} 
 \end{enumerate}
 Pour les questions 1 et 2 donner les résultats sans justifications en reprenant les notations que vous trouverez dans l'exercice et le polycopié du cours.
 
