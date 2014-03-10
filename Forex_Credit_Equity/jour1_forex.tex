@@ -1,0 +1,113 @@
+\documentclass{beamer}
+\usepackage[english,francais]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{multicol}
+
+\usepackage{graphicx}
+\graphicspath{{./Forex_Credit_Equity/}}
+
+\newcommand{\FIG}[3]{\includegraphics<#1>[width=#2]{#3}}
+
+\usetheme{Warsaw}
+\title[Produits dérivés actions,change et credit]{Produits dérivés de change}
+\author{Richard Guillemot}
+\institute{DIFIQ}
+\date{11 Avril 2014}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Taux de change \textbf{"Spot"}}
+\Huge
+\begin{center}
+\textbf{\textcolor<3>{red}{EUR}/\textcolor<4>{blue}{USD}}=1.3885
+\end{center}
+\huge
+\begin{center}
+\onslide<2->{1 \textcolor<3>{red}{euro} vaut 1.3885 \textcolor<4>{blue}{dollar}.}
+\end{center}
+\large
+\vspace{0.5cm}
+\begin{itemize}
+\item[]<3-> \textbf{\textcolor<3>{red}{EUR (euro)}} est la \textcolor<3>{red}{devise étrangère ou devise 1}.
+\item[]<4-> \textbf{\textcolor<4>{blue}{USD (dollar)}} est la \textcolor<4>{blue}{devise domestique ou devise 2}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Livraison ou Settlement}
+\begin{center}
+\begin{figure}[h]
+\FIG{1}{12cm}{figures/settlement-1.png}
+\FIG{2}{12cm}{figures/settlement-2.png}
+\FIG{3}{12cm}{figures/settlement-3.png}
+\FIG{4}{12cm}{figures/settlement-4.png}
+\end{figure}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Taux de change \textbf{"Forward"}}
+\large
+\begin{overprint}
+\onslide<1>Comment garantir un taux de change à une date future \textbf{T} ?\\ Et à quel taux \textbf{X}.
+\onslide<2>\textbf{Prêt} de$t$ \textcolor{red}{$\frac{1}{1+\delta R^{EUR}}$ euros}.\\Remboursé en $T$ avec les intérêts, c'est à dire \textcolor{red}{1 euros}.
+\onslide<3>\textbf{Change} \textcolor{red}{$\frac{1}{1+\delta R^{EUR}}$ euros} contre \textcolor{blue}{$\frac{S}{1+\delta r^{EUR}}$dollars}.
+\onslide<4>\textbf{Emprunt} en $t$ de \textcolor{blue}{$\frac{S}{1+\delta R^{EUR}}$} dollars\\ Remboursé en $T$ avec les intérêts, c'est à dire \textcolor{blue}{$S\frac{1+\delta R^{USD}}{1+\delta R^{EUR}}$ dollars}.
+\onslide<5>\[X=S\frac{1+\delta R^{USD}}{1+\delta R^{EUR}}\]
+\end{overprint}
+\begin{figure}
+\begin{overprint}
+\FIG{1}{11cm}{figures/fxfwd-1.png}
+\FIG{2}{11cm}{figures/fxfwd-2.png}
+\FIG{3}{11cm}{figures/fxfwd-3.png}
+\FIG{4}{11cm}{figures/fxfwd-4.png}
+\FIG{5}{11cm}{figures/fxfwd-5.png}
+\end{overprint}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\small
+\frametitle{Taux de change \textbf{"Forward"} - Récapitulatif}
+\begin{center}
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Notation} & \textbf{Description} & \textbf{Formule} & \textbf{Valeur} \\
+\hline
+\hline
+\onslide<2->
+$\delta$ & Maturité du forward & $T-(t+2D)$ & 1 an = 365 jours  \\
+\onslide<3->
+$R^{EUR}$ & Taux zéro coupon euro. &  & 0.5\% \\
+\onslide<4->
+$R^{USD}$ & Taux zéro coupon euro. &  & 0.3\% \\
+\onslide<5->
+$S$ & Taux de change spot. &  & 1.3889 \\
+\onslide<6->
+$X$ & Forward de change. &  $S\frac{1+\delta R^{USD}}{1+\delta R^{EUR}}$ & ?? \\
+\hline
+\end{tabular}
+\end{center}
+\[
+\uncover<7->{X=} \uncover<8->{1.3889\times \frac{1+\frac{365}{360} \times 0.3\%}{1+\frac{365}{360} \times 0.5\%}\uncover<9->{=1.3861}} 
+\]
+\onslide<10->{Soit \textbf{27.6} points de base d'écart négatif par rapport au taux spot.}
+\end{frame}
+
+\begin{frame}
+\frametitle{Quizz}
+Si on vend 100 Mios euro dans 1 an d'euros au taux spot au lieu d'utiliser le taux foward précedemment calculé:\\
+\vspace{0.5cm}
+a) On gagne 276 kEUR\\
+b) On perd 27 kEUR\\
+c) On gagne 2.76 millions d'euros.\\
+d) On perd 276 kEUR.\\
+\end{frame}
+
+
+\end{document}

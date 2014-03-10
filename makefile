@@ -10,7 +10,8 @@ DERIVES_DE_TAUX = \
 		Derives_de_taux/jour4_multi_curve.pdf \
 		Derives_de_taux/multi_courbe.pdf \
 		Derives_de_taux/jour4_multi_curve.pdf \
-		Derives_de_taux/evaluation.pdf
+		Derives_de_taux/evaluation.pdf \
+		Forex_Credit_Change/jour1_forex.pdf
 
 %.pdf: %.tex
 	$(TEX) $<
