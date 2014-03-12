@@ -55,7 +55,7 @@
 \large
 \begin{overprint}
 \onslide<1>Comment garantir un taux de change à une date future \textbf{T} ?\\ Et à quel taux \textbf{X}.
-\onslide<2>\textbf{Prêt} de$t$ \textcolor{red}{$\frac{1}{1+\delta R^{EUR}}$ euros}.\\Remboursé en $T$ avec les intérêts, c'est à dire \textcolor{red}{1 euros}.
+\onslide<2>\textbf{Prêt} en $t$ de \textcolor{red}{$\frac{1}{1+\delta R^{EUR}}$ euros}.\\Remboursé en $T$ avec les intérêts, c'est à dire \textcolor{red}{1 euros}.
 \onslide<3>\textbf{Change} \textcolor{red}{$\frac{1}{1+\delta R^{EUR}}$ euros} contre \textcolor{blue}{$\frac{S}{1+\delta r^{EUR}}$dollars}.
 \onslide<4>\textbf{Emprunt} en $t$ de \textcolor{blue}{$\frac{S}{1+\delta R^{EUR}}$} dollars\\ Remboursé en $T$ avec les intérêts, c'est à dire \textcolor{blue}{$S\frac{1+\delta R^{USD}}{1+\delta R^{EUR}}$ dollars}.
 \onslide<5>\[X=S\frac{1+\delta R^{USD}}{1+\delta R^{EUR}}\]
@@ -81,7 +81,7 @@
 \hline
 \hline
 \onslide<2->
-$\delta$ & Maturité du forward & $T-(t+2D)$ & 1 an = 365 jours  \\
+$\delta$ & Maturité du forward & $T-(t+2D)$ & 1 an = 365 jours \\
 \onslide<3->
 $R^{EUR}$ & Taux zéro coupon euro. &  & 0.5\% \\
 \onslide<4->
@@ -103,11 +103,57 @@ $X$ & Forward de change. &  $S\frac{1+\delta R^{USD}}{1+\delta R^{EUR}}$ & ?? \\
 \frametitle{Quizz}
 Si on vend 100 Mios euro dans 1 an d'euros au taux spot au lieu d'utiliser le taux foward précedemment calculé:\\
 \vspace{0.5cm}
-a) On gagne 276 kEUR\\
-b) On perd 27 kEUR\\
-c) On gagne 2.76 millions d'euros.\\
-d) On perd 276 kEUR.\\
+a) On gagne 276 kEUR \uncover<2>{\textcolor{green}{\textbf{VRAI}}}\\
+b) On perd 27 kEUR \uncover<2>{\textcolor{red}{\textbf{FAUX}}}\\
+c) On gagne 2.76 millions d'euros. \uncover<2>{\textcolor{red}{\textbf{FAUX}}}\\
+d) On perd 276 kEUR. \uncover<2>{\textcolor{red}{\textbf{FAUX}}}\\
+\vspace{0.5cm}
+\uncover<2>{On emprunte à 0.3\% en dollars et on prête à 0.5\% en euros !!!}
 \end{frame}
 
+\begin{frame}
+\frametitle{Le swap de devises ou Cross-Currency Swap}
+\large
+\begin{overprint}
+\onslide<1>On considère l'échéancier d'un swap standard.
+\onslide<2>On échange en $t$+2D ouvrés \textcolor{blue}{$N^{USD}$} avec sa contrevaleur \textcolor{red}{$N^{EUR}$}.\\ On fera l'échange inverse à la maturité du swap $T$.
+\onslide<3>On reçoit une jambe variable euro en contrepartie d'une jambe variable dollar.
+\onslide<4>En pratique il faut retirer la \textbf{\textcolor{red}{marge de basis m}} à la jambe EUR pour mettre le swap au pair (valeur nulle).
+\onslide<5>Un swap de devises d'un seule période est un foward de change de nominal \textcolor{red}{$N^{EUR}(1+\delta (L^{EUR}-\textbf{m})$}.
+\end{overprint}
+\begin{figure}
+\begin{overprint}
+\FIG{1}{11cm}{figures/xccyswap-1.png}
+\FIG{2}{11cm}{figures/xccyswap-2.png}
+\FIG{3}{11cm}{figures/xccyswap-3.png}
+\FIG{4}{11cm}{figures/xccyswap-4.png}
+\FIG{5}{11cm}{figures/xccyswap-singleflow.png}
+\end{overprint}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Taux de change \textbf{Forward} et marge de basis.}
+\Huge
+\[
+	X=S\frac{1+\delta R^{USD}}{1+\delta (R^{EUR}-\textbf{m})}
+\]
+\end{frame}
+\begin{frame}
+\frametitle{Delta de change et position de change}
+\begin{itemize}
+\item[-] Le \textbf{delta de change} est la sensibilité ou la dérivé au taux de change de la valeur d'un portefeuille en devise domestique.\\
+\vspace{0.5cm}
+\item[-] La \textbf{position de change} correspond au nominaux équivalents au portefeuille dans chacune des devises. Elle indique la taille des opérations de change "Spot" nécessaires pour neutraliser le risque.
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Soit une entreprise française qui doit recevoir un flux de 138.89 Millions de dollars (équivalent à 100 millions d'euros) dans 1 an.
+\item Soit une entreprise américaine qui doit payé un flux 
+\end{itemize}
+\end{frame}
 
 \end{document}
