@@ -7,6 +7,7 @@
 \graphicspath{{./Forex_Credit_Equity/}}
 
 \newcommand{\FIG}[3]{\includegraphics<#1>[width=#2]{#3}}
+\newcommand{\hide}[2]{\textcolor<#1>{white}{#2}}
 
 \usetheme{Warsaw}
 \title[Produits dérivés actions,change et credit]{Produits dérivés de change}
@@ -28,7 +29,7 @@
 \end{center}
 \huge
 \begin{center}
-\onslide<2->{1 \textcolor<3>{red}{euro} vaut 1.3885 \textcolor<4>{blue}{dollar}.}
+\onslide<2->{1 \textcolor<3>{red}{euro} vaut 1.3889 \textcolor<4>{blue}{dollar}.}
 \end{center}
 \large
 \vspace{0.5cm}
@@ -228,48 +229,14 @@ Une \textbf{option de change} est un contrat asymétrique par lequel à une date
 Quel est le payoff d'une option de change ?
 \vspace{0.5cm}
 \small
-\begin{overprint}
-\onslide<1>\begin{tabular}{|c|c|c|}
+\begin{tabular}{|c|c|c|}
 \hline
 &$\mathbf{S^{EUR/USD}}$&$\mathbf{S^{USD/EUR}}$\\
 \hline
-\textcolor{red}{\textbf{EUR}}&\textcolor{white}{$\frac{(N^{EUR} \times S^{EUR/USD}-N^{USD})_+}{S^{EUR/USD}}$}&\textcolor{white}{$(N^{EUR}-N^{USD} \times S^{USD/EUR})_+$} \\
-\textcolor{blue}{\textbf{USD}}& \textcolor{white}{$(N^{EUR} \times S^{EUR/USD}-N^{USD})_+$} & \textcolor{white}{$\frac{(N^{EUR}-N^{USD} \times S^{USD/EUR})_+}{S^{USD/EUR}}$} \\
+\textcolor{red}{\textbf{EUR}}&\hide{1-2}{\textcolor<3->{red}{$\frac{(N^{EUR} \times S^{EUR/USD}-N^{USD})_+}{S^{EUR/USD}}$}}&\hide{1-3}{\textcolor<4->{red}{$(N^{EUR}-N^{USD} \times S^{USD/EUR})_+$}} \\
+\textcolor{blue}{\textbf{USD}}& \hide{1}{\textcolor<2->{blue}{$(N^{EUR} \times S^{EUR/USD}-N^{USD})_+$}} & \hide{1-4}{\textcolor<5->{blue}{$\frac{(N^{EUR}-N^{USD} \times S^{USD/EUR})_+}{S^{USD/EUR}}$}}\\
 \hline
 \end{tabular}
-\onslide<2>\begin{tabular}{|c|c|c|}
-\hline
-&$\mathbf{S^{EUR/USD}}$&$\mathbf{S^{USD/EUR}}$\\
-\hline
-\textcolor{red}{\textbf{EUR}}&\textcolor{white}{$\frac{(N^{EUR} \times S^{EUR/USD}-N^{USD})_+}{S^{EUR/USD}}$}&\textcolor{white}{$(N^{EUR}-N^{USD} \times S^{USD/EUR})_+$} \\
-\textcolor{blue}{\textbf{USD}}& \textcolor{blue}{$(N^{EUR} \times S^{EUR/USD}-N^{USD})_+$} & \textcolor{white}{$\frac{(N^{EUR}-N^{USD} \times S^{USD/EUR})_+}{S^{USD/EUR}}$} \\
-\hline
-\end{tabular}
-\onslide<3>\begin{tabular}{|c|c|c|}
-\hline
-&$\mathbf{S^{EUR/USD}}$&$\mathbf{S^{USD/EUR}}$\\
-\hline
-\textcolor{red}{\textbf{EUR}}&\textcolor{red}{$\frac{(N^{EUR} \times S^{EUR/USD}-N^{USD})_+}{S^{EUR/USD}}$}&\textcolor{white}{$(N^{EUR}-N^{USD} \times S^{USD/EUR})_+$} \\
-\textcolor{blue}{\textbf{USD}}& \textcolor{blue}{$(N^{EUR} \times S^{EUR/USD}-N^{USD})_+$} & \textcolor{white}{$\frac{(N^{EUR}-N^{USD} \times S^{USD/EUR})_+}{S^{USD/EUR}}$} \\
-\hline
-\end{tabular}
-\onslide<4>\begin{tabular}{|c|c|c|}
-\hline
-&$\mathbf{S^{EUR/USD}}$&$\mathbf{S^{USD/EUR}}$\\
-\hline
-\textcolor{red}{\textbf{EUR}}&\textcolor{red}{$\frac{(N^{EUR} \times S^{EUR/USD}-N^{USD})_+}{S^{EUR/USD}}$}&\textcolor{red}{$(N^{EUR}-N^{USD} \times S^{USD/EUR})_+$} \\
-\textcolor{blue}{\textbf{USD}}& \textcolor{blue}{$(N^{EUR} \times S^{EUR/USD}-N^{USD})_+$} & \textcolor{white}{$\frac{(N^{EUR}-N^{USD} \times S^{USD/EUR})_+}{S^{USD/EUR}}$} \\
-\hline
-\end{tabular}
-\onslide<5>\begin{tabular}{|c|c|c|}
-\hline
-&$\mathbf{S^{EUR/USD}}$&$\mathbf{S^{USD/EUR}}$\\
-\hline
-\textcolor{red}{\textbf{EUR}}&\textcolor{red}{$\frac{(N^{EUR} \times S^{EUR/USD}-N^{USD})_+}{S^{EUR/USD}}$}&\textcolor{red}{$(N^{EUR}-N^{USD} \times S^{USD/EUR})_+$} \\
-\textcolor{blue}{\textbf{USD}}& \textcolor{blue}{$(N^{EUR} \times S^{EUR/USD}-N^{USD})_+$} & \textcolor{blue}{$\frac{(N^{EUR}-N^{USD} \times S^{USD/EUR})_+}{S^{USD/EUR}}$} \\
-\hline
-\end{tabular}
-\end{overprint}
 \begin{center}
 \textcolor{red}{100 Mios d'euros} call contre \textcolor{blue}{139 Mios de dollars} put.\\
 \end{center}
@@ -287,7 +254,7 @@ Quel est le payoff d'une option de change ?
 \end{frame}
 
 \begin{frame}{Option de change - Black \& Scholes }
-En contrepartie le vendeur reçoit un prime de la part de l'acheteur que l'on peut calculer à l'aide de la formule de Black \& Scholes:\\
+En contrepartie le vendeur reçoit une prime (\textbf{p}) de la part de l'acheteur que l'on peut calculer à l'aide de la formule de Black \& Scholes:\\
 \vspace{0.5cm}
 \begin{overprint}
 \onslide<1>\begin{center}
@@ -318,7 +285,7 @@ avec:\\
 
 \begin{frame}{Option de change - Symétrie}
 \begin{overprint}
-\onslide<1>On peut exprimer la prime de l'option de plusieurs manières:\\
+\onslide<1>On peut exprimer la prime (\textbf{p}) de l'option de plusieurs manières:\\
 \onslide<2>Comme un call sur EUR/USD:\\
 \onslide<3>Comme un put sur USD/EUR:\\
 \end{overprint}
@@ -358,9 +325,9 @@ F&=S^{USD/EUR}e^{(r^{USD}-r^{EUR}) \times T}
 \begin{frame}{Option de change - Jargon}
 \Huge
 \begin{overprint}
-\onslide<1>\begin{center}EUR/USD=1.3885\fontsize{60}{70}\selectfont\textcolor{white}{0}\huge\end{center}
-\onslide<2>\begin{center}EUR/USD=1.3\fontsize{60}{70}\selectfont8\huge85\end{center}
-\onslide<3>\begin{center}EUR/USD=1.388\fontsize{60}{70}\selectfont5\huge\end{center}
+\onslide<1>\begin{center}EUR/USD=1.3889\fontsize{60}{70}\selectfont\textcolor{white}{0}\huge\end{center}
+\onslide<2>\begin{center}EUR/USD=1.3\fontsize{60}{70}\selectfont8\huge89\end{center}
+\onslide<3>\begin{center}EUR/USD=1.388\fontsize{60}{70}\selectfont9\huge\end{center}
 \vspace{0.5cm}
 \end{overprint}
 \large
@@ -371,18 +338,31 @@ F&=S^{USD/EUR}e^{(r^{USD}-r^{EUR}) \times T}
 \end{overprint}
 \end{frame}
 
-\begin{frame}{Option de change - Quotation de la prime}
-On considère les même données de marché que précédemment et on quote la prime d'une option change de maturité 1 an qui reçoit \textcolor{red}{100 millions d'euros} contre \textcolor{blue}{139 millions de dollars}.\\
-\begin{tabular}{|c|c|c|}
+\begin{frame}{Option de change - Cotation de la prime}
+On considère les même données de marché que précédemment avec une volatilité $\sigma=12\%$ et on quote la prime d'une option change de maturité 1 an qui reçoit \textcolor{red}{100 millions d'euros} contre \textcolor{blue}{139 millions de dollars}.\\
+\vspace{0.5cm}
+Les 6 modes de cotations:\\
+\vspace{0.5cm}
+\begin{tabular}{|l|c|l|}
 \hline
-Cash EUR&&\\
-Cash USD&&\\
-\% de nominal EUR&&\\
-\% de mominal USD&&\\
-USD pips par EUR
-% Nominal &&\\
+Prix en dollars&\hide{1}{$p$}&\hide{1}{53.98 kUSD}\\
+Prix en euros&\hide{1-2}{$\frac{p}{S}$}&\hide{1-2}{38.87 kEUR}\\
+Prix en \% de nominal dollar&\hide{1-3}{$\frac{p}{N \times K}$}& \hide{1-3}{3.8837\%}\\
+Prix en \% de nominal euro&\hide{1-4}{$\frac{p}{N}$}& \hide{1-4}{5.3983\%}\\
+Prix en dollars pips per EUR&\hide{1-5}{$\frac{p}{1e^4}$}& \hide{1-5}{539.83 dollar pips}\\
+Prix en euros pips per USD&\hide{1-6}{$\frac{p}{S \times K \times 1e^4}$}& \hide{1-6}{279.62 euro pips}\hide{1-7}{}\\
 \hline
 \end{tabular}
 \end{frame}
 
+\begin{frame}{Option de change - Delta de change}
+Le Delta de change $\delta$ est le pourcentage du nominal en devise 1 qu'il faut vendre pour couvrir la position de change.
+\[
+\delta=\frac{\partial p}{\partial S}=e^{-r^{EUR} \times T} \times \mathcal{N}(d_1)
+\]
+On peut exprimer de façon équivalente le delta de change en pourcentage du nominal $\delta^{reverse}$ en devise 2:
+\[
+\delta^{reverse}=-\frac{\delta \times S}{K}
+\]
+\end{frame}
 \end{document}
