@@ -165,7 +165,7 @@ Position de change&&$(N^{EUR},N^{USD})$\\
 \end{frame}
 
 \begin{frame}
-\frametitle{Problème}
+\frametitle{Exercice}
 On reprend les données du premier exemple la marge de basis m égale à 5 points de base:\\
 \begin{itemize}
 \item[-] \textbf{Opération 1}: Une banque francaise doit recevoir de son client \textcolor{blue}{138.70 millions de dollars} contre \textcolor{red}{100 millions d'euros} dans 1 an.
@@ -180,7 +180,7 @@ Pour chacune des 2 opérations et le portefeuille total de la banque:\\
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{Problème - Solution}
+\begin{frame}{Exercice - Solution}
 \begin{center}
 \begin{tabular}{|c|r|r|r|l|}
 \hline
@@ -333,7 +333,7 @@ F&=S^{USD/EUR}e^{(r^{USD}-r^{EUR}) \times T}
 \end{overprint}
 \end{frame}
 
-\begin{frame}{Option de change - Cotation de la prime}
+\begin{frame}{Option de change - Cotation de la prime - Exercice}
 On considère les même données de marché que précédemment avec une volatilité $\sigma=12\%$ et on quote la prime d'une option change de maturité 1 an qui reçoit \textcolor{red}{100 millions d'euros} contre \textcolor{blue}{139 millions de dollars}.\\
 \vspace{0.5cm}
 Les 6 modes de cotations:\\
@@ -471,7 +471,7 @@ Comment à partir des cotations de marché des différents produits reconstituer
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Cotation du smile de change}
+\begin{frame}{Cotation du smile de change - Exercice}
 Construire la smile de change 1 an à partir des données suivantes:
 \begin{center}
 \begin{tabular}{|l|l|l|l|}
@@ -489,15 +489,16 @@ $\mathbf{r^{EUR}}$&0.5\%&$\mathbf{RR^{10}}$&-4\%\\
 \end{figure}
 \end{frame}
 
-\begin{frame}{Cotation du smile de change}
+\begin{frame}{Cotation du smile de change - Exercice}
+
 \begin{center}
 \begin{tabular}{|c|c|c|c|} 
 \hline 
-$\mathbf{K^{10Put}}$&1.1201&$\mathbf{\sigma^{10Put}}$&18.0\%\\
-$\mathbf{K^{25Put}}$&1.2755&$\mathbf{\sigma^{25Put}}$&14.0\%\\
-$\mathbf{K^{ATM}}$&1.3975&$\mathbf{\sigma^{ATM}}$&12.0\%\\
-$\mathbf{K^{25Call}}$&1.5148&$\mathbf{\sigma^{25Call}}$&12.0\%\\
-$\mathbf{K^{10Call}}$&1.6760&$\mathbf{\sigma^{10Call}}$&14.0\%\\
+$\mathbf{K^{10Put}}$&\visible<3->{1.1201}&$\mathbf{\sigma^{10Put}}$&\visible<2->{18.0\%}\\
+$\mathbf{K^{25Put}}$&\visible<3->{1.2755}&$\mathbf{\sigma^{25Put}}$&\visible<2->{14.0\%}\\
+$\mathbf{K^{ATM}}$&\visible<3->{1.3975}&$\mathbf{\sigma^{ATM}}$&\visible<2->{12.0\%}\\
+$\mathbf{K^{25Call}}$&\visible<3->{1.5148}&$\mathbf{\sigma^{25Call}}$&\visible<2->{12.0\%}\\
+$\mathbf{K^{10Call}}$&\visible<3->{1.6760}&$\mathbf{\sigma^{10Call}}$&\visible<2->{14.0\%}\\
 \hline 
 \end{tabular}
 \end{center} 
@@ -620,4 +621,62 @@ b_n\\
 \]
 \end{overprint}
 \end{frame}
+
+\begin{frame}{Interpolation spline cubique - Exercice}
+Construire un spline cubique à partir de points de smile calculés précédemment.
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+&\textbf{k}&\textbf{a}&\textbf{b}\\
+\hline
+\visible<2->{0}&\visible<3->{-27.43\%}&\visible<2->{-}&\visible<2->{-}\\
+\visible<2->{1}&\visible<3->{-22.38\%}&\visible<3->{-0.26\%}&\visible<3->{-0.52\%}\\
+\visible<2->{2}&\visible<3->{-8.37\%}&\visible<3->{-0.73\%}&\visible<3->{-0.98\%}\\
+\visible<2->{3}&\visible<3->{7.09\%}&\visible<3->{-0.98\%}&\visible<3->{-0.83\%}\\
+\visible<2->{4}&\visible<3->{15.07\%}&\visible<3->{-0.86\%}&\visible<3->{-0.43\%}\\
+\hline
+\end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}{Sensibilités au change et aux paramètres de smile}
+On peut calculer la sensibilité de chacun des 3 produits 
+\begin{itemize}
+\item \textbf{ZDS}: Zéro Delta Straddle
+\item \textbf{RR25}: Risk Reversal 25 delta
+\item \textbf{BF25}: Buterfly 25 delta
+\end{itemize}
+aux paramètres du smile:\\
+\begin{overprint}
+\onslide<1>\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{Avec Smile}&\textbf{Delta FX}&\textbf{Sensi ATM}&\textbf{Sensi RR25}&\textbf{SensiBF25}\\
+\hline
+ZDS&5\%&0.56\%&0.00\%&0.00\%\\
+RR25&38\%&0.03\%&0.39\%&0.01\%\\
+BF25&-2\%&-0.16\%&0.00\%&0.35\%\\
+RR10&10\%&-0.00\%&0.32\%&-0.09\%\\
+BF10&-4\%&-0.39\%&-0.00\%&0.55\%\\
+\hline
+\end{tabular}
+\end{center}
+\onslide<2>\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{Sans Smile}&\textbf{Delta FX}&\textbf{Sensi ATM}&\textbf{Sensi RR25}&\textbf{SensiBF25}\\
+\hline
+ZDS&0\%&0.55\%&0.00\%&0.00\%\\
+RR25&50\%&0.00\%&0.44\%&-0.02\%\\
+BF25&-0\%&-0.10\%&-0.01\%&0.39\%\\
+RR10&20\%&0.00\%&0.48\%&-0.05\%\\
+BF10&-0\%&-0.29\%&-0.00\%&0.73\%\\
+\hline
+\end{tabular}
+\end{center}
+\end{overprint}
+\end{frame}
+
+
+
 \end{document}
