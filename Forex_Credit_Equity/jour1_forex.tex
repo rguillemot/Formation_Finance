@@ -471,4 +471,153 @@ Comment à partir des cotations de marché des différents produits reconstituer
 \end{itemize}
 \end{frame}
 
+\begin{frame}{Cotation du smile de change}
+Construire la smile de change 1 an à partir des données suivantes:
+\begin{center}
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Maturité}&1 an&$\mathbf{\sigma^{ATM}}$&12\%\\
+\textbf{EUR/USD}&1.3889&$\mathbf{RR^{25}}$&-2\%\\
+$\mathbf{r^{USD}}$&0.3\%&$\mathbf{BF^{25}}$&1\%\\
+$\mathbf{r^{EUR}}$&0.5\%&$\mathbf{RR^{10}}$&-4\%\\
+\textbf{Basis EUR}&0.1\%&$\mathbf{BF{10}}$&4\%\\
+\hline
+\end{tabular}
+\end{center}
+\begin{figure}
+\FIG{1}{7cm}{figures/fxopt-smile.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Cotation du smile de change}
+\begin{center}
+\begin{tabular}{|c|c|c|c|} 
+\hline 
+$\mathbf{K^{10Put}}$&1.1201&$\mathbf{\sigma^{10Put}}$&18.0\%\\
+$\mathbf{K^{25Put}}$&1.2755&$\mathbf{\sigma^{25Put}}$&14.0\%\\
+$\mathbf{K^{ATM}}$&1.3975&$\mathbf{\sigma^{ATM}}$&12.0\%\\
+$\mathbf{K^{25Call}}$&1.5148&$\mathbf{\sigma^{25Call}}$&12.0\%\\
+$\mathbf{K^{10Call}}$&1.6760&$\mathbf{\sigma^{10Call}}$&14.0\%\\
+\hline 
+\end{tabular}
+\end{center} 
+\end{frame}
+
+\begin{frame}
+\frametitle<1>{Interpolation linéaire}
+\frametitle<2->{Interpolation spline cubique}
+\begin{align*}
+y&=q(x)=(1-t)\times y_{1}+t \times y_{2}\visible<2->{+\underbrace{t \times (1-t) \times (\mathbf{a} \times (1-t)+\mathbf{b} \times t)}_{\text{Termes quadratiques et cubiques}}}\\
+t&=\frac{x-x_1}{x_2-x_1}
+\end{align*}
+\begin{figure}
+\begin{center}
+\FIG{1,2}{9cm}{figures/interpolation-0.png}
+\FIG{3}{9cm}{figures/interpolation-1.png}
+\FIG{4}{9cm}{figures/interpolation-2.png}
+\end{center}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Interpolation spline cubique}
+On peut facilement calculer les dérivés premières et secondes de $q$ aux points $x_1$ et $x_2$:\\
+\vspace{0.5cm}
+\begin{tabular}{r l r l r l}
+$q'(x)$&$=\frac{\partial q}{\partial x}$&$q'(x_1)$&$=\frac{y_2-y_1}{x_2-x_1}+\frac{a}{x_2-x_1}$&$q'(x_2)$&$=\frac{y_2-y_1}{x_2-x_1}-\frac{b}{x_2-x_1}$\\
+$q''(x)$&$=\frac{\partial^2 q}{\partial x^2}$&$q''(x_1)$&$=2\frac{b-2a}{(x_2-x_1)^2}$&$q''(x_2)$&$=2\frac{a-2b}{(x_2-x_1)^2}$\\
+\end{tabular}
+\\
+\vspace{0.5cm}
+On peut facilement cacluler $a$ et $b$ en fonctions des dérivés premières:
+\begin{align*}
+a&=\underbrace{q'(x_1)}_{k_1}(x_2-x_1)-(y_2-y_1)\\
+b&=\underbrace{q'(x_2)}_{k_2}(x_2-x_1)+(y_2-y_1)\\
+\end{align*}
+\end{frame}
+
+\begin{frame}{Interpolation spline cubique}
+\begin{figure}
+\begin{center}
+\FIG{1-}{9cm}{figures/interpolation-3.png}
+\end{center}
+\end{figure}
+On considère $n$ tronçons de spline qui raccordent les $n+1$ points de $(x_0,y_0)$ à  $(x_n,y_n)$.
+\end{frame}
+\begin{frame}{Interpolation spline cubique}
+\begin{center}
+\begin{tabular}{c c c}
+$k_{i-1}$&$k_i$&$k_{i+1}$\\
+\hline
+$\frac{y_{i}-y_{i-1}}{x_{i}-x_{i-1}}+\frac{a_i}{x_i-x_{i-1}}$&$\frac{y_{i+1}-y_{i}}{x_{i+1}+x_{i}}+\frac{a_{i+1}}{x_{i+1}-x_{i}}$&\\
+&$\frac{y_{i}-y_{i-1}}{x_{i}-x_{i-1}}-\frac{b_i}{x_i-x_{i-1}}$&$\frac{y_{i+1}-y_{i}}{x_{i+1}+x_{i}}-\frac{b_{i+1}}{x_{i+1}-x_{i}}$\\
+\hline
+\end{tabular}
+\end{center}
+\begin{overprint}
+\onslide<1>\[
+q''(x_i)=2\frac{b_i-2a_i}{(x_{i}-x_{i-1})^2}=2\frac{a_{i+1}-2b_{i+1}}{(x_{i+1}-x_{i})^2}
+\]
+\onslide<2>\[
+\underbrace{\frac{1}{x_i-x_{i-1}}k_{i-1}}_{a_{i,i-1}}+\underbrace{2\big[ \frac{1}{x_i-x_{i-1}} + \frac{1}{x_{i+1}-x_{i}}  \big]}_{a_{i,i}} k_{i} +\underbrace{\frac{1}{x_{i+1}-x_{i}}}_{a_{i,i+1}}k_{i+1}
+\]
+\[
+=\underbrace{3\big[ \frac{y_{i}-y_{i-1}}{(x_i-x_{i-1})^2} + \frac{y_{i+1}-y_{i}}{(x_{i+1}-x_{i})^2} \big]}_{b_i}
+\]
+\end{overprint}
+\end{frame}
+
+\begin{frame}{Interpolation spline cubique}
+Pour les points extrêmes on suppose que la dérivée seconde est nulle:\\
+\begin{overprint}
+\onslide<1>\begin{align*}
+q''(x_0)&=\frac{b_1 -2 a_1}{(x_1-x_0)^2}=0\\
+q''(x_n)&=\frac{a_n -2 b_n}{(x_n-x_{n-1})^2}=0\\
+\end{align*}
+\onslide<2>\begin{align*}
+\underbrace{2\frac{1}{x_{1}-x_{0}}  }_{a_{0,0}} k_{0}&+\underbrace{\frac{1}{x_{1}-x_{0}}}_{a_{0,1}}k_{1}&&=\underbrace{3\frac{y_{1}-y_{0}}{(x_{1}-x_{0})^2}}_{b_0}\\
+&\underbrace{\frac{1}{x_{n}-x_{n-1}}}_{a_{n,n-1}}k_{n-1}&+\underbrace{2\frac{1}{x_{1}-x_{0}}}_{a_{n,n}} k_{n-1} &=\underbrace{3\frac{y_{n}-y_{n-1}}{(x_{n}-x_{n-1})^2}}_{b_n}
+\end{align*}
+\end{overprint}
+\end{frame}
+\begin{frame}{Interpolation spline cubique}
+Il nous faut maintenant résoudre le système linéaire précedemment défini où $K$ est l'inconnu:\\
+\begin{overprint}
+\onslide<1>\Huge
+\[
+A \times K = B
+\]
+\onslide<2>\footnotesize
+\[
+\underbrace{\left( 
+\begin{array}{ccccccc}
+a_{0,0} & a_{0,1} & \hdots & \hdots & \hdots & \hdots & 0 \\
+a_{1,0} & \ddots & \ddots & \ddots  &  &  & \vdots  \\
+\vdots & & a_{i,i-1} & a_{i,i} & a_{i,i+1} & & \vdots \\
+\vdots & & & \ddots & \ddots & \ddots & a_{n-1,n}\\
+0 & \hdots & \hdots & \hdots & \hdots & a_{n,n-1} & a_{n,n} 
+\end{array}
+\right)}_{\text{\huge A}}
+\underbrace{\left(
+\begin{array}{c}
+k_0\\
+\vdots\\
+k_i\\
+\vdots\\
+k_n\\
+\end{array}
+\right)}_{\text{\huge K}}
+=
+\underbrace{\left(
+\begin{array}{c}
+b_0\\
+\vdots\\
+b_i\\
+\vdots\\
+b_n\\
+\end{array}
+\right)}_{\text{\huge B}}
+\]
+\end{overprint}
+\end{frame}
 \end{document}
