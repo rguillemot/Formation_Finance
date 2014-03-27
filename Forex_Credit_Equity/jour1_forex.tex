@@ -2,6 +2,7 @@
 \usepackage[english,francais]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{multicol}
+\usepackage{bm}
 
 \usepackage{graphicx}
 \graphicspath{{./Forex_Credit_Equity/}}
@@ -333,6 +334,7 @@ F&=S^{USD/EUR}e^{(r^{USD}-r^{EUR}) \times T}
 \end{overprint}
 \end{frame}
 
+
 \begin{frame}{Option de change - Cotation de la prime - Exercice}
 On considère les même données de marché que précédemment avec une volatilité $\sigma=12\%$ et on quote la prime d'une option change de maturité 1 an qui reçoit \textcolor{red}{100 millions d'euros} contre \textcolor{blue}{139 millions de dollars}.\\
 \vspace{0.5cm}
@@ -393,6 +395,19 @@ Comment évolue le delta de change en fonction du strike ?
 \FIG{5}{11cm}{figures/fxopt-delta-4.png}
 %\end{overprint}
 \end{center}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Black Scholes: $\delta$ versus Vega}
+\begin{align*}
+\bm{\delta}=\frac{\partial p}{\partial S}=e^{-r^{1} \times T} \mathcal{N}(d_1)& \text{\textbf{Vega}}=\frac{\partial p}{\partial \sigma}=e^{-r^{f} \times T}S\sqrt{T}\mathcal{N'}(d_1)
+\end{align*}
+\[
+\text{\textbf{Vega}}=e^{-r^{1} \times T}S\sqrt{T}\mathcal{N'}(\mathcal{N}^{-1}(\bm{\delta} e^{r^{1} \times T}))=f(\bm{\delta})
+\]
+\begin{figure}
+\centering
+\FIG{1}{9cm}{figures/fxopt-deltavsvega.png}
 \end{figure}
 \end{frame}
 
@@ -637,6 +652,9 @@ Construire un spline cubique à partir de points de smile calculés précédemme
 \hline
 \end{tabular}
 \end{center}
+\end{frame}
+
+\begin{frame}{Option Digitale de change}
 \end{frame}
 
 \begin{frame}{Sensibilités au change et aux paramètres de smile}
