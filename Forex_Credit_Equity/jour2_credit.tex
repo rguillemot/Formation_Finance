@@ -4,6 +4,8 @@
 \usepackage{multicol}
 \usepackage{bm}
 \usepackage{tikz}
+\usepackage{bbm}
+\usepackage{cancel}
 \usetikzlibrary{positioning}
 
 \usepackage{graphicx}
@@ -12,7 +14,6 @@
 
 \newcommand{\FIG}[3]{\includegraphics<#1>[width=#2]{#3}}
 \newcommand{\FIGSCALE}[3]{\includegraphics<#1>[resolution=72dpi]{#3}}
-\newcommand{\tikzmark}[1]{\tikz[overlay,remember picture] \node (#1) {};}
 
 \usetheme{Warsaw}
 \title[Produits dérivés actions,change et credit]{Produits dérivés de crédit}
@@ -30,8 +31,6 @@
 
 \begin{exampleblock}{}
   {\large ``Un crédit est une mise à disposition d'argent sous forme de prêt, consentie par un \textcolor{red}{\textbf{créancier (créditeur, prêteur)}} à \textcolor{blue}{\textbf{un débiteur (emprunteur)}}.''}
-  \vskip5mm
-  \hspace*\fill{\small Wikipedia}
 \end{exampleblock}
 \vspace{0.5cm}
 \visible<2->{Le \textbf{Risque de Crédit} fait référence à l'incapacité du \textcolor{red}{débiteur} de remplir ses engagements (le remboursement du capital ou le paiement des intérêts) totalement ou en partie. On dit alors que ce dernier fait défaut.\\
@@ -60,7 +59,7 @@ Capital prêté, Intérêts & \visible<7->{Princpal, Interests}\\
 \hline
 Remboursement & \visible<8->{Repayment}\\
 \hline
-Prêt hypothécaire ou garanti & \visible<9->{Mortgage or secured load}\\
+Prêt hypothécaire ou garanti & \visible<9->{Mortgage or secured loan}\\
 \hline
 Saisie&\visible<10->{Foreclosure}\\
 \hline
@@ -94,11 +93,12 @@ Ratio à respecter pour une banque $\frac{\text{Fonds Propres}}{\text{Dettes}}\g
 %\end{tikzpicture}
 \end{overprint}
 \begin{tikzpicture}[remember picture,overlay]
-\draw<2> [<-,black, ultra thick] (8,1.5) node[yshift=-0.2cm]{\textbf{Première perte}} -- (8,4.4) node[yshift=0.2cm] {\textbf{Dernière perte}};
-\draw<3> [->,black, ultra thick] (8,1.5) node[yshift=-0.2cm]{\textbf{Risque Maximum}} -- (8,4.4) node[yshift=0.2cm] {\textbf{Risque Minimum}};
-\draw<4-> [->,black, ultra thick] (8,1.5) node[yshift=-0.2cm]{\textbf{Intérêts élevés}} -- (8,4.4) node[yshift=0.2cm] {\textbf{Intérêts faibles}};
+\draw<2> [->,black, ultra thick] (8,1.5) node[yshift=-0.2cm]{\textbf{Première perte}} -- (8,4.4) node[yshift=0.2cm] {\textbf{Dernière perte}};
+\draw<3> [<-,black, ultra thick] (8,1.5) node[yshift=-0.2cm]{\textbf{Risque Maximum}} -- (8,4.4) node[yshift=0.2cm] {\textbf{Risque Minimum}};
+\draw<4-> [<-,black, ultra thick] (8,1.5) node[yshift=-0.2cm]{\textbf{Intérêts élevés}} -- (8,4.4) node[yshift=0.2cm] {\textbf{Intérêts faibles}};
 \end{tikzpicture}
 \end{frame}
+
 \begin{frame}{Risque de crédit}
 Comment atténuer le risque de crédit ? \\
 \visible<2->{En anglais : How to mitigate the credit risk ?}\\
@@ -111,6 +111,101 @@ Comment atténuer le risque de crédit ? \\
 \item \visible<8->{\textbf{Securitization}}
 \item \visible<9->{\textbf{Assurance ou \textcolor{red}{dérivés de crédits}}}
 \end{enumerate}
+\end{frame}
+
+\begin{frame}{Dérivés de crédit}
+\begin{exampleblock}{}
+  {\large ``Un dérivé de crédit est instrument financier conçu pour transférer le risque de crédit associé à un \textcolor{red}{\textbf{emprunteur}} à une entité autre que le \textcolor{blue}{\textbf{prêteur}}.''}
+\end{exampleblock}
+\vspace{0.5cm}
+\onslide<2->L'entité \textcolor{blue}{\textbf{vendeuse de protection}} et à laquelle est transférée le risque est dite \textcolor{blue}{\textbf{"Long Credit"}}.\\
+\vspace{0.5cm}
+\onslide<3->L'entité \textcolor{red}{\textbf{acheteuse de protection}} et qui transfert le risque est dite \textcolor{red}{\textbf{"Short Credit"}}.\\
+\end{frame}
+
+\begin{frame}{Unfunded or Funded Credit Derivatives}
+Il existe 2 différents types de dérivés de crédit:
+\vspace{0.5cm}
+\begin{itemize}
+\item \onslide<2->\textbf{Unfunded Credit Derivatives}: le vendeur de protection de détient pas d'actif. Exemple: Crédit Default Swap.
+\item \onslide<3->\textbf{Funded Credit Derivatives}: le vendeur de protection détient un actif. Exemple: Credit Linked Note.
+\end{itemize}
+\vspace{0.5cm}
+\onslide<4>Il est possible d'acheter un Crédit Default Swap sans détenir aucune créance associée!!!!
+\end{frame}
+
+\begin{frame}{Credit Default Swap}
+\vspace{0.5cm}
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+$N$&\visible<2->{Nominal}\\
+$C$&\visible<3->{Coupon ou prime du CDS}\\ 
+$Rec$&\visible<4->{Taux de recouvrement (Recovery rate)}\\
+$\tau$&\visible<5>{Temps de défaut}\\
+\hline
+\end{tabular}
+\end{center}
+\begin{center}
+\begin{figure}
+\FIG{1-}{11cm}{figures/cds.png}
+\end{figure}
+\end{center}
+\end{frame}
+
+\begin{frame}{La courbe de taux "sans risque".}
+$B(t,T)$ est la valeur en $t$ de l'obligation zéro coupon qui paie 1 unité de nominal en $T$:
+\begin{overprint}
+\onslide<1>\[
+B(t,T)=\mathbb{E}\big[e^{\int_t^T r_s ds}|\mathcal{F}_t\big]
+\]
+\onslide<2->\[
+B(t,T)=e^{-\int_t^T r_s ds}
+\]
+\end{overprint}
+\vspace{0.5cm}
+$r$ est appelé le taux court.\\
+\onslide<2->On supposera par la suite que ce taux est déterministe.\\
+\vspace{0.5cm}
+\onslide<3>Dans le cas où $t=0$ on simplifiera la notation.\\
+\[
+B(T)=B(0,T)
+\]
+\end{frame}
+
+\begin{frame}{La Probabilité de défaut}
+$Q(t,T)$ est la probabilité vue de la date $t$ de ne pas faire défaut à une date ultérieur $T$:\\
+\begin{overprint}
+\onslide<1>\[
+Q(t,T)=\mathbb{P}\big[\tau>T|\mathcal{F}_t\big]
+\]
+\onslide<2-5>\[
+Q(t,T)=\mathbb{P}\big[\tau>T|\tau>t\big]
+\]
+\onslide<6->\[
+Q(t,T)=\invisible<7->{\mathbbm{E}\big[}\color<7>{red}{{e^{-\int_{t}^{T}\lambda(s) ds}}}\invisible<7->{\big]}
+\]
+\end{overprint}
+\onslide<3->Le modele à intensité suppose que la probabilité défaut suit formule suivante:\\ 
+\begin{overprint}
+\onslide<3>\[
+\mathbb{P}\big[t < \tau \leq t+dt|\tau > t \big]=\lambda(t) dt
+\]
+\onslide<4>\[
+\frac{\mathbb{P}\big[\tau \leq t+dt\big]-\mathbb{P}\big[\tau \leq t\big]}{1-\mathbb{P}\big[\tau \leq t \big]}=\lambda(t) dt
+\]
+\onslide<5->\[
+dQ(0,t)=-\lambda(t) Q(0,t)dt
+\]
+\end{overprint}
+\onslide<7->Par la suite on suppose que $\lambda(t)$ est déterministe.\\
+\vspace{0.5cm}
+\onslide<8>Dans le cas $t=0$ on simplfie la notation $Q(T)=Q(0,T)$
+\end{frame}
+
+\begin{frame}{La jambe de prime}
+\[
+\]
 \end{frame}
 
 \end{document}
