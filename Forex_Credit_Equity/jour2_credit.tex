@@ -1,0 +1,116 @@
+\documentclass{beamer}
+\usepackage[english,francais]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{multicol}
+\usepackage{bm}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+
+\usepackage{graphicx}
+\usepackage{multirow}
+\graphicspath{{./Forex_Credit_Equity/}}
+
+\newcommand{\FIG}[3]{\includegraphics<#1>[width=#2]{#3}}
+\newcommand{\FIGSCALE}[3]{\includegraphics<#1>[resolution=72dpi]{#3}}
+\newcommand{\tikzmark}[1]{\tikz[overlay,remember picture] \node (#1) {};}
+
+\usetheme{Warsaw}
+\title[Produits dérivés actions,change et credit]{Produits dérivés de crédit}
+\author{Richard Guillemot}
+\institute{DIFIQ}
+\date{22 Avril 2014}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}{Le Crédit}
+
+\begin{exampleblock}{}
+  {\large ``Un crédit est une mise à disposition d'argent sous forme de prêt, consentie par un \textcolor{red}{\textbf{créancier (créditeur, prêteur)}} à \textcolor{blue}{\textbf{un débiteur (emprunteur)}}.''}
+  \vskip5mm
+  \hspace*\fill{\small Wikipedia}
+\end{exampleblock}
+\vspace{0.5cm}
+\visible<2->{Le \textbf{Risque de Crédit} fait référence à l'incapacité du \textcolor{red}{débiteur} de remplir ses engagements (le remboursement du capital ou le paiement des intérêts) totalement ou en partie. On dit alors que ce dernier fait défaut.\\
+Le \textbf{Risque de Crédit} est intégralement porté par \textcolor{blue}{le créancier}.} 
+\end{frame}
+
+
+\begin{frame}{Vocabulaire}
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Français} & \textbf{Anglais} \\
+\hline
+\hline
+Prêt, Crédit, Obligation&\visible<2->{Loan, Credit, Bond}\\ 
+\hline
+Créditeur, Prêteur&\visible<3->{Creditor, Lender}\\ 
+\hline
+Créancier, Emprunteur&\visible<4->{Debtor, Borrower}\\ 
+\hline
+(Qualité de) crédit&\visible<5->{Creditworthiness}\\
+\hline
+Défaut, Insolvabilité, Faillite&\visible<6->{Default, Insolvency, Bankruptcy}\\
+\hline
+Capital prêté, Intérêts & \visible<7->{Princpal, Interests}\\
+\hline
+Remboursement & \visible<8->{Repayment}\\
+\hline
+Prêt hypothécaire ou garanti & \visible<9->{Mortgage or secured load}\\
+\hline
+Saisie&\visible<10->{Foreclosure}\\
+\hline
+\hline
+\end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}{Struture du capital (ou passif) d'une entreprise.}
+\begin{overprint}
+\begin{tabular}{|c|lccc}
+\cline{1-1}
+\textbf{Capital}\\
+\cline{1-1}
+\cline{1-1}
+Secured Debt& \multirow{4}{*}{$\left.\rule{0cm}{1cm}\right\}{\text{Dettes}}$}&\\
+Senior Debt&\\
+Subordinate Debt&\\
+Mezzanine Debt&\\
+\cline{1-1}
+& \multirow{3}{*}{$\left.\rule{0cm}{0.75cm}\right\}{\text{Fonds propres}}$}&\\
+Equity\\
+\\
+\cline{1-1}
+\end{tabular}
+\onslide<5>
+\vspace{0.5cm}
+Ratio à respecter pour une banque $\frac{\text{Fonds Propres}}{\text{Dettes}}\geq 8\%$
+%\begin{tikzpicture}
+%\draw (1,1) -- (2,2)
+%\end{tikzpicture}
+\end{overprint}
+\begin{tikzpicture}[remember picture,overlay]
+\draw<2> [<-,black, ultra thick] (8,1.5) node[yshift=-0.2cm]{\textbf{Première perte}} -- (8,4.4) node[yshift=0.2cm] {\textbf{Dernière perte}};
+\draw<3> [->,black, ultra thick] (8,1.5) node[yshift=-0.2cm]{\textbf{Risque Maximum}} -- (8,4.4) node[yshift=0.2cm] {\textbf{Risque Minimum}};
+\draw<4-> [->,black, ultra thick] (8,1.5) node[yshift=-0.2cm]{\textbf{Intérêts élevés}} -- (8,4.4) node[yshift=0.2cm] {\textbf{Intérêts faibles}};
+\end{tikzpicture}
+\end{frame}
+\begin{frame}{Risque de crédit}
+Comment atténuer le risque de crédit ? \\
+\visible<2->{En anglais : How to mitigate the credit risk ?}\\
+\begin{enumerate}
+\item \visible<3->{\textbf{Valorisation basée sur la qualité de crédit} : Introduction d'une marge (ou spread) de crédit.}
+\item \visible<4->{\textbf{Conventions de crédit (Loan covenants)}: clauses restrictives pour le prêteur}.
+\item \visible<5->{\textbf{Limtes de Risque}}
+\item \visible<6->{\textbf{Diversification}}
+\item \visible<7->{\textbf{Dépot de garantié}: Hypothèque, Collatéral, Haircut}
+\item \visible<8->{\textbf{Securitization}}
+\item \visible<9->{\textbf{Assurance ou \textcolor{red}{dérivés de crédits}}}
+\end{enumerate}
+\end{frame}
+
+\end{document}
