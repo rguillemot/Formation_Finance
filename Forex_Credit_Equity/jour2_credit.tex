@@ -194,8 +194,11 @@ Q(t,T)=\invisible<7->{\mathbbm{E}\big[}\color<7>{red}{{e^{-\int_{t}^{T}\lambda(s
 \onslide<4>\[
 \frac{\mathbb{P}\big[\tau \leq t+dt\big]-\mathbb{P}\big[\tau \leq t\big]}{1-\mathbb{P}\big[\tau \leq t \big]}=\lambda(t) dt
 \]
-\onslide<5->\[
+\onslide<5-7>\[
 dQ(0,t)=-\lambda(t) Q(0,t)dt
+\]
+\onslide<8>\[
+dQ(t)=-\lambda(t) Q(t)dt
 \]
 \end{overprint}
 \onslide<7->Par la suite on suppose que $\lambda(t)$ est déterministe.\\
@@ -203,18 +206,96 @@ dQ(0,t)=-\lambda(t) Q(0,t)dt
 \onslide<8>Dans le cas $t=0$ on simplfie la notation $Q(T)=Q(0,T)$
 \end{frame}
 
-\begin{frame}{Jambe de Prime}
+
+\begin{frame}{Jambe de Protection}
+\begin{overprint}
+\onslide<1>\begin{align*}
+PV_{\text{Protection}}&=N \times (1-Rec)\times\mathbb{E}[e^{-\int_{t}^{\tau}r_s ds}\mathbbm{1}_{\tau<T}]\\
+\end{align*}
+\onslide<2>\begin{align*}
+PV_{\text{Protection}}&=N \times (1-Rec)\times\mathbb{E}[e^{-\int_{t}^{\tau}r_s ds}\mathbbm{1}_{\tau<T}]\\
+&=-N \times (1-Rec) \times \int_{t}^{T} B(t,s) \frac{dQ(t,s)}{ds}ds\\
+\end{align*}
+\onslide<3>\begin{align*}
+PV_{\text{Protection}}&=N \times (1-Rec)\times\mathbb{E}[e^{-\int_{t}^{\tau}r_s ds}\mathbbm{1}_{\tau<T}]\\
+&=N \times (1-Rec) \times \lambda \times \int_{t}^{T} e^{-(\lambda+r) \times (s-t)}ds\\
+\end{align*}
+\onslide<4>\begin{align*}
+PV_{\text{Protection}}&=N \times (1-Rec)\times\mathbb{E}[e^{-\int_{t}^{\tau}r_s ds}\mathbbm{1}_{\tau<T}]\\
+&=\color{red}{N \times (1-Rec) \times \lambda \times\frac{ 1-e^{-(\lambda+r) \times (T-t)}}{\lambda+r}}\\
+\end{align*}
+\end{overprint}
+\onslide<3->On peut terminer le calcul dans le cas où le taux d'intérêt continu et l'intensité de défaut sont constants:
 \begin{align*}
-PV_{\text{Premium}}&=PV_{\text{Premium Only}}+PV_{\text{Accrued interest}}\\
-PV_{\text{Premium Only}}&=N \times C \times \sum_{i=1}^{n}\delta_i B(T_i) Q(T_i)\\
-PV_{\text{Accrued interest}}&=-N \times C \times \sum_{i=1}^{n} \int_{T_{i-1}}^{T_i}(s-T_{i-1}) B(s) \frac{dQ(s)}{ds}ds
+B(t)&=e^{-r \times t}\\
+Q(t)&=e^{-\lambda \times t}
 \end{align*}
 \end{frame}
 
-\begin{frame}{Jambe de Protection}
-\[
-PV_{\text{Protection}}=-N \times (1-Rec) \times \int_{t}^{T} B(s) \frac{dQ(s)}{ds}ds
+\begin{frame}{Jambe de Prime "seule"}
+\begin{overprint}
+\onslide<1-2>\begin{align*}
+PV_{\text{Premium Only}}&=N \times C \times \sum_{i=1}^{n}\delta_i \times\mathbb{E}[e^{-\int_{t}^{\tau}r_s ds}\mathbbm{1}_{T_i<\tau}]\\
+\visible<2>{&=N \times C \times \sum_{i=1}^{n}\delta_i \times \underbrace{B(t,T_i) \times Q(t,T_i)}_{\text{Zéro Coupon risqué}}}
+\end{align*}
+\onslide<3>\begin{align*}
+PV_{\text{Premium Only}}&=N \times C \times \sum_{i=1}^{n}\delta_i \times\mathbb{E}[e^{-\int_{t}^{\tau}r_s ds}\mathbbm{1}_{T_i<\tau}]\\
+&=\color{red}{N \times C \times \sum_{i=1}^{n}\delta_i \times e^{-(r+\lambda) \times (T_i-t)}}
+\end{align*}
+
+\end{overprint}
+\onslide<3->On peut terminer le calcul dans le cas où le taux d'intérêt continu et l'intensité de défaut sont constants:
+\begin{align*}
+B(t)&=e^{-r \times t}\\
+Q(t)&=e^{-\lambda \times t}
+\end{align*}
+\end{frame}
+
+\begin{frame}{Jame de coupon courru}
+\begin{overprint}
+\onslide<1-2>\begin{align*}
+PV_{\text{Accrued Interest}}&=N \times C \times \sum_{i=1}^{n} \times\mathbb{E}[\text{\small DCC}(T_{i-1},s)e^{-\int_{t}^{\tau}r_s ds}\mathbbm{1}_{T_{i-1}< \tau \leq T_i}]\\
+\visible<2>{&=N \times C \times \sum_{i=1}^{n} \times \int_{T_{i-1}}^{T_i} (s-T_{i-1})B(t,s) \frac{dQ(t,s)}{ds}ds}
+\end{align*}
+\onslide<3>\begin{align*}
+PV_{\text{Accrued Interest}}&=N \times C \times \sum_{i=1}^{n} \times\mathbb{E}[\text{\small DCC}(T_{i-1},s)e^{-\int_{t}^{\tau}r_s ds}\mathbbm{1}_{T_{i-1}< \tau \leq T_i}]\\
+&=N \times C \times \sum_{i=1}^{n} \times \lambda \times \int_{T_{i-1}}^{T_i} (s-T_{i-1})e^{-(r+\lambda) \times (s-t)}ds
+\end{align*}
+\onslide<4>\[
+PV_{\text{Accrued Interest}}=N \times C \times \sum_{i=1}^{n} \times\mathbb{E}[\text{\small DCC}(T_{i-1},s)e^{-\int_{t}^{\tau}r_s ds}\mathbbm{1}_{T_{i-1}< \tau \leq T_i}]
 \]
+\begin{align*}
+=\color{red}{N \times C \times \sum_{i=1}^{n} \times \lambda \times} &\color{red}{\big[ \frac{e^{-(r+\lambda) \times (T_{i-1}-t)}-e^{-(r+\lambda) \times (T_{i}-t)}}{(r+\lambda)^2}}\\
+&\color{red}{- \delta_i \times \frac{e^{-(r+\lambda) \times (T_{i}-t)}}{r+\lambda}  \big]}\\
+\end{align*}
+\end{overprint}
+\onslide<3->On peut terminer le calcul dans le cas où le taux d'intérêt continu et l'intensité de défaut sont constants:
+\begin{align*}
+B(t)&=e^{-r \times t}\\
+Q(t)&=e^{-\lambda \times t}
+\end{align*}
+\end{frame}
+
+\begin{frame}{Exercice}
+Considérons un CDS \textbf{5 ans} qui démarre aujourd'hui et qui paie une prime \textbf{trimestrielle}.\\
+\vspace{0.5cm}
+On suppose les données de marché suivante:\\
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+Taux d'intérêt continu&\textbf{1\%}\\
+Intensité de défaut&\textbf{3\%}\\
+Recovery&\textbf{40\%}\\
+\hline
+\end{tabular}
+\end{center}
+Quelle est la prime qui rend la structure au pair?\\
+Pour un nominal de \textbf{10 millions d'euros}, quelles sont les valeurs:\\
+\begin{itemize}
+\item de la Jambe de protection ?\\
+\item de la Jambe de prime ? \\
+\item de la Jambe de coupon courru ?\\
+\end{itemize}
 \end{frame}
 
 \begin{frame}{CDS Big bang}
