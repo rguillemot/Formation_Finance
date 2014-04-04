@@ -203,9 +203,27 @@ dQ(0,t)=-\lambda(t) Q(0,t)dt
 \onslide<8>Dans le cas $t=0$ on simplfie la notation $Q(T)=Q(0,T)$
 \end{frame}
 
-\begin{frame}{La jambe de prime}
+\begin{frame}{Jambe de Prime}
+\begin{align*}
+PV_{\text{Premium}}&=PV_{\text{Premium Only}}+PV_{\text{Accrued interest}}\\
+PV_{\text{Premium Only}}&=N \times C \times \sum_{i=1}^{n}\delta_i B(T_i) Q(T_i)\\
+PV_{\text{Accrued interest}}&=-N \times C \times \sum_{i=1}^{n} \int_{T_{i-1}}^{T_i}(s-T_{i-1}) B(s) \frac{dQ(s)}{ds}ds
+\end{align*}
+\end{frame}
+
+\begin{frame}{Jambe de Protection}
 \[
+PV_{\text{Protection}}=-N \times (1-Rec) \times \int_{t}^{T} B(s) \frac{dQ(s)}{ds}ds
 \]
+\end{frame}
+
+\begin{frame}{CDS Big bang}
+Une réforme du marché des CDS a eu lieu en Avril 2009:
+\begin{itemize}
+\item \textbf{Fixed Coupon:} 
+\item \textbf{IMM Dates:}
+\item  
+\end{itemize}
 \end{frame}
 
 \end{document}
