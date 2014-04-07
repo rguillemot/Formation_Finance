@@ -8,6 +8,7 @@
 \graphicspath{{./Forex_Credit_Equity/}}
 
 \newcommand{\FIG}[3]{\includegraphics<#1>[width=#2]{#3}}
+
 \newcommand{\FIGSCALE}[3]{\includegraphics<#1>[resolution=72dpi]{#3}}
 
 \usetheme{Warsaw}
@@ -695,6 +696,27 @@ BF10&-0\%&-0.29\%&-0.00\%&0.73\%\\
 \end{overprint}
 \end{frame}
 
+\begin{frame}{Forward FX Range}
+Un \textbf{Forward FX Range} permet de garantir un taux de change $K$ dans le futur. Cette garantie est active à condition que le taux de change soit compris dans un intervalle (range) $[K_{Min},K_{Max}]$.\\
+\vspace{0.5 cm}
+L'objectif de ce produit est de proposer au client un taux de change forward bonifié en lui faisant courir un risque minimum.
+\end{frame}
 
+\begin{frame}{Exemple de Forward FX Range}
+Considérons un Forward FX Range de maturité qui se désactive si le cour de l'EURUSD s'écarte de plus de \textbf{30\%} de sa valeur spot.\\
+\vspace{0.5cm}
+La banque propose d'améliorer de \textbf{30 pips} le taux de change forward classique dans le cas \textbf{d'une vente à terme d'euros} contre l'achat de dollar dans un an. 
+\begin{center}
+\FIG{1}{9cm}{figures/EURUSDPerf.png}
+\end{center}
+\end{frame}
 
+\begin{frame}{Exercice}
+\begin{enumerate}
+\item Comment répliquer le Forward FX Range avec des options de change "vanille" ?
+\item Déterminer la marge réalisée par la banque à partir des données de marché précédemment utilisées.
+\item Quel est la probabilité (risque neutre et non pas historique) que le produit se désactive en la défaveur du client. 
+\item Calculer la courverture nécéssaire en utilisant les produits de marché standard, Spot, Money Market, Basis, Risk Reversal Buterfly.
+\end{enumerate}
+\end{frame}
 \end{document}
