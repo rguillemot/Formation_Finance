@@ -58,8 +58,8 @@
 \large
 \begin{overprint}
 \onslide<1>Comment garantir un taux de change à une date future \textbf{T} ?\\ Et à quel taux \textbf{X}.
-\onslide<2>\textbf{Prêt} en $t$ de \textcolor{red}{$\frac{1}{1+\delta R^{EUR}}$ euros}.\\Remboursé en $T$ avec les intérêts, c'est à dire \textcolor{red}{1 euros}.
-\onslide<3>\textbf{Change} \textcolor{red}{$\frac{1}{1+\delta R^{EUR}}$ euros} contre \textcolor{blue}{$\frac{S}{1+\delta r^{EUR}}$dollars}.
+\onslide<2>\textbf{Prêt} en $t$ de \textcolor{red}{$\frac{1}{1+\delta R^{EUR}}$ euros}.\\Remboursé en $T$ avec les intérêts, c'est à dire \textcolor{red}{1 euro}.
+\onslide<3>\textbf{Change} \textcolor{red}{$\frac{1}{1+\delta R^{EUR}}$ euros} contre \textcolor{blue}{$\frac{S}{1+\delta R^{EUR}}$dollars}.
 \onslide<4>\textbf{Emprunt} en $t$ de \textcolor{blue}{$\frac{S}{1+\delta R^{EUR}}$} dollars\\ Remboursé en $T$ avec les intérêts, c'est à dire \textcolor{blue}{$S\frac{1+\delta R^{USD}}{1+\delta R^{EUR}}$ dollars}.
 \onslide<5>\[X=S\frac{1+\delta R^{USD}}{1+\delta R^{EUR}}\]
 \end{overprint}
@@ -99,7 +99,7 @@ $X$ & \visible<6->{Forward de change.} &  \visible<6->{$S\frac{1+\delta R^{USD}}
 
 \begin{frame}
 \frametitle{Quizz}
-Si on vend 100 Mios euro dans 1 an d'euros au taux spot au lieu d'utiliser le taux foward précedemment calculé:\\
+Si on vend 100 millons euro dans 1 an au taux spot au lieu d'utiliser le taux foward précedemment calculé:\\
 \vspace{0.5cm}
 a) On gagne 276 kEUR \uncover<2>{\textcolor{green}{\textbf{VRAI}}}\\
 b) On perd 27 kEUR \uncover<2>{\textcolor{red}{\textbf{FAUX}}}\\
@@ -141,12 +141,12 @@ d) On perd 276 kEUR. \uncover<2>{\textcolor{red}{\textbf{FAUX}}}\\
 \begin{frame}
 \frametitle{Delta de change et position de change}
 \begin{itemize}
-\item[-] Le \textbf{delta de change} est la sensibilité ou la dérivé au taux de change de la valeur d'un portefeuille en devise domestique.\\
+\item[-] Le \textbf{delta de change} est la sensibilité ou la dérivée au taux de change de la valeur d'un portefeuille en devise domestique.\\
 \vspace{0.5cm}
 \[
 \Delta_{FX}=\frac{\partial \prod^d}{\partial S}
 \]
-\item[-] La \textbf{position de change} correspond au nominaux équivalents $N^i$ au portefeuille dans chacune des devises. Elle indique la taille des opérations de change "Spot" nécessaires pour neutraliser le risque.
+\item[-] La \textbf{position de change} correspond au nominaux $N^i$  équivalents au portefeuille dans chacune des devises. Elle indique la taille des opérations de change "Spot" nécessaires pour neutraliser le risque.
 
 \end{itemize}
 \end{frame}
@@ -168,16 +168,16 @@ Position de change&&$(N^{EUR},N^{USD})$\\
 
 \begin{frame}
 \frametitle{Exercice}
-On reprend les données du premier exemple la marge de basis m égale à 5 points de base:\\
+On reprend les données du premier exemple la marge de basis m est égale à 5 points de base:\\
 \begin{itemize}
 \item[-] \textbf{Opération 1}: Une banque francaise doit recevoir de son client \textcolor{blue}{138.70 millions de dollars} contre \textcolor{red}{100 millions d'euros} dans 1 an.
 \item[-] \textbf{Opération 2}: Sa filliale américaine doit recevoir de son client \textcolor{red}{72.11 millions d'euros} contre \textcolor{blue}{100 millions de dollars} dans 1 an.
 \end{itemize}
-Pour chacune des 2 opérations et le portefeuille total de la banque:\\
+Pour chacune des 2 opérations et pour le portefeuille total de la banque:\\
 \begin{enumerate}
 \item Quel est le Profit \& Loss (PNL) pour la banque ?
-\item Quels sont de Delta FX et la position de change ?
-\item Quelle est la sensibilité à un mouvement de 1 point de base des taux euros, dollar et de la marge de basis ?
+\item Quels sont les Delta FX et la position de change ?
+\item Quelles sont la sensibilités à un mouvement de 1 point de base des taux euro, dollar et de la marge de basis ?
 \item Quelles opérations doit réaliser la banque pour neutraliser son risque de change ?
 \end{enumerate}
 \end{frame}
@@ -204,7 +204,7 @@ Pour chacune des 2 opérations et le portefeuille total de la banque:\\
 \hline
 \end{tabular}
 \end{center}
-Il faut vendre 38.584 millions de dollar contre 27.780 millions d'euros.
+Il faut vendre 38.584 millions de dollars contre 27.780 millions d'euros.
 \end{frame}
 
 \begin{frame}{Option de change}
@@ -217,7 +217,7 @@ Une \textbf{option de change} est un contrat asymétrique par lequel à une date
 \end{itemize}
 \onslide<2>\begin{itemize}
 \item La contrepartie \textbf{vendeuse s'engage} à recevoir un montant \textcolor{red}{$N^{EUR}$ en euro} contre \textcolor{blue}{$N^{USD}$ en dollar}.
-\item La contrepartie \textbf{acheteuse peut à son gré} recevoir un nominal \textcolor{blue}{$N^{USD}$ en dollar} contre un nominal \textcolor{red}{$N^{EUR}$ en euros}.
+\item La contrepartie \textbf{acheteuse peut à son gré} recevoir un nominal \textcolor{blue}{$N^{USD}$ en dollar} contre un nominal \textcolor{red}{$N^{EUR}$ en euro}.
 \end{itemize}
 \end{overprint}
 \end{frame}
@@ -251,7 +251,7 @@ Quel est le payoff d'une option de change ?
 \end{frame}
 
 \begin{frame}{Option de change - Black \& Scholes }
-En contrepartie le vendeur reçoit une prime (\textbf{p}) de la part de l'acheteur que l'on peut calculer à l'aide de la formule de Black \& Scholes:\\
+En contrepartie le vendeur reçoit de la part de l'acheteur une prime (\textbf{p})  que l'on peut calculer à l'aide de la formule de Black \& Scholes:\\
 \vspace{0.5cm}
 \begin{overprint}
 \onslide<1>\begin{center}
@@ -282,7 +282,7 @@ avec:\\
 
 \begin{frame}{Option de change - Symétrie}
 \begin{overprint}
-\onslide<1>On peut exprimer la prime (\textbf{p}) de l'option de plusieurs manières:\\
+\onslide<1>On peut exprimer la prime (\textbf{p}) de plusieurs manières:\\
 \onslide<2>Comme un call sur EUR/USD:\\
 \onslide<3>Comme un put sur USD/EUR:\\
 \end{overprint}
@@ -337,7 +337,7 @@ F&=S^{USD/EUR}e^{(r^{USD}-r^{EUR}) \times T}
 
 
 \begin{frame}{Option de change - Cotation de la prime - Exercice}
-On considère les même données de marché que précédemment avec une volatilité $\sigma=12\%$ et on quote la prime d'une option change de maturité 1 an qui reçoit \textcolor{red}{100 millions d'euros} contre \textcolor{blue}{139 millions de dollars}.\\
+On considère les mêmes données de marché que précédemment avec une volatilité $\sigma=12\%$ et on cote la prime d'une option de change de maturité 1 an qui reçoit \textcolor{red}{100 millions d'euros} contre \textcolor{blue}{139 millions de dollars}.\\
 \vspace{0.5cm}
 Les 6 modes de cotations:\\
 \vspace{0.5cm}
@@ -413,7 +413,7 @@ Comment évolue le delta de change en fonction du strike ?
 \end{frame}
 
 \begin{frame}{Zero delta straddle}
-Un \textbf{zéro delta straddle} EURUSD est pour un même strike ($K^{ATM}$) et un même nominal:
+Un \textbf{zéro delta straddle} EUR/USD est pour un même strike ($K^{ATM}$) et un même nominal:
 \begin{itemize}
 \item l'achat d'un call EUR
 \item et l'achat d'un put EUR.
@@ -432,10 +432,10 @@ La delta du portefeuille doit être nul.
 \end{frame}
 
 \begin{frame}{25\% delta risk reversal}
-Un \textbf{25\% delta risk reversal} EURUSD est pour un même nominal: 
+Un \textbf{25\% delta risk reversal} EUR/USD est pour un même nominal: 
 \begin{itemize}
 \item l'achat d'un call EUR de delta égal à 25\% de strike $K^{25Call}$
-\item et la vente d'un put EUR de delta égal à -25\% $K^{25Put}$.
+\item et la vente d'un put EUR de delta égal à -25\% de strike $K^{25Put}$.
 \end{itemize}
 \begin{figure}
 \begin{center}
@@ -446,12 +446,12 @@ Un \textbf{25\% delta risk reversal} EURUSD est pour un même nominal:
 \end{figure}
 \end{frame}
 
-\begin{frame}{25\% delta butterfly}
-Un \textbf{25\% delta butterfly} est pour un même nominal:
+\begin{frame}{25\% delta Butterfly}
+Un \textbf{25\% delta Butterfly} est pour un même nominal:
 \begin{itemize}
 \item l'achat d'un call EUR de strike $K^{25Call}$
 \item l'achat d'un call EUR de strike $K^{25Put}$
-\item et la vente de 2 call EUR de strike $K^{ATM}$.
+\item et la vente de 2 calls EUR de strike $K^{ATM}$.
 \end{itemize}
 \FIG{1}{10cm}{figures/butterfly-0.png}
 \FIG{2}{10cm}{figures/butterfly-1.png}
@@ -459,7 +459,7 @@ Un \textbf{25\% delta butterfly} est pour un même nominal:
 \end{frame}
 
 \begin{frame}{Cotation du smile de change}
-Les différentes options de changes ne sont pas cotés en prix mais en volatilité.\\
+Les différentes options de change ne sont pas cotées en prix mais en volatilité.\\
 \vspace{0.5cm}
 
 \begin{tabular}{|l|l|l|}
@@ -468,7 +468,7 @@ Les différentes options de changes ne sont pas cotés en prix mais en volatilit
 \hline
 \textbf{0\% delta straddle}&$\sigma^{ATM}$\\
 \textbf{25\% delta risk reversal}&$RR^{25}=\sigma^{25Call}-\sigma^{25Put}$\\
-\textbf{25\% delta butterfly}&$BF^{25}=\sigma^{25Call}+\sigma^{25Put}-2 \times \sigma^{ATM}$\\
+\textbf{25\% delta Butterfly}&$BF^{25}=\sigma^{25Call}+\sigma^{25Put}-2 \times \sigma^{ATM}$\\
 \hline
 \end{tabular}
 \vspace{0.5cm}
@@ -478,7 +478,7 @@ Comment à partir des cotations de marché des différents produits reconstituer
 
 \begin{frame}{Cotation du smile de change}
 \begin{itemize}
-\item \textbf{Etape 1}: On calcule le 3 points de volatilité de change.
+\item \textbf{Etape 1}: On calcule les 3 points de volatilité de change.
 \begin{align*}
 \sigma^{25Call}&=\sigma^{ATM}+BF^{25}+\frac{1}{2} RR^{25}\\
 \sigma^{25Put}&=\sigma^{ATM}+BF^{25}-\frac{1}{2} RR^{25}\\
@@ -488,7 +488,8 @@ Comment à partir des cotations de marché des différents produits reconstituer
 \end{frame}
 
 \begin{frame}{Cotation du smile de change - Exercice}
-Construire la smile de change 1 an à partir des données suivantes:
+Construire le smile de change 1 an à partir des données suivantes:
+
 \begin{center}
 \begin{tabular}{|l|l|l|l|}
 \hline
@@ -546,7 +547,7 @@ $q''(x)$&$=\frac{\partial^2 q}{\partial x^2}$&$q''(x_1)$&$=2\frac{b-2a}{(x_2-x_1
 \end{tabular}
 \\
 \vspace{0.5cm}
-On peut facilement cacluler $a$ et $b$ en fonctions des dérivés premières:
+On peut facilement calculer $a$ et $b$ en fonction des dérivées premières:
 \begin{align*}
 a&=\underbrace{q'(x_1)}_{k_1}(x_2-x_1)-(y_2-y_1)\\
 b&=\underbrace{q'(x_2)}_{k_2}(x_2-x_1)+(y_2-y_1)\\
@@ -598,7 +599,7 @@ q''(x_n)&=\frac{a_n -2 b_n}{(x_n-x_{n-1})^2}=0\\
 \end{overprint}
 \end{frame}
 \begin{frame}{Interpolation spline cubique}
-Il nous faut maintenant résoudre le système linéaire précedemment défini où $K$ est l'inconnu:\\
+Il nous faut maintenant résoudre le système linéaire précédemment défini où $K$ est l'inconnue:\\
 \begin{overprint}
 \onslide<1>\Huge
 \[
@@ -639,7 +640,7 @@ b_n\\
 \end{frame}
 
 \begin{frame}{Interpolation spline cubique - Exercice}
-Construire un spline cubique à partir de points de smile calculés précédemment.
+Construire un spline cubique à partir des points de smile calculés précédemment.
 \begin{center}
 \begin{tabular}{|c|c|c|c|}
 \hline
@@ -655,15 +656,12 @@ Construire un spline cubique à partir de points de smile calculés précédemme
 \end{center}
 \end{frame}
 
-\begin{frame}{Option Digitale de change}
-\end{frame}
-
 \begin{frame}{Sensibilités au change et aux paramètres de smile}
-On peut calculer la sensibilité de chacun des 3 produits 
+On peut calculer la sensibilité de chacun des 5 produits 
 \begin{itemize}
 \item \textbf{ZDS}: Zéro Delta Straddle
-\item \textbf{RR25}: Risk Reversal 25 delta
-\item \textbf{BF25}: Buterfly 25 delta
+\item \textbf{RR25, RR10}: Risk Reversal 25 et 10 delta
+\item \textbf{BF25, BF10}: Butterfly 25 et 10 delta
 \end{itemize}
 aux paramètres du smile:\\
 \begin{overprint}
@@ -703,9 +701,9 @@ L'objectif de ce produit est de proposer au client un taux de change forward bon
 \end{frame}
 
 \begin{frame}{Exemple de Forward FX Range}
-Considérons un Forward FX Range de maturité qui se désactive si le cour de l'EURUSD s'écarte de plus de \textbf{30\%} de sa valeur spot.\\
+Considérons un Forward FX Range de maturité 1 an qui se désactive si le cours de l'EUR/USD s'écarte de plus de \textbf{30\%} de sa valeur spot à terme.\\
 \vspace{0.5cm}
-La banque propose d'améliorer de \textbf{30 pips} le taux de change forward classique dans le cas \textbf{d'une vente à terme d'euros} contre l'achat de dollar dans un an. 
+La banque propose d'améliorer de \textbf{30 pips} le taux de change forward classique dans le cas \textbf{d'une vente à terme d'euros} contre l'achat de dollars dans un an. 
 \begin{center}
 \FIG{1}{9cm}{figures/EURUSDPerf.png}
 \end{center}
@@ -715,8 +713,8 @@ La banque propose d'améliorer de \textbf{30 pips} le taux de change forward cla
 \begin{enumerate}
 \item Comment répliquer le Forward FX Range avec des options de change "vanille" ?
 \item Déterminer la marge réalisée par la banque à partir des données de marché précédemment utilisées.
-\item Quel est la probabilité (risque neutre et non pas historique) que le produit se désactive en la défaveur du client. 
-\item Calculer la courverture nécéssaire en utilisant les produits de marché standard, Spot, Money Market, Basis, Risk Reversal Buterfly.
+\item Quelle est la probabilité (risque neutre et non pas historique) que le produit se désactive en la défaveur du client. 
+\item Calculer la couverture nécessaire en utilisant les produits de marché standard, Spot, Money Market, Basis, Risk Reversal Butterfly.
 \end{enumerate}
 \end{frame}
 \end{document}
