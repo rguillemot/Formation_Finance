@@ -170,8 +170,8 @@ Position de change&&$(N^{EUR},N^{USD})$\\
 \frametitle{Exercice}
 On reprend les données du premier exemple la marge de basis m est égale à 5 points de base:\\
 \begin{itemize}
-\item[-] \textbf{Opération 1}: Une banque francaise doit recevoir de son client \textcolor{blue}{138.70 millions de dollars} contre \textcolor{red}{100 millions d'euros} dans 1 an.
-\item[-] \textbf{Opération 2}: Sa filliale américaine doit recevoir de son client \textcolor{red}{72.11 millions d'euros} contre \textcolor{blue}{100 millions de dollars} dans 1 an.
+\item[-] \textbf{Opération 1}: Une banque francaise doit recevoir de son client \textcolor{blue}{138.80 millions de dollars} contre \textcolor{red}{100 millions d'euros} dans 1 an.
+\item[-] \textbf{Opération 2}: Sa filliale américaine doit recevoir de son client \textcolor{red}{72.09 millions d'euros} contre \textcolor{blue}{100 millions de dollars} dans 1 an.
 \end{itemize}
 Pour chacune des 2 opérations et pour le portefeuille total de la banque:\\
 \begin{enumerate}
@@ -189,22 +189,22 @@ Pour chacune des 2 opérations et pour le portefeuille total de la banque:\\
 &\textbf{Cas 1}&\textbf{Cas 2}&\textbf{TOTAL}& \\
 \hline
 \hline
-\textbf{PNL EUR} &12&3&15&kEUR\\
-\textbf{PNL USD} &17&4&21&kUSD\\
+\textbf{PNL EUR} &35&9&43&kEUR\\
+\textbf{PNL USD} &48&12&60&kUSD\\
 \hline
 \hline
-\textbf{Delta FX} &-99.55&71.79&-27.77&Mios EUR\\
-\textbf{Sensi taux} &9.91&-7.15&2.76&kEUR/bp\\
-\textbf{Sensi taux} &-13.79&9.94&-3.85&kUSD/bp\\
-\textbf{Sensi basis} &-9.91&7.15&-2.76&kEUR/bp\\
+\textbf{Delta FX} &-99.60&71.79&-27.81&Mios EUR\\
+\textbf{Sensi taux} &9.92&-7.15&2.77&kEUR/bp\\
+\textbf{Sensi taux} &-13.80&9.94&-3.86&kUSD/bp\\
+\textbf{Sensi basis} &-9.92&7.15&-2.77&kEUR/bp\\
 \hline
 \hline
-\textbf{NEUR} &-99.552&71.787&-27.765&Mios EUR/bp\\
-\textbf{NUSD} &138.285&-99.701&38.584&Mios USD/bp\\
+\textbf{NEUR} &-99.602&71.793&-27.809&Mios EUR/bp\\
+\textbf{NUSD} &138.385&-99.701&38.684&Mios USD/bp\\
 \hline
 \end{tabular}
 \end{center}
-Il faut vendre 38.584 millions de dollars contre 27.780 millions d'euros.
+Il faut vendre 38.684 millions de dollars contre 27.850 millions d'euros.
 \end{frame}
 
 \begin{frame}{Option de change}
@@ -347,8 +347,8 @@ Prix en dollars&\visible<2->{$p$}&\visible<2->{6.501 Mios USD}\\
 Prix en euros&\visible<3->{$\frac{p}{S}$}&\visible<3->{4.681 Mios EUR}\\
 Prix en \% de nominal dollar&\visible<4->{$\frac{p}{N \times K}$}& \visible<4->{4.6771\%}\\
 Prix en \% de nominal euro&\visible<5->{$\frac{p}{N \times S}$}& \visible<5->{4.6808\%}\\
-Prix en dollars pips per EUR&\visible<6->{$\frac{p}{1e^4}$}& \visible<6->{6.5012 kUSD pips}\\
-Prix en euros pips per USD&\visible<7->{$\frac{p}{S \times K \times 1e^4}$}& \visible<7->{3.3675 kEUR pips}\\
+Prix en dollars pips per EUR&\visible<6->{$\frac{p}{N \times 1e^4}$}& \visible<6->{650.12 USD pips}\\
+Prix en euros pips per USD&\visible<7->{$\frac{p}{S \times N \times K \times 1e^4}$}& \visible<7->{336.75 EUR pips}\\
 \hline
 \end{tabular}
 \end{frame}
@@ -401,7 +401,7 @@ Comment évolue le delta de change en fonction du strike ?
 
 \begin{frame}{Black Scholes: $\delta$ versus Vega}
 \begin{align*}
-\bm{\delta}=\frac{\partial p}{\partial S}=e^{-r^{1} \times T} \mathcal{N}(d_1)& \text{\textbf{Vega}}=\frac{\partial p}{\partial \sigma}=e^{-r^{f} \times T}S\sqrt{T}\mathcal{N'}(d_1)
+\bm{\delta}=\frac{\partial p}{\partial S}=e^{-r^{1} \times T} \mathcal{N}(d_1)& \text{\textbf{Vega}}=\frac{\partial p}{\partial \sigma}=e^{-r^{1} \times T}S\sqrt{T}\mathcal{N'}(d_1)
 \end{align*}
 \[
 \text{\textbf{Vega}}=e^{-r^{1} \times T}S\sqrt{T}\mathcal{N'}(\mathcal{N}^{-1}(\bm{\delta} e^{r^{1} \times T}))=f(\bm{\delta})
@@ -550,7 +550,7 @@ $q''(x)$&$=\frac{\partial^2 q}{\partial x^2}$&$q''(x_1)$&$=2\frac{b-2a}{(x_2-x_1
 On peut facilement calculer $a$ et $b$ en fonction des dérivées premières:
 \begin{align*}
 a&=\underbrace{q'(x_1)}_{k_1}(x_2-x_1)-(y_2-y_1)\\
-b&=\underbrace{q'(x_2)}_{k_2}(x_2-x_1)+(y_2-y_1)\\
+b&=-\underbrace{q'(x_2)}_{k_2}(x_2-x_1)+(y_2-y_1)\\
 \end{align*}
 \end{frame}
 
