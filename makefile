@@ -12,6 +12,8 @@ DERIVES_DE_TAUX = \
 		Derives_de_taux/jour4_multi_curve.pdf \
 		Derives_de_taux/evaluation.pdf \
 		Forex_Credit_Change/jour1_forex.pdf \
+		Forex_Credit_Change/webex_forex.pdf \
+		Forex_Credit_Change/jour2_forex.pdf \
 		Forex_Credit_Change/jour2_credit.pdf
 
 %.pdf: %.tex

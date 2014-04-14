@@ -1,0 +1,144 @@
+\documentclass{beamer}
+\usepackage[english,francais]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{multicol}
+\usepackage{bm}
+
+\usepackage{graphicx}
+\graphicspath{{./Forex_Credit_Equity/}}
+
+\newcommand{\FIG}[3]{\includegraphics<#1>[width=#2]{#3}}
+
+\newcommand{\FIGSCALE}[3]{\includegraphics<#1>[resolution=72dpi]{#3}}
+
+\usetheme{Warsaw}
+\title[Produits dérivés actions,change et credit]{Produits dérivés de change\\Séance Webex}
+\author{Richard Guillemot}
+\institute{DIFIQ}
+\date{18 Avril 2014}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Besoin d'un client américain.}
+Un client américain doit payer son fournisseur français dans 1 an \textbf{\textcolor{red}{100 millions d'euros}}.\\ 
+\uncover<2->{Pour des raisons "stratégiques" il ne souhaite pas couvrir cette position de change à terme.\\}
+\vspace{0.5cm}
+\uncover<3->{Cependant il souhaite tout de même se protéger contre des mouvements trop important du taux de change.\\
+Ainsi:\\
+\begin{itemize}
+\item Il ne veux payer au \textbf{maximum} \textbf{\textcolor{blue}{149 millions de dollars}}.
+\item A l'inverse il veut payer au \textbf{minimum} \textbf{\textcolor{blue}{129 millions de dollars}}.
+\end{itemize}}
+\vspace{0.5cm}
+\uncover<4->{\textbf{Comment statisfaire le besoin de notre client ?}}
+
+\vspace{0.5cm}
+\end{frame}
+
+\begin{frame}{Question}
+Est ce que l'on rend vraiment un service à notre client ?\\
+\vspace{0.5cm}
+\begin{itemize}
+\uncover<2->{\item \textbf{Oui:} Lorsque l'EUR/USD passe au dessus de 1.49.\\}
+\uncover<3->{\item \textbf{Non:} Lorsque l'EUR/USD passe en dessous de 1.29.\\}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Question}
+Quel est le payoff du produit que la banque vend à son client ?\\
+\vspace{0.5cm}
+\FIG{1}{11cm}{figures/probleme_rr_payoff.png}
+\end{frame}
+
+\begin{frame}{Question}
+Ce produit \textbf{le Risk Reversal}, est équivalent à:\\
+\vspace{0.5cm}
+\begin{enumerate}
+\item acheter 100 millions de call euro à 1.49 et vendre 100 millions de put euro à 1.29.
+\item vendre 100 millions de call euro à 1.49 et acheter 100 millions de put euro à 1.29.
+\item acheter 100 millions de call euro à 1.49 et acheter 100 millions de put euro à 1.29.
+\item acheter 100 millions de call euro à 1.49 et vendre 100 millions de call euro à 1.29.
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}{Valorisation et couverture}
+A partir des données de marché suivantes:\\
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Notation} & \textbf{Valeur} \\
+\hline
+\hline
+$S$ & 1.3889 \\
+$R^{EUR}$ & 0.5\% \\
+$R^{USD}$ & 0.3\% \\
+$m$ & 0.1 \% \\
+$\sigma$ & 12\% \\
+\hline
+\end{tabular}
+\end{center}
+Calculer:
+\begin{itemize}
+\item La valeur du produit. Le client doit il vraiment nous payer ?\\
+\item Le delta de change. \\
+\item Le vega de change. \\ 
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Structuration}
+Modifier le caractéristiques du produit de telle façon que:\\
+\begin{itemize}
+\item le PNL du produit soit nul.
+\item le Delta FX du produit soit nul.
+\end{itemize}
+\vspace{0.5cm}
+Dans les 2 cas calculer le PNL, le Delta FX et le Vega du produit modifié.
+\end{frame}
+
+\begin{frame}{Le Risk Reversal 25 Delta}
+Le Risk Reversal 25 Delta est:\\
+\begin{enumerate}
+\item l'achat d'un call euro de de delta 25\%.\\
+\item la vente d'un put euro de delta -25 \%.
+\end{enumerate}
+\Large
+\begin{align*}
+K^{25 Delta Call}&=F\times e^{\mathcal{N}^{-1}(0.25 \times e^{r^{EUR}\times T})\times \sigma \sqrt{T} +\frac{1}{2}\sigma^2 \times T }\\
+K^{25 Delta Put}&=F\times e^{\mathcal{N}^{-1}(-0.25 \times e^{r^{EUR}\times T})\times \sigma \sqrt{T} -\frac{1}{2}\sigma^2 \times T }
+\end{align*}
+\normalsize
+Il est coté comme un différence de volatilité:\\
+\[
+	RR^{25 Delta}=\sigma(K^{25 Delta Call})-\sigma(K^{25 Delta Put})
+\]
+\end{frame}
+
+
+\begin{frame}{Question}
+Pour un mouvement de 1 \% de la volatilité monnaie, la valeur du Risk Reversal 25 Delta:\\
+\begin{enumerate}
+\item baisse de 50 kEUR.
+\item baisse de 440 kEUR.
+\item fluctue de quelques milliers d'euros.
+\item reste extactement la même. 
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Question}
+Pour un mouvement à la baisse de 1 \% de sa volatilité, la valeur du Risk Reversal 25 Delta:\\
+\begin{enumerate}
+\item baisse de 260 kEUR.
+\item baisse de 440 kEUR.
+\item fluctue de quelques milliers d'euros.
+\item reste extactement la même.
+\end{enumerate}
+ 
+\end{frame}
+\end{document}
+
