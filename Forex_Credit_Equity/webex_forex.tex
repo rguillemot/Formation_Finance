@@ -31,7 +31,7 @@ Un client américain doit payer son fournisseur français dans 1 an \textbf{\tex
 \uncover<3->{Cependant il souhaite tout de même se protéger contre des mouvements trop important du taux de change.\\
 Ainsi:\\
 \begin{itemize}
-\item Il ne veux payer au \textbf{maximum} \textbf{\textcolor{blue}{149 millions de dollars}}.
+\item Il veut payer au \textbf{maximum} \textbf{\textcolor{blue}{149 millions de dollars}}.
 \item A l'inverse il veut payer au \textbf{minimum} \textbf{\textcolor{blue}{129 millions de dollars}}.
 \end{itemize}}
 \vspace{0.5cm}
@@ -52,17 +52,20 @@ Est ce que l'on rend vraiment un service à notre client ?\\
 \begin{frame}{Question}
 Quel est le payoff du produit que la banque vend à son client ?\\
 \vspace{0.5cm}
+\begin{overprint}
 \FIG{1}{11cm}{figures/probleme_rr_payoff.png}
+\FIG{2}{11cm}{figures/probleme_rr_payoff_sol.png}
+\end{overprint}
 \end{frame}
 
 \begin{frame}{Question}
 Ce produit \textbf{le Risk Reversal}, est équivalent à:\\
 \vspace{0.5cm}
 \begin{enumerate}
-\item acheter 100 millions de call euro à 1.49 et vendre 100 millions de put euro à 1.29.
-\item vendre 100 millions de call euro à 1.49 et acheter 100 millions de put euro à 1.29.
-\item acheter 100 millions de call euro à 1.49 et acheter 100 millions de put euro à 1.29.
-\item acheter 100 millions de call euro à 1.49 et vendre 100 millions de call euro à 1.29.
+\item vendre 100 millions de call euro à 1.49 et acheter 100 millions de put euro à 1.29 \uncover<2>{\textcolor{red}{\textbf{FAUX}}}.
+\item acheter 100 millions de call euro à 1.49 et acheter 100 millions de put euro à 1.29 \uncover<2>{\textcolor{red}{\textbf{FAUX}}}.
+\item acheter 100 millions de call euro à 1.49 et vendre 100 millions de put euro à 1.29 \uncover<2>{\textcolor{green}{\textbf{VRAI}}}.
+\item acheter 100 millions de call euro à 1.49 et vendre 100 millions de call euro à 1.29 \uncover<2>{\textcolor{red}{\textbf{FAUX}}}.
 \end{enumerate}
 
 \end{frame}
@@ -95,7 +98,7 @@ Calculer:
 Modifier le caractéristiques du produit de telle façon que:\\
 \begin{itemize}
 \item le PNL du produit soit nul.
-\item le Delta FX du produit soit nul.
+\item le Delta FX du produit soit de 50 \%.
 \end{itemize}
 \vspace{0.5cm}
 Dans les 2 cas calculer le PNL, le Delta FX et le Vega du produit modifié.
@@ -119,26 +122,48 @@ Il est coté comme un différence de volatilité:\\
 \]
 \end{frame}
 
+\begin{frame}{Black Scholes: $\delta$ versus Vega}
+\begin{align*}
+\bm{\delta}=\frac{\partial p}{\partial S}=e^{-r^{EUR} \times T} \mathcal{N}(d_1)& \text{\textbf{Vega}}=\frac{\partial p}{\partial \sigma}=e^{-r^{EUR} \times T}S\sqrt{T}\mathcal{N'}(d_1)
+\end{align*}
+\[
+\text{\textbf{Vega}}=e^{-r^{EUR} \times T}S\sqrt{T}\mathcal{N'}(\mathcal{N}^{-1}(\bm{\delta} e^{r^{EUR} \times T}))=f(\bm{\delta})
+\]
+\begin{figure}
+\centering
+\FIG{1}{9cm}{figures/fxopt-deltavsvega.png}
+\end{figure}
+\end{frame}
 
 \begin{frame}{Question}
 Pour un mouvement de 1 \% de la volatilité monnaie, la valeur du Risk Reversal 25 Delta:\\
 \begin{enumerate}
-\item baisse de 50 kEUR.
-\item baisse de 440 kEUR.
-\item fluctue de quelques milliers d'euros.
-\item reste extactement la même. 
+\item baisse de 50 kEUR.\uncover<2>{\textcolor{red}{\textbf{FAUX}}}
+\item baisse de 440 kEUR.\uncover<2>{\textcolor{red}{\textbf{FAUX}}}
+\item fluctue de quelques milliers d'euros.\uncover<2>{\textcolor{green}{\textbf{VRAI}}}
+\item reste extactement la même.\uncover<2>{\textcolor{red}{\textbf{FAUX}}}
 \end{enumerate}
 \end{frame}
 
 \begin{frame}{Question}
 Pour un mouvement à la baisse de 1 \% de sa volatilité, la valeur du Risk Reversal 25 Delta:\\
 \begin{enumerate}
-\item baisse de 260 kEUR.
-\item baisse de 440 kEUR.
-\item fluctue de quelques milliers d'euros.
-\item reste extactement la même.
+\item baisse de 260 kEUR.\uncover<2>{\textcolor{red}{\textbf{FAUX}}}
+\item baisse de 440 kEUR.\uncover<2>{\textcolor{green}{\textbf{VRAI}}}
+\item fluctue de quelques milliers d'euros.\uncover<2>{\textcolor{red}{\textbf{FAUX}}}
+\item reste extactement la même.\uncover<2>{\textcolor{red}{\textbf{FAUX}}}
 \end{enumerate}
- 
 \end{frame}
+
+\begin{frame}{Conclusion}
+Ce que nous avons appris:
+\begin{enumerate}
+\item<2-> Le Risk Reversal est une stratégie permettant une couverture partielle d'une risque de change. Il est particulièrement adapté pour se protéger contre des mouvement importants des taux de change.
+\item<3-> Il s'autofinance.
+\item<4-> Il est peu sensible au niveau moyen du smile de change.
+\item<5-> Il est très sensible à la pente du smile. 
+\end{enumerate}
+\end{frame}
+
 \end{document}
 

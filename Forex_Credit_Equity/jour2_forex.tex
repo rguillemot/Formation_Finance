@@ -23,19 +23,6 @@
 \titlepage
 \end{frame}
 
-\begin{frame}{Black Scholes: $\delta$ versus Vega}
-\begin{align*}
-\bm{\delta}=\frac{\partial p}{\partial S}=e^{-r^{1} \times T} \mathcal{N}(d_1)& \text{\textbf{Vega}}=\frac{\partial p}{\partial \sigma}=e^{-r^{1} \times T}S\sqrt{T}\mathcal{N'}(d_1)
-\end{align*}
-\[
-\text{\textbf{Vega}}=e^{-r^{1} \times T}S\sqrt{T}\mathcal{N'}(\mathcal{N}^{-1}(\bm{\delta} e^{r^{1} \times T}))=f(\bm{\delta})
-\]
-\begin{figure}
-\centering
-\FIG{1}{9cm}{figures/fxopt-deltavsvega.png}
-\end{figure}
-\end{frame}
-
 \begin{frame}{Zero delta straddle}
 Un \textbf{zéro delta straddle} EUR/USD est pour un même strike ($K^{ATM}$) et un même nominal:
 \begin{itemize}
