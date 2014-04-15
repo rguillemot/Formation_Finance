@@ -1,0 +1,331 @@
+\documentclass{beamer}
+\usepackage[english,francais]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{multicol}
+\usepackage{bm}
+
+\usepackage{graphicx}
+\graphicspath{{./Forex_Credit_Equity/}}
+
+\newcommand{\FIG}[3]{\includegraphics<#1>[width=#2]{#3}}
+
+\newcommand{\FIGSCALE}[3]{\includegraphics<#1>[resolution=72dpi]{#3}}
+
+\usetheme{Warsaw}
+\title[Produits dérivés actions,change et credit]{Produits dérivés de change}
+\author{Richard Guillemot}
+\institute{DIFIQ}
+\date{22 Avril 2014}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}{Zero delta straddle}
+Un \textbf{zéro delta straddle} EUR/USD est pour un même strike ($K^{ATM}$) et un même nominal:
+\begin{itemize}
+\item l'achat d'un call EUR
+\item et l'achat d'un put EUR.
+\end{itemize}
+La delta du portefeuille doit être nul.
+\begin{figure}
+\begin{center}
+\FIG{1}{11cm}{figures/zero-delta-straddle-0.png}
+\FIG{2}{11cm}{figures/zero-delta-straddle-1.png}
+\FIG{3}{11cm}{figures/zero-delta-straddle-2.png}
+\FIG{4}{11cm}{figures/zero-delta-straddle-3.png}
+\FIG{5}{11cm}{figures/zero-delta-straddle-4.png}
+\FIG{6}{11cm}{figures/zero-delta-straddle-5.png}
+\end{center}
+\end{figure}
+\end{frame}
+
+\begin{frame}{25\% delta risk reversal}
+Un \textbf{25\% delta risk reversal} EUR/USD est pour un même nominal: 
+\begin{itemize}
+\item l'achat d'un call EUR de delta égal à 25\% de strike $K^{25Call}$
+\item et la vente d'un put EUR de delta égal à -25\% de strike $K^{25Put}$.
+\end{itemize}
+\begin{figure}
+\begin{center}
+\FIG{1}{10cm}{figures/risk-reversal-0.png}
+\FIG{2}{10cm}{figures/risk-reversal-1.png}
+\FIG{3}{10cm}{figures/risk-reversal-2.png}
+\end{center}
+\end{figure}
+\end{frame}
+
+\begin{frame}{25\% delta Butterfly}
+Un \textbf{25\% delta Butterfly} est pour un même nominal:
+\begin{itemize}
+\item l'achat d'un call EUR de strike $K^{25Call}$
+\item l'achat d'un call EUR de strike $K^{25Put}$
+\item et la vente de 2 calls EUR de strike $K^{ATM}$.
+\end{itemize}
+\FIG{1}{10cm}{figures/butterfly-0.png}
+\FIG{2}{10cm}{figures/butterfly-1.png}
+\FIG{3}{10cm}{figures/butterfly-2.png}
+\end{frame}
+
+\begin{frame}{Cotation du smile de change}
+Les différentes options de change ne sont pas cotées en prix mais en volatilité.\\
+\vspace{0.5cm}
+
+\begin{tabular}{|l|l|l|}
+\hline
+&\textbf{Cotation}\\
+\hline
+\textbf{0\% delta straddle}&$\sigma^{ATM}$\\
+\textbf{25\% delta risk reversal}&$RR^{25}=\sigma^{25Call}-\sigma^{25Put}$\\
+\textbf{25\% delta Butterfly}&$BF^{25}=\sigma^{25Call}+\sigma^{25Put}-2 \times \sigma^{ATM}$\\
+\hline
+\end{tabular}
+\vspace{0.5cm}
+\\
+Comment à partir des cotations de marché des différents produits reconstituer le smile de change?
+\end{frame}
+
+\begin{frame}{Cotation du smile de change}
+\begin{itemize}
+\item \textbf{Etape 1}: On calcule les 3 points de volatilité de change.
+\begin{align*}
+\sigma^{25Call}&=\sigma^{ATM}+BF^{25}+\frac{1}{2} RR^{25}\\
+\sigma^{25Put}&=\sigma^{ATM}+BF^{25}-\frac{1}{2} RR^{25}\\
+\end{align*}
+\item \textbf{Etape 2}: On calcule les strikes à partir de la volatilité et du delta.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Cotation du smile de change - Exercice}
+Construire le smile de change 1 an à partir des données suivantes:
+
+\begin{center}
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Maturité}&1 an&$\mathbf{\sigma^{ATM}}$&12\%\\
+\textbf{EUR/USD}&1.3889&$\mathbf{RR^{25}}$&-2\%\\
+$\mathbf{r^{USD}}$&0.3\%&$\mathbf{BF^{25}}$&1\%\\
+$\mathbf{r^{EUR}}$&0.5\%&$\mathbf{RR^{10}}$&-4\%\\
+\textbf{Basis EUR}&0.1\%&$\mathbf{BF{10}}$&4\%\\
+\hline
+\end{tabular}
+\end{center}
+\begin{figure}
+\FIG{1}{7cm}{figures/fxopt-smile.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Cotation du smile de change - Exercice}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|} 
+\hline 
+$\mathbf{K^{10Put}}$&\visible<3->{1.1201}&$\mathbf{\sigma^{10Put}}$&\visible<2->{18.0\%}\\
+$\mathbf{K^{25Put}}$&\visible<3->{1.2755}&$\mathbf{\sigma^{25Put}}$&\visible<2->{14.0\%}\\
+$\mathbf{K^{ATM}}$&\visible<3->{1.3975}&$\mathbf{\sigma^{ATM}}$&\visible<2->{12.0\%}\\
+$\mathbf{K^{25Call}}$&\visible<3->{1.5148}&$\mathbf{\sigma^{25Call}}$&\visible<2->{12.0\%}\\
+$\mathbf{K^{10Call}}$&\visible<3->{1.6760}&$\mathbf{\sigma^{10Call}}$&\visible<2->{14.0\%}\\
+\hline 
+\end{tabular}
+\end{center} 
+\end{frame}
+
+\begin{frame}
+\frametitle<1>{Interpolation linéaire}
+\frametitle<2->{Interpolation spline cubique}
+\begin{align*}
+y&=q(x)=(1-t)\times y_{1}+t \times y_{2}\visible<2->{+\underbrace{t \times (1-t) \times (\mathbf{a} \times (1-t)+\mathbf{b} \times t)}_{\text{Termes quadratiques et cubiques}}}\\
+t&=\frac{x-x_1}{x_2-x_1}
+\end{align*}
+\begin{figure}
+\begin{center}
+\FIG{1,2}{9cm}{figures/interpolation-0.png}
+\FIG{3}{9cm}{figures/interpolation-1.png}
+\FIG{4}{9cm}{figures/interpolation-2.png}
+\end{center}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Interpolation spline cubique}
+On peut facilement calculer les dérivés premières et secondes de $q$ aux points $x_1$ et $x_2$:\\
+\vspace{0.5cm}
+\begin{tabular}{r l r l r l}
+$q'(x)$&$=\frac{\partial q}{\partial x}$&$q'(x_1)$&$=\frac{y_2-y_1}{x_2-x_1}+\frac{a}{x_2-x_1}$&$q'(x_2)$&$=\frac{y_2-y_1}{x_2-x_1}-\frac{b}{x_2-x_1}$\\
+$q''(x)$&$=\frac{\partial^2 q}{\partial x^2}$&$q''(x_1)$&$=2\frac{b-2a}{(x_2-x_1)^2}$&$q''(x_2)$&$=2\frac{a-2b}{(x_2-x_1)^2}$\\
+\end{tabular}
+\\
+\vspace{0.5cm}
+On peut facilement calculer $a$ et $b$ en fonction des dérivées premières:
+\begin{align*}
+a&=\underbrace{q'(x_1)}_{k_1}(x_2-x_1)-(y_2-y_1)\\
+b&=-\underbrace{q'(x_2)}_{k_2}(x_2-x_1)+(y_2-y_1)\\
+\end{align*}
+\end{frame}
+
+\begin{frame}{Interpolation spline cubique}
+\begin{figure}
+\begin{center}
+\FIG{1-}{9cm}{figures/interpolation-3.png}
+\end{center}
+\end{figure}
+On considère $n$ tronçons de spline qui raccordent les $n+1$ points de $(x_0,y_0)$ à  $(x_n,y_n)$.
+\end{frame}
+\begin{frame}{Interpolation spline cubique}
+\begin{center}
+\begin{tabular}{c c c}
+$k_{i-1}$&$k_i$&$k_{i+1}$\\
+\hline
+$\frac{y_{i}-y_{i-1}}{x_{i}-x_{i-1}}+\frac{a_i}{x_i-x_{i-1}}$&$\frac{y_{i+1}-y_{i}}{x_{i+1}+x_{i}}+\frac{a_{i+1}}{x_{i+1}-x_{i}}$&\\
+&$\frac{y_{i}-y_{i-1}}{x_{i}-x_{i-1}}-\frac{b_i}{x_i-x_{i-1}}$&$\frac{y_{i+1}-y_{i}}{x_{i+1}+x_{i}}-\frac{b_{i+1}}{x_{i+1}-x_{i}}$\\
+\hline
+\end{tabular}
+\end{center}
+\begin{overprint}
+\onslide<1>\[
+q''(x_i)=2\frac{b_i-2a_i}{(x_{i}-x_{i-1})^2}=2\frac{a_{i+1}-2b_{i+1}}{(x_{i+1}-x_{i})^2}
+\]
+\onslide<2>\[
+\underbrace{\frac{1}{x_i-x_{i-1}}k_{i-1}}_{a_{i,i-1}}+\underbrace{2\big[ \frac{1}{x_i-x_{i-1}} + \frac{1}{x_{i+1}-x_{i}}  \big]}_{a_{i,i}} k_{i} +\underbrace{\frac{1}{x_{i+1}-x_{i}}}_{a_{i,i+1}}k_{i+1}
+\]
+\[
+=\underbrace{3\big[ \frac{y_{i}-y_{i-1}}{(x_i-x_{i-1})^2} + \frac{y_{i+1}-y_{i}}{(x_{i+1}-x_{i})^2} \big]}_{b_i}
+\]
+\end{overprint}
+\end{frame}
+
+\begin{frame}{Interpolation spline cubique}
+Pour les points extrêmes on suppose que la dérivée seconde est nulle:\\
+\begin{overprint}
+\onslide<1>\begin{align*}
+q''(x_0)&=\frac{b_1 -2 a_1}{(x_1-x_0)^2}=0\\
+q''(x_n)&=\frac{a_n -2 b_n}{(x_n-x_{n-1})^2}=0\\
+\end{align*}
+\onslide<2>\begin{align*}
+\underbrace{2\frac{1}{x_{1}-x_{0}}  }_{a_{0,0}} k_{0}&+\underbrace{\frac{1}{x_{1}-x_{0}}}_{a_{0,1}}k_{1}&&=\underbrace{3\frac{y_{1}-y_{0}}{(x_{1}-x_{0})^2}}_{b_0}\\
+&\underbrace{\frac{1}{x_{n}-x_{n-1}}}_{a_{n,n-1}}k_{n-1}&+\underbrace{2\frac{1}{x_{1}-x_{0}}}_{a_{n,n}} k_{n-1} &=\underbrace{3\frac{y_{n}-y_{n-1}}{(x_{n}-x_{n-1})^2}}_{b_n}
+\end{align*}
+\end{overprint}
+\end{frame}
+\begin{frame}{Interpolation spline cubique}
+Il nous faut maintenant résoudre le système linéaire précédemment défini où $K$ est l'inconnue:\\
+\begin{overprint}
+\onslide<1>\Huge
+\[
+A \times K = B
+\]
+\onslide<2>\footnotesize
+\[
+\underbrace{\left( 
+\begin{array}{ccccccc}
+a_{0,0} & a_{0,1} & \hdots & \hdots & \hdots & \hdots & 0 \\
+a_{1,0} & \ddots & \ddots & \ddots  &  &  & \vdots  \\
+\vdots & & a_{i,i-1} & a_{i,i} & a_{i,i+1} & & \vdots \\
+\vdots & & & \ddots & \ddots & \ddots & a_{n-1,n}\\
+0 & \hdots & \hdots & \hdots & \hdots & a_{n,n-1} & a_{n,n} 
+\end{array}
+\right)}_{\text{\huge A}}
+\underbrace{\left(
+\begin{array}{c}
+k_0\\
+\vdots\\
+k_i\\
+\vdots\\
+k_n\\
+\end{array}
+\right)}_{\text{\huge K}}
+=
+\underbrace{\left(
+\begin{array}{c}
+b_0\\
+\vdots\\
+b_i\\
+\vdots\\
+b_n\\
+\end{array}
+\right)}_{\text{\huge B}}
+\]
+\end{overprint}
+\end{frame}
+
+\begin{frame}{Interpolation spline cubique - Exercice}
+Construire un spline cubique à partir des points de smile calculés précédemment.
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+&\textbf{k}&\textbf{a}&\textbf{b}\\
+\hline
+\visible<2->{0}&\visible<3->{-27.43\%}&\visible<2->{-}&\visible<2->{-}\\
+\visible<2->{1}&\visible<3->{-22.38\%}&\visible<3->{-0.26\%}&\visible<3->{-0.52\%}\\
+\visible<2->{2}&\visible<3->{-8.37\%}&\visible<3->{-0.73\%}&\visible<3->{-0.98\%}\\
+\visible<2->{3}&\visible<3->{7.09\%}&\visible<3->{-0.98\%}&\visible<3->{-0.83\%}\\
+\visible<2->{4}&\visible<3->{15.07\%}&\visible<3->{-0.86\%}&\visible<3->{-0.43\%}\\
+\hline
+\end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}{Sensibilités au change et aux paramètres de smile}
+On peut calculer la sensibilité de chacun des 5 produits 
+\begin{itemize}
+\item \textbf{ZDS}: Zéro Delta Straddle
+\item \textbf{RR25, RR10}: Risk Reversal 25 et 10 delta
+\item \textbf{BF25, BF10}: Butterfly 25 et 10 delta
+\end{itemize}
+aux paramètres du smile:\\
+\begin{overprint}
+\onslide<1>\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{Avec Smile}&\textbf{Delta FX}&\textbf{Sensi ATM}&\textbf{Sensi RR25}&\textbf{SensiBF25}\\
+\hline
+ZDS&5\%&0.56\%&0.00\%&0.00\%\\
+RR25&38\%&0.03\%&0.39\%&0.01\%\\
+BF25&-2\%&-0.16\%&0.00\%&0.35\%\\
+RR10&10\%&-0.00\%&0.32\%&-0.09\%\\
+BF10&-4\%&-0.39\%&-0.00\%&0.55\%\\
+\hline
+\end{tabular}
+\end{center}
+\onslide<2>\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{Sans Smile}&\textbf{Delta FX}&\textbf{Sensi ATM}&\textbf{Sensi RR25}&\textbf{SensiBF25}\\
+\hline
+ZDS&0\%&0.55\%&0.00\%&0.00\%\\
+RR25&50\%&0.00\%&0.44\%&-0.02\%\\
+BF25&-0\%&-0.10\%&-0.01\%&0.39\%\\
+RR10&20\%&0.00\%&0.48\%&-0.05\%\\
+BF10&-0\%&-0.29\%&-0.00\%&0.73\%\\
+\hline
+\end{tabular}
+\end{center}
+\end{overprint}
+\end{frame}
+
+\begin{frame}{Forward FX Range}
+Un \textbf{Forward FX Range} permet de garantir un taux de change $K$ dans le futur. Cette garantie est active à condition que le taux de change soit compris dans un intervalle (range) $[K_{Min},K_{Max}]$.\\
+\vspace{0.5 cm}
+L'objectif de ce produit est de proposer au client un taux de change forward bonifié en lui faisant courir un risque minimum.
+\end{frame}
+
+\begin{frame}{Exemple de Forward FX Range}
+Considérons un Forward FX Range de maturité 1 an qui se désactive si le cours de l'EUR/USD s'écarte de plus de \textbf{30\%} de sa valeur spot à terme.\\
+\vspace{0.5cm}
+La banque propose d'améliorer de \textbf{30 pips} le taux de change forward classique dans le cas \textbf{d'une vente à terme d'euros} contre l'achat de dollars dans un an. 
+\begin{center}
+\FIG{1}{9cm}{figures/EURUSDPerf.png}
+\end{center}
+\end{frame}
+
+\begin{frame}{Exercice}
+\begin{enumerate}
+\item Comment répliquer le Forward FX Range avec des options de change "vanille" ?
+\item Déterminer la marge réalisée par la banque à partir des données de marché précédemment utilisées.
+\item Quelle est la probabilité (risque neutre et non pas historique) que le produit se désactive en la défaveur du client. 
+\item Calculer la couverture nécessaire en utilisant les produits de marché standard, Spot, Money Market, Basis, Risk Reversal Butterfly.
+\end{enumerate}
+\end{frame}
+\end{document}
