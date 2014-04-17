@@ -307,7 +307,28 @@ Une réforme du marché des CDS a eu lieu en Avril 2009:
 \end{itemize}
 \end{frame}
 
-\begin{frame}
+\begin{frame}{Asset Swap}
+
+\tikzset{
+block/.style={
+  rectangle,
+  draw,
+  text width=5.5em,
+  text centered,
+  rounded corners,
+  minimum height=4em},
+line/.style={draw},
+edge/.style={draw}
+}
+
+\begin{tikzpicture}
+\node (wa) [wa]  {System Combination};
+\path (wa.west)+(-3.2,1.5) node (asr1) [sensor] {$ASR_1$};
+\path (wa.west)+(-3.2,0.5) node (asr2)[sensor] {$ASR_2$};
+    \path (wa.west)+(-3.2,-1.0) node (dots)[ann] {$\vdots$}; 
+    \path (wa.west)+(-3.2,-2.0) node (asr3)[sensor] {$ASR_N$};    
+
+\end{tikzpicture}
 \end{frame}
 
 \end{document}
