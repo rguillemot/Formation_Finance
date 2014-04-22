@@ -6,7 +6,19 @@
 \usepackage{tikz}
 \usepackage{bbm}
 \usepackage{cancel}
-\usetikzlibrary{positioning}
+\usetikzlibrary{shapes,matrix,positioning,fit,decorations.pathmorphing,calc}
+
+\tikzset{cancel/.style={
+        cross out,
+        draw,
+        red,
+        ultra thick,
+        fit=#1,
+        },
+    wave/.style={
+        decorate,decoration={snake,post length=0.1cm, pre length=0.1cm,amplitude=1mm,
+        segment length=0.5cm},thick}
+}
 
 \usepackage{graphicx}
 \usepackage{multirow}
@@ -128,10 +140,70 @@ Il existe 2 différents types de dérivés de crédit:
 \vspace{0.5cm}
 \begin{itemize}
 \item \onslide<2->\textbf{Unfunded Credit Derivatives}: le vendeur de protection de détient pas d'actif. Exemple: Crédit Default Swap.
-\item \onslide<3->\textbf{Funded Credit Derivatives}: le vendeur de protection détient un actif. Exemple: Credit Linked Note.
+\item \onslide<3->\textbf{Funded Credit Derivatives}: le vendeur de protection détient un actif. Exemple: Asset Swap.
 \end{itemize}
 \vspace{0.5cm}
 \onslide<4>Il est possible d'acheter un Crédit Default Swap sans détenir aucune créance associée!!!!
+\end{frame}
+
+\begin{frame}{Asset Swap}
+\begin{overprint}
+\onslide<1>A la mise en place du swap, l'acheteur livre l'obligation au vendeur en échange de sa valeur faciale.
+\onslide<2>Par la suite l'acheteur réçoit le coupon de l'obligation de la part du vendeur en échange du taux \textbf{LIBOR+x bps}, c'est à dire 100.
+\onslide<3->Dans le cas où l'obligation fait défaut, le swap reste actif.
+\end{overprint}
+\vspace{0.5cm}
+\tikzstyle{cpty} = [draw,  minimum height=3em, minimum width=6em, rounded corners]
+\begin{overprint}
+\onslide<1>\begin{center}
+\begin{tikzpicture}
+\path[->] node[cpty] (acheteur) {Acheteur};
+\path[-latex] node[cpty, right of=acheteur,xshift=4cm] (vendeur) {Vendeur} (acheteur.10) edge node[midway,above] {Bond} (vendeur.170);
+\path[latex-] (acheteur.-10) edge node[midway,below] {100} (vendeur.190);
+\end{tikzpicture}
+\end{center}
+\onslide<2->\begin{center}
+\begin{tikzpicture}
+\node[cpty] (acheteur) {Acheteur};
+\path[-latex] 
+    node[cpty, right of=acheteur,xshift=4cm] (vendeur) {Vendeur} (acheteur.10) 
+    edge[wave] node[midway,above] {\small{LIBOR +x bps}} (vendeur.170);
+\path[latex-] 
+    node[cpty, below of=vendeur,yshift=-1cm] (bond) {Bond} (vendeur) 
+    edge node[midway,right] (coupon) {\small{Coupon}} (bond);
+\path[latex-] 
+    (acheteur.-10) 
+    edge node[midway,below] {Coupon} 
+    (vendeur.190);
+\node<3> [cancel=(bond)] {};
+\node<3> [cancel=(coupon)] {};
+\end{tikzpicture}
+\end{center}
+\vspace{0.5cm}
+\end{overprint}
+\onslide<4>La Jambe fixe a $N^F$ flux et la jambe variable $N^V$ flux. Elle maturent simultanément en $T=T^F_{N^F}=T^V_{N^V}$
+\end{frame}
+
+\begin{frame}{La marge d'Asset Swap}
+Valeur de l'opération du point de vue du Vendeur:
+\small
+\begin{overprint}
+\onslide<1>\[
+\underbrace{\vphantom{\sum_{i=1}^{N^V}} P^{Mkt}-100}_{\text{Echange Initial}}+\underbrace{\sum_{i=1}^{N^V}\delta^V_i\big[L(T^V_{i-1},T^V_i)+m\big]B(t,T_i)}_{\text{Jambe Variable}}-\underbrace{C\sum_{i=1}^{N^F}\delta^F_iB(t,T^F_i)}_{\text{Jambe Fixe}]}=0
+\]
+\onslide<2>\[
+\underbrace{\vphantom{\sum_{i=1}^{N^V}} P^{Mkt}-100}_{\text{Echange Initial}}+\underbrace{ 100-100 \times B(t,T) \sum_{i=1}^{N^V}\delta^V_ii m B(t,T_i)}_{\text{Jambe Variable}}-\underbrace{C\sum_{i=1}^{N^F}\delta^F_iB(t,T_i)}_{\text{Jambe Fixe}}=0
+\]
+\onslide<3->\[
+\underbrace{\vphantom{\sum_{i=1}^{N^V}} P^{Mkt}-\cancel{100}}_{\text{Echange Initial}}+\underbrace{ \cancel{100}-100 \times B(t,T) \sum_{i=1}^{N^V}\delta^V_ii m B(t,T_i)}_{\text{Jambe Variable}}-\underbrace{C\sum_{i=1}^{N^F}\delta^F_iB(t,T_i)}_{\text{Jambe Fixe}}=0
+\]
+\end{overprint}
+\normalsize
+\onslide<4>
+Par conséquent:\\
+\[
+m=\frac{P^{Mkt}-P^{Risk Free}}{\underbrace{\sum_{i=1}^{N^V}\delta^V_iB(t,T_i)}_{BPV^{Risk Free}}}
+\]
 \end{frame}
 
 \begin{frame}{Credit Default Swap}
@@ -140,7 +212,7 @@ Il existe 2 différents types de dérivés de crédit:
 \begin{tabular}{|l|l|}
 \hline
 $N$&\visible<2->{Nominal}\\
-$C$&\visible<3->{Coupon ou prime du CDS}\\ 
+$S$&\visible<3->{Coupon, prime ou spread de CDS}\\ 
 $Rec$&\visible<4->{Taux de recouvrement (Recovery rate)}\\
 $\tau$&\visible<5>{Temps de défaut}\\
 \hline
@@ -235,12 +307,12 @@ Q(t)&=e^{-\lambda \times t}
 \begin{frame}{Jambe de Prime "seule"}
 \begin{overprint}
 \onslide<1-2>\begin{align*}
-PV_{\text{Premium Only}}&=N \times C \times \sum_{i=1}^{n}\delta_i \times\mathbb{E}[e^{-\int_{t}^{\tau}r_s ds}\mathbbm{1}_{T_i<\tau}]\\
-\visible<2>{&=N \times C \times \sum_{i=1}^{n}\delta_i \times \underbrace{B(t,T_i) \times Q(t,T_i)}_{\text{Zéro Coupon risqué}}}
+PV_{\text{Premium Only}}&=N \times S \times \sum_{i=1}^{n}\delta_i \times\mathbb{E}[e^{-\int_{t}^{\tau}r_s ds}\mathbbm{1}_{T_i<\tau}]\\
+\visible<2>{&=N \times S \times \sum_{i=1}^{n}\delta_i \times \underbrace{B(t,T_i) \times Q(t,T_i)}_{\text{Zéro Coupon risqué}}}
 \end{align*}
 \onslide<3>\begin{align*}
-PV_{\text{Premium Only}}&=N \times C \times \sum_{i=1}^{n}\delta_i \times\mathbb{E}[e^{-\int_{t}^{\tau}r_s ds}\mathbbm{1}_{T_i<\tau}]\\
-&=\color{red}{N \times C \times \sum_{i=1}^{n}\delta_i \times e^{-(r+\lambda) \times (T_i-t)}}
+PV_{\text{Premium Only}}&=N \times S \times \sum_{i=1}^{n}\delta_i \times\mathbb{E}[e^{-\int_{t}^{\tau}r_s ds}\mathbbm{1}_{T_i<\tau}]\\
+&=\color{red}{N \times S \times \sum_{i=1}^{n}\delta_i \times e^{-(r+\lambda) \times (T_i-t)}}
 \end{align*}
 
 \end{overprint}
@@ -251,21 +323,21 @@ Q(t)&=e^{-\lambda \times t}
 \end{align*}
 \end{frame}
 
-\begin{frame}{Jame de coupon courru}
+\begin{frame}{Jambe de coupon courru}
 \begin{overprint}
 \onslide<1-2>\begin{align*}
 PV_{\text{Accrued Interest}}&=N \times C \times \sum_{i=1}^{n} \times\mathbb{E}[\text{\small DCC}(T_{i-1},s)e^{-\int_{t}^{\tau}r_s ds}\mathbbm{1}_{T_{i-1}< \tau \leq T_i}]\\
-\visible<2>{&=N \times C \times \sum_{i=1}^{n} \times \int_{T_{i-1}}^{T_i} (s-T_{i-1})B(t,s) \frac{dQ(t,s)}{ds}ds}
+\visible<2>{&=N \times S \times \sum_{i=1}^{n} \times \int_{T_{i-1}}^{T_i} (s-T_{i-1})B(t,s) \frac{dQ(t,s)}{ds}ds}
 \end{align*}
 \onslide<3>\begin{align*}
-PV_{\text{Accrued Interest}}&=N \times C \times \sum_{i=1}^{n} \times\mathbb{E}[\text{\small DCC}(T_{i-1},s)e^{-\int_{t}^{\tau}r_s ds}\mathbbm{1}_{T_{i-1}< \tau \leq T_i}]\\
-&=N \times C \times \sum_{i=1}^{n} \times \lambda \times \int_{T_{i-1}}^{T_i} (s-T_{i-1})e^{-(r+\lambda) \times (s-t)}ds
+PV_{\text{Accrued Interest}}&=N \times S \times \sum_{i=1}^{n} \times\mathbb{E}[\text{\small DCC}(T_{i-1},s)e^{-\int_{t}^{\tau}r_s ds}\mathbbm{1}_{T_{i-1}< \tau \leq T_i}]\\
+&=N \times S \times \sum_{i=1}^{n} \times \lambda \times \int_{T_{i-1}}^{T_i} (s-T_{i-1})e^{-(r+\lambda) \times (s-t)}ds
 \end{align*}
 \onslide<4>\[
-PV_{\text{Accrued Interest}}=N \times C \times \sum_{i=1}^{n} \times\mathbb{E}[\text{\small DCC}(T_{i-1},s)e^{-\int_{t}^{\tau}r_s ds}\mathbbm{1}_{T_{i-1}< \tau \leq T_i}]
+PV_{\text{Accrued Interest}}=N \times S \times \sum_{i=1}^{n} \times\mathbb{E}[\text{\small DCC}(T_{i-1},s)e^{-\int_{t}^{\tau}r_s ds}\mathbbm{1}_{T_{i-1}< \tau \leq T_i}]
 \]
 \begin{align*}
-=\color{red}{N \times C \times \sum_{i=1}^{n} \times \lambda \times} &\color{red}{\big[ \frac{e^{-(r+\lambda) \times (T_{i-1}-t)}-e^{-(r+\lambda) \times (T_{i}-t)}}{(r+\lambda)^2}}\\
+=\color{red}{N \times S \times \sum_{i=1}^{n} \times \lambda \times} &\color{red}{\big[ \frac{e^{-(r+\lambda) \times (T_{i-1}-t)}-e^{-(r+\lambda) \times (T_{i}-t)}}{(r+\lambda)^2}}\\
 &\color{red}{- \delta_i \times \frac{e^{-(r+\lambda) \times (T_{i}-t)}}{r+\lambda}  \big]}\\
 \end{align*}
 \end{overprint}
@@ -299,36 +371,135 @@ Pour un nominal de \textbf{10 millions d'euros}, quelles sont les valeurs:\\
 \end{frame}
 
 \begin{frame}{CDS Big bang}
-Une réforme du marché des CDS a eu lieu en Avril 2009:
+Une réforme du marché des CDS a eu lieu en Avril 2009:\\
+\vspace{0.5cm}
 \begin{itemize}
-\item \textbf{Fixed Coupon:} 
-\item \textbf{IMM Dates:}
-\item  
+\item \textbf{IMM Dates:} Le 3ème jeudi des mois de Mars, Juin, Septembre et Décembre.
+\item \textbf{Fixed Coupon:} Les coupons ont des valeurs fixes (100 bps, 300 bps, 500 bps ...). A la mise en place du CDS, le contreparties s'échange une prime dite "Upfront".
+\end{itemize}
+\vspace{0.5cm}
+\textbf{Objectif}: Standardiser le marché et rendre les CDS fongibles.
+\end{frame}
+
+\begin{frame}{CDS Basis}
+Il est possible de donner un prix théorique à une obligation en utilisant le modèle à intensité et l'intensité induite du spread de CDS:\\
+\begin{overprint}
+\onslide<1>\begin{align*}
+P^{Risky}&=C \times \sum_{i=1}^{n} B(t,T_i) \times Q(t,T_i) + 100 \times B(t,T_n) \times Q(t,T_n)\\
+&+Rec \times 100 \times \int_{t}^{T} B(t,s) \frac{dQ(t,s)}{ds}ds
+\end{align*}
+
+\onslide<2>\begin{align*}
+P^{Risky}&=C \times \sum_{i=1}^{n} B(t,T_i) \times Q(t,T_i) + 100 \times B(t,T_n) \times Q(t,T_n)\\
+&+Rec\times 100 \times \lambda \times \int_{t}^{T} e^{-(\lambda+r) \times (s-t)}ds
+\end{align*}
+
+\onslide<3->\begin{align*}
+P^{Risky}&=C \times \sum_{i=1}^{n} B(t,T_i) \times Q(t,T_i) + 100 \times B(t,T_n) \times Q(t,T_n)\\
+&+Rec \times 100 \times \lambda \times\frac{ 1-e^{-(\lambda+r) \times (T-t)}}{\lambda+r}
+\end{align*}
+\end{overprint}
+\onslide<4> On constate dans la pratique que ce prix est plus élévé que le prix de marché. On appelle CDS basis:\\ 
+\[
+m=\frac{P^{Mkt}-P^{Risky}}{BPV^{Risk Free}}
+\]
+\end{frame}
+
+\begin{frame}{Collateralized Debt Obligation}
+On considère un ensemble de $n$ créances ayant le même nominal:\\
+\vspace{0.5cm}
+\begin{center}
+\begin{tikzpicture}[every text node part/.style={align=left},
+                     stack/.style={rectangle split, 
+                                   rectangle split parts = 5,
+				   align=left,
+                                   draw},
+                    myarrow/.style={single arrow,
+                                    draw,
+                                    right = 4pt,
+                                    minimum size = 8ex}
+		 ]
+
+\node [stack] (ini)  {%
+	Bond 1
+	\nodepart{two}Bond 2
+	\nodepart{three}Bond 3
+	\nodepart{four}$\cdots$
+	\nodepart{five}Bond n};
+
+% we add an arrow
+\node [myarrow] (A) at (ini.east) {} ;  
+% after the arrow, the main node at the end
+
+\node [stack,align=left,right=3pt,text width=6cm] at (A.east)  {%
+	Tranche \textbf{Equity}: 0\%-3\%    
+	\nodepart{two}
+	Tranche \textbf{Junor}: 3\%-7\%   
+	\nodepart{three}
+	Tranche \textbf{Mezzanine} 7\%-15\%
+	\nodepart{four}
+	Tranche \textbf{Senior} 15\%-30\%
+	\nodepart{five}
+	Tranche \textbf{Super Senior} 30\%-100\%};
+\end{tikzpicture}
+\end{center}
+En cas de défaut, le pertes sont payées en priorité par les tranches les plus juniors jusqu'aux tranches les plus seniors.
+\end{frame}
+
+\begin{frame}{La copule gaussienne à un facteur}
+Le modèle est proposé par David X. Li en 2000.\\
+\vspace{0.5cm}
+On suppose que la probabilité de défaut avant une date T de l'obligation $i$ est la suivante:\\
+\[
+p=\mathbb{P}\big[\tau < T\big]=\mathbb{P}\big[\rho Y + \sqrt{1-\rho^2} \epsilon_i \leq K\big]
+\]
+avec:
+\begin{itemize}
+\item $Y, \epsilon_1, ... et \epsilon_N$ sont de v.a. indépendantes suivant chacune une loi gaussienne standard.\\
+\item $K = \mathcal{N}^{-1}\big[p\big]$\\
+\end{itemize}
+\vspace{0.5cm}
+Les défauts de chacune des obligations sont conditonellement à $Y$ indépendant.
+\end{frame}
+
+\begin{frame}{Probabilité du $n^{eme}$ défaut}
+On calcule facilement la probabilité de $j^{eme}$ défaut:\\
+\[
+\mathbb{P}\big[N(T)=j\big]=\int_{\infty}^{\infty}\left( {\begin{array}{*{20}c}
+n \\
+j \\
+\end{array}} \right)
+ \mathcal{N}\big(\frac{K-\rho y}{\sqrt{1-\rho^2}}\big)^j\big(1-\mathcal{N}\big(\frac{K-\rho y}{\sqrt{1-\rho^2}}\big)\big)^{n-j}n(y)dy
+\]
+avec:\\
+\begin{itemize}
+\item $n(y)$ est la densité de la loi normale centré réduite.
+\item $\left( {\begin{array}{*{20}c}
+n \\
+j \\
+\end{array}} \right)=\frac{n!}{(n-j)!j!}$ est la nombre de combinaisons de $j$ éléments parmi $n$.
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Asset Swap}
-
-\tikzset{
-block/.style={
-  rectangle,
-  draw,
-  text width=5.5em,
-  text centered,
-  rounded corners,
-  minimum height=4em},
-line/.style={draw},
-edge/.style={draw}
-}
-
-\begin{tikzpicture}
-\node (wa) [wa]  {System Combination};
-\path (wa.west)+(-3.2,1.5) node (asr1) [sensor] {$ASR_1$};
-\path (wa.west)+(-3.2,0.5) node (asr2)[sensor] {$ASR_2$};
-    \path (wa.west)+(-3.2,-1.0) node (dots)[ann] {$\vdots$}; 
-    \path (wa.west)+(-3.2,-2.0) node (asr3)[sensor] {$ASR_N$};    
-
-\end{tikzpicture}
+\begin{frame}{Espérance de perte (Expected Loss)}
+A partir de la probabilité du $n^{eme}$ défaut on calcule l'espérance de chaque tranche:\\
+\[
+EL_{K_a,K_d}(T)=\frac{1}{K_d-K_a}\sum_{j=1}^{n}\big[min(\frac{N(T)}{n},K_d)-K_a\big]^+\mathbb{P}\big[N(T)=j\big]
+\]
+avec:\\
+\begin{itemize}
+\item $K_a$: le point d'attachement.
+\item $K_b$: le point de détachement.
+\end{itemize}
 \end{frame}
 
+\begin{frame}{Espérance de gain versus $\rho$.}
+La probabilité de défaut vaut 5\% et le Recovery est nul.\\
+\begin{center}
+\begin{figure}
+\FIG{1}{11cm}{figures/CDO_rho.png}
+\end{figure}
+\end{center}
+
+\end{frame}
 \end{document}
