@@ -31,7 +31,7 @@
 \title[Produits dérivés actions,change et credit]{Produits dérivés de crédit}
 \author{Richard Guillemot}
 \institute{DIFIQ}
-\date{22 Avril 2014}
+\date{29 Avril 2014}
 
 \begin{document}
 
@@ -78,6 +78,167 @@ Saisie&\visible<10->{Foreclosure}\\
 \hline
 \end{tabular}
 \end{center}
+\end{frame}
+
+\begin{frame}{Obligation}
+\begin{center}
+\begin{figure}
+\FIG{1-}{9cm}{figures/bond.png}
+\end{figure}
+\end{center}
+\begin{overprint}
+La valeur actuelle de l'obligation\only<2->{, après simplification}:\\
+\onslide<1>\[
+P=\sum_{i=1}^{n} \frac{\delta C}{(1+\delta R)^{\frac{i}{\delta}}}+\frac{100}{(1+\delta R)^{\frac{n}{\delta}}}
+\]
+\onslide<2->\[
+P=\vphantom{\sum_{i=1}^{n}}\frac{C}{R}\big[100-\frac{100}{(1+\delta R)^{\frac{n}{\delta}}}\big]+\frac{100}{(1+\delta R)^{\frac{n}{\delta}}}
+\]
+\end{overprint}
+\vspace{0.5cm}
+$\mathbf{R}$ est le rendement (yield) de l'obligation.\\
+\vspace{0.5cm} 
+\onslide<3>Quand $R=C$ l'obligation est dite \textbf{au pair}:
+\[
+P=100
+\]
+\end{frame}
+\begin{frame}
+\frametitle<1-4>{En dessous vs. au dessus du pair}
+\frametitle<5-7>{Long versus Short}
+\begin{overprint}
+\onslide<2-4>Une obligation est:
+\begin{itemize}
+\item<3-4>\textbf{"en dessous de pair"}: $P<100$ et $R>C$.
+\item<4>\textbf{"au dessus de pair"}: $P>100$ et $R<C$.
+\end{itemize}
+\onslide<5-7>Un opérateur est:
+\begin{itemize}
+\item<6-7>\textcolor{red}{\textbf{"Long"}} sous entendu de l'obligation: il anticipe une \textcolor{red}{\textbf{baisse}} des taux.
+\item<7>\textcolor{blue}{\textbf{"Short"}} sous entendu de l'obligation: il anticipe une \textcolor{blue}{\textbf{hausse}} des taux.
+\end{itemize}
+\end{overprint}
+\begin{center}
+\begin{figure}
+\FIG{1-}{4.5cm}{figures/prixvsrdt.png}
+\end{figure}
+\end{center}
+\end{frame}
+
+\begin{frame}{Coupon Couru - Clean Price - Dirty Price}
+\begin{center}
+\begin{figure}
+\FIG{1-}{9cm}{figures/accrual.png}
+\end{figure}
+\end{center}
+\[
+\text{Clean Price}=\text{Dirty Price}-\underbrace{\text{Acc} \times C}_{\text{Coupon Couru}}
+\]
+\begin{tabular}{|l|l|}
+\hline
+$t$&Date de valorisation\\
+$T_{i-1}$&Date de paiement du coupon précédent\\
+$T_{i}$&Date de paiement du coupon suivant\\
+Acc&$t-T_{i-1}$ sous forme de fraction d'années\\
+\hline
+\end{tabular}
+\end{frame}
+
+\begin{frame}{Evolution du prix d'une obligation au cours du temps.}
+On considère une obligation:
+\begin{itemize} 
+\item de maturité initiale 10 ans.\\
+\item de coupon 5\%.\\
+\item de fréquence annuelle.
+\end{itemize}
+\begin{center}
+\begin{figure}
+\FIG{1-}{11cm}{figures/bondprices.png}
+\end{figure}
+\end{center}
+\end{frame}
+
+\begin{frame}{Emprunt zéro coupon}
+\begin{center}
+\begin{figure}
+\FIG{1}{11cm}{figures/zerocoupon.png}
+\end{figure}
+\end{center}
+Les différents format du taux zéro coupon $R$:\\
+\begin{center}
+\begin{tabular}{|l|l|l|l|}
+\hline
+&\textbf{Linéaire}&\textbf{Actuariel}&\textbf{Continu}\\
+\hline
+$\mathbf{B(t,T)}$&$\frac{1}{1+\delta R^{ACT}(t,T)}$&$\frac{1}{(1+R^{LIN}(t,T))^{\frac{\delta}{f}}}$&$e^{-\delta R^{CONT}(t,T)}$\\
+\hline
+\end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}{Le taux monétaire, dépôt ou money market}
+
+Voici l'échéancier de l'EURIBOR 6M:
+\begin{figure}[h]
+\vspace{2mm}
+\FIG{1}{7cm}{figures/schema_euribor.jpg} 
+\vspace{1mm}
+\end{figure}
+Le taux monétaire est défini comme:
+\[
+R=L(t,T_\text{start}, T_\text{end})=\frac{1}{\delta}\left(\frac{B(t,T_\text{start})}{B(t,T_\text{end})}-1\right)
+\]
+La période est caculée avec la convention Act 360:
+\[
+\delta = \frac{T_\text{end} - T_\text{start}} {360}
+\]
+\end{frame}
+
+\begin{frame}{Réplication d'un emprunt future}
+\begin{overprint}
+\begin{center}
+\begin{figure}[h]
+\FIG{1}{3in}{figures/fwd_replic1.png}
+\FIG{2}{3in}{figures/fwd_replic2.png}
+\FIG{3-}{3in}{figures/fwd_replic3.png}
+\end{figure}
+\end{center}
+\onslide<1> Soit un emprunt à taux fixe qui démarre dans le futur. Nous allons le répliquer par 2 emprunts qui démarrent aujourd'hui.
+\onslide<2> On prête aujourd'hui $B(t,T_{start})$ qui sera remboursé avec les intérêts en $T_{start}$ par un flux de 1.
+\onslide<3> On emprunte aujourd'hui $(1+\delta K)B(t,T_{end})$ qui nous sera remboursé avec les intérêts en $T_{end}$ par un flux de $1+\delta K$.
+\onslide<4> Il n'y a maintenant plus de flux futurs nous allons donc calculer le taux fixe $K^*$ qui égalise les flux aujourd'hui :
+\[
+K^*=R(t,T_{start}, T_{end})=\frac{1}{\delta}\left(\frac{B(t,T_{start})}{B(t,T_{end})}-1\right)
+\]
+\end{overprint}
+\end{frame}
+
+\begin{frame}{Obligation à taux variable}
+\begin{overprint}
+\begin{center}
+\begin{figure}[h]
+\FIG{1-}{11cm}{figures/bond_variable.png}
+\end{figure}
+\end{center}
+\onslide<1>On calcule la valeur de l'obligation à taux variable:\\
+\[
+P = \sum_{i=1}^{n}\delta_i\times R(T_{i-1},T_{i})\times  B(t,T_i)+B(t,T_{n})
+\]
+\onslide<2>On estime la valeur actuelle du taux variable en utilisant le taux forward.\\
+\[
+P = \sum_{i=1}^{n}\delta_i\times \frac{1}{\delta_i}\left(\frac{B(t,T_{i-1})}{B(t,T_i)}-1\right)   \times  B(t,T_i)+B(t,T_{n})
+\]
+\onslide<3>\[
+P = \sum_{i=1}^{n} \left(B(t,T_{i-1})-B(t,T_i)\right)+B(t,T_{n})
+\]
+\onslide<4-5>\[
+P = 1-\only<4>{B(t,T_n)+B(t,T_n)}\only<5>{\cancel{B(t,T_n)}+\cancel{B(t,T_n)}}
+\]
+\onslide<6>\[
+P = 1
+\]
+\textbf{La valeur d'une obligation à taux variable (sans marge) est insensible au taux (les jours de paiement de ses coupons).}
+\end{overprint}
 \end{frame}
 
 \begin{frame}{Struture du capital (ou passif) d'une entreprise.}
@@ -374,13 +535,45 @@ Pour un nominal de \textbf{10 millions d'euros}, quelles sont les valeurs:\\
 Une réforme du marché des CDS a eu lieu en Avril 2009:\\
 \vspace{0.5cm}
 \begin{itemize}
-\item \textbf{IMM Dates:} Le 3ème jeudi des mois de Mars, Juin, Septembre et Décembre.
+\item \textbf{Fixed Dates:} Le 20 des mois de Mars, Juin, Septembre et Décembre.
 \item \textbf{Fixed Coupon:} Les coupons ont des valeurs fixes (100 bps, 300 bps, 500 bps ...). A la mise en place du CDS, les contreparties s'échangent une prime dite "Up Front".
 \end{itemize}
 \vspace{0.5cm}
 \textbf{Objectif}: Standardiser le marché et rendre les CDS fongibles.
 \end{frame}
 
+\begin{frame}{CDS Index}
+La société \textbf{Markit} organise le marché des CDS Index:\\
+\begin{itemize}
+\item \textbf{CDX}: Index couvrant l'Amérique du nord.
+\item \textbf{iTraxx}: Index couvrant l'Europe et l'Asie.
+\end{itemize}
+\vspace{0.5cm}
+L'indice est coté pour différentes maturités (1 an, 2 ans, 3 ans, 4 ans, 5 ans, 10 ans) et différents niveaux de risque de crédit Investment Grade, High Yield, etc ...\\
+\vspace{0.5cm}
+L'objectif est d'améliorer la liquidité du marché des CDS.
+\end{frame}
+
+\begin{frame}{CDX NA.IG 5Y Série 22}
+\begin{center}
+\begin{figure}
+\FIG{1}{10cm}{figures/cdxnaig5yserie22.png}
+\end{figure}
+\end{center}
+\small
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{NA}&North America&\textbf{Maturité}&5 ans\\
+\textbf{IG}&Investment Grade&\textbf{Précédent Roll}&20 Mars 2014\\
+\textbf{Fréquence}&Trimestrielle&\textbf{Prochain Roll}&20 Septembre 2014\\
+\textbf{Coupon}&100bps&\textbf{CleanPrice}&101.642\%\\
+\hline
+\end{tabular}
+\begin{align*}
+\text{CleanPrice}&=100-\underbrace{(\text{Protection Leg}-\text{Coupon Leg}-\text{Accrual Leg})}_{\text{Up Front}}\\
+&-\text{Coupon Couru}
+\end{align*}
+\end{frame}
 \begin{frame}{CDS Basis}
 Il est possible de calculer un prix théorique pour une obligation en utilisant le modèle à intensité de défaut avec l'intensité induite du spread de CDS:\\
 \begin{overprint}
