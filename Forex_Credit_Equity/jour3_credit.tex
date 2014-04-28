@@ -114,8 +114,8 @@ P=100
 \end{itemize}
 \onslide<5-7>Un opérateur est:
 \begin{itemize}
-\item<6-7>\textcolor{red}{\textbf{"Long"}} sous entendu de l'obligation: il anticipe une \textcolor{red}{\textbf{baisse}} des taux.
-\item<7>\textcolor{blue}{\textbf{"Short"}} sous entendu de l'obligation: il anticipe une \textcolor{blue}{\textbf{hausse}} des taux.
+\item<6-7>\textcolor{red}{\textbf{"Long"}} sous entendu de l'obligation: il \textcolor{red}{\textbf{prête}} et anticipe une \textcolor{red}{\textbf{baisse}} des taux.
+\item<7>\textcolor{blue}{\textbf{"Short"}} sous entendu de l'obligation: il \textcolor{blue}{\textbf{emprunte}} et anticipe une \textcolor{blue}{\textbf{hausse}} des taux.
 \end{itemize}
 \end{overprint}
 \begin{center}
@@ -270,6 +270,15 @@ Ratio à respecter pour une banque $\frac{\text{Fonds Propres}}{\text{Dettes}}\g
 \draw<3> [<-,black, ultra thick] (8,1.5) node[yshift=-0.2cm]{\textbf{Risque Maximum}} -- (8,4.4) node[yshift=0.2cm] {\textbf{Risque Minimum}};
 \draw<4-> [<-,black, ultra thick] (8,1.5) node[yshift=-0.2cm]{\textbf{Intérêts élevés}} -- (8,4.4) node[yshift=0.2cm] {\textbf{Intérêts faibles}};
 \end{tikzpicture}
+\end{frame}
+
+\begin{frame}{Analyse Crédit}
+La qualité de crédit (Creditworthiness) est déterminée de façon différente selon la nature de l'emprunteur:\\
+\vspace{0.5cm}
+\begin{itemize}
+\item \textbf{Crédit aux états souverrains et aux entreprises}: la notation du crédit ou (crédit rating) est commercialisée par les agences de crédit telles que Standard \& Poor's, Moody's and Fitch Ratings.
+\item \textbf{Crédit aux particuliers}: credit history et scoring (utilisation de méthodes statistiques).
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Risque de crédit}
@@ -637,6 +646,70 @@ On considère un ensemble de $n$ créances ayant le même nominal:\\
 \end{tikzpicture}
 \end{center}
 En cas de défaut, le pertes sont payées en priorité par les tranches les plus juniors jusqu'aux tranches les plus seniors.
+\end{frame}
+
+\begin{frame}{Exemple de CDO à 2 entités \& 2 tranches}
+On considère un CDO composé de 2 créances et de 2 tranches de taille égale:\\
+Les 2 événements de défaut ont chacun une probabilité de \textbf{10\%}.\\
+Si ils sont:\\
+\begin{itemize}
+\item  \textbf{indépendants}:\\
+\vspace{0.25cm}
+\begin{overprint}
+\onslide<1>
+\begin{tabular}{|l|c|c|c|}
+\hline
+&\textbf{0 Défaut}&\textbf{1 Défaut}&\textbf{2 Défauts}\\
+\hline
+\textbf{Probabilité}&&&\\
+\hline
+\end{tabular}
+\onslide<2>
+\begin{tabular}{|l|c|c|c|}
+\hline
+&\textbf{0 Défaut}&\textbf{1 Défaut}&\textbf{2 Défauts}\\
+\hline
+\textbf{Probabilité}&81\%&18\%&1\%\\
+\hline
+\end{tabular}
+\onslide<3->
+\begin{tabular}{|l|c|c|c|}
+\hline
+&\textbf{Tranche 1}&\textbf{Tranche 2}\\
+\hline
+\textbf{Perte Moyenne}&19\%&1\%\\
+\hline
+\end{tabular}
+\end{overprint}
+\vspace{0.25cm}
+\item \textbf{parfaitement corrélés}:\\
+\vspace{0.25cm}
+\begin{overprint}
+\onslide<4>\begin{tabular}{|l|c|c|c|}
+\hline
+&\textbf{0 Défaut}&\textbf{1 Défaut}&\textbf{2 Défauts}\\
+\hline
+\textbf{Probabilité}&&&\\
+\hline
+\end{tabular}
+\onslide<5>\begin{tabular}{|l|c|c|c|}
+\hline
+&\textbf{0 Défaut}&\textbf{1 Défaut}&\textbf{2 Défauts}\\
+\hline
+\textbf{Probabilité}&90\%&0\%&10\%\\
+\hline
+\end{tabular}
+\onslide<6>
+\begin{tabular}{|l|c|c|c|}
+\hline
+&\textbf{Tranche 1}&\textbf{Tranche 2}\\
+\hline
+\textbf{Perte Moyenne}&10\%&10\%\\
+\hline
+\end{tabular}
+\end{overprint}
+
+\end{itemize}
 \end{frame}
 
 \begin{frame}{La copule gaussienne à un facteur}
