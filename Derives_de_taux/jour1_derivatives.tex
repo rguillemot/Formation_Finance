@@ -12,11 +12,11 @@
 \title[Pdts dérivés de taux]{Principaux produits derivés de taux. \\ Formules de valorisation et de cotation}
 \author{Antonin Chaix - Richard Guillemot}
 \institute{Master IFMA}
-\date{7 Février 2014}
+\date{6 Février 2015}
 
 \setbeamertemplate{sidebar right}{}
 \setbeamertemplate{footline}{%
-\hfill\usebeamertemplate***{navigation symbols}
+\hfill\usebeamertemplate{navigation symbols}
 \hspace{1cm}\insertframenumber{}/\inserttotalframenumber}
 
 \begin{document}
@@ -26,8 +26,56 @@
 \begin{figure}[h]
 \centering \FIG{5cm}{figures/UPMC_IFMA.jpg}
 \end{figure}
+\end{frame}
+
+\begin{frame}{Les différents types de taux}
+\begin{figure}[h]
+\centering \FIG{7cm}{figures/capi_actu.png}
+\end{figure}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+&\textbf{C}apitalisation&\textbf{A}ctualisation \\
+\hline
+  Taux Linéaire & $1+\delta R^L$ &  $\frac{1}{1+\delta R^L}$ \\
+  Taux Actuariel & $(1+\frac{\delta}{N}R^A)^N$ &  $\frac{1}{(1+\frac{\delta}{N}R^A)^N}$ \\
+  Taux Continu & $e^{\delta R^C}$ & $e^{-\delta R^C}$ \\
+\hline
+\end{tabular}
+\end{center}
+\[
+	R^C < R^A < R^L
+\]
+\end{frame}
+
+\begin{frame}{Quizz}
+Supposons que l'on souhaite emprunter la somme de 120 000 euros pendant 10 ans à un taux de 1\%.\\
+
+\vspace{0.5cm}
+La mensualité fixe à payer est de:
+\begin{itemize}
+\item a) 950 euros
+\item b) 1000 euros
+\item c) 1050 euros
+\item d) 1100 euros
+\end{itemize}
 
 \end{frame}
+
+\begin{frame}{Quizz}
+Supposons que l'on souhaite emprunter la somme de 120 000 euros pendant 10 ans à un taux de 1\%.\\
+
+\vspace{0.5cm}
+La mensualité fixe à payer est de:
+\begin{itemize}
+\item a) 950 euros \textbf{\color{red}{FAUX}} capital non remboursé
+\item b) 1000 euros \textbf{\color{red}{FAUX}} capital seulement remoboursé
+\item c) 1050 euros \textbf{\color{green}{VRAI}}
+\item d) 1100 euros \textbf{\color{red}{VRAI}} intérêts payés sur le capital de départ
+\end{itemize}
+
+\end{frame}
+
 
 \begin{frame}{Le taux monétaire, dépôt ou money market}
 
@@ -141,6 +189,23 @@ La quantité ${LVL}(t,T_0,T_n)$, le level ou l'annuité permet de determiner sim
 \[
 \text{LVL}(t,T_0,T_n)=  \sum_{i=1}^{n}\delta_i^F \;B(t,T_i^F)
 \]
+\end{frame}
+
+\begin{frame}{Conventions de marchés euro et dollar}
+\begin{center}
+\begin{tabular}{|l|c|c|}
+\hline
+Devise&\textbf{EUR}&\textbf{USD}\\
+Index&\textbf{EURIBOR}&\textbf{LIBOR} \\
+\hline
+Date de départ& J+2 Business Days&J + 2 Business Days \\
+Fréquence Variable&6 mois&3 mois\\
+Day Count variable&ACT360&ACT360\\
+Fréquence Fixe&1 an&6 mois\\
+Day Count Fixe&30/360&30 360\\
+\hline
+\end{tabular}
+\end{center}
 \end{frame}
 
 \begin{frame}{Calage de la courbe des taux}
