@@ -364,15 +364,18 @@ Valeur de l'opération du point de vue du Vendeur:
 \onslide<2>\[
 \underbrace{\vphantom{\sum_{i=1}^{N^V}} P^{Mkt}-100}_{\text{Echange Initial}}+\underbrace{ 100-100 \times B(t,T) \sum_{i=1}^{N^V}\delta^V_ii m B(t,T_i)}_{\text{Jambe Variable}}-\underbrace{C\sum_{i=1}^{N^F}\delta^F_iB(t,T_i)}_{\text{Jambe Fixe}}=0
 \]
-\onslide<3->\[
-\underbrace{\vphantom{\sum_{i=1}^{N^V}} P^{Mkt}-\cancel{100}}_{\text{Echange Initial}}+\underbrace{ \cancel{100}-100 \times B(t,T) \sum_{i=1}^{N^V}\delta^V_ii m B(t,T_i)}_{\text{Jambe Variable}}-\underbrace{C\sum_{i=1}^{N^F}\delta^F_iB(t,T_i)}_{\text{Jambe Fixe}}=0
+\onslide<3>\[
+\underbrace{\vphantom{\sum_{i=1}^{N^V}} P^{Mkt}-\cancel{100}}_{\text{Echange Initial}}+\underbrace{ \cancel{100}-100 \times B(t,T) + \sum_{i=1}^{N^V}\delta^V_i m B(t,T_i)}_{\text{Jambe Variable}}-\underbrace{C\sum_{i=1}^{N^F}\delta^F_iB(t,T_i)}_{\text{Jambe Fixe}}=0
+\]
+\onslide<4->\[
+P^{Mkt}\underbrace{-100 \times B(t,T) + C \sum_{i=1}^{N^F} \delta^F_i B(t,T_i) }_{P^{Risky}}-\sum_{i=1}^{N^V} \delta^V_i m B(t,T_i)=0
 \]
 \end{overprint}
 \normalsize
-\onslide<4>
+\onslide<5>
 Par conséquent:\\
 \[
-m=\frac{P^{Mkt}-P^{Risk Free}}{\underbrace{\sum_{i=1}^{N^V}\delta^V_iB(t,T_i)}_{BPV^{Risk Free}}}
+m=\frac{P^{RiskFree}-P^{Mkt}}{\underbrace{\sum_{i=1}^{N^V}\delta^V_iB(t,T_i)}_{BPV^{Risk Free}}}
 \]
 \end{frame}
 
