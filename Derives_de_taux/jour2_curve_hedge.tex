@@ -12,7 +12,7 @@
 \title[Produits dérivés de taux]{Calage de la courbe des taux et couverture.}
 \author{Antonin Chaix - Richard Guillemot}
 \institute{Master IFMA}
-\date{13 Février 2014}
+\date{13 Février 2015}
 
 \begin{document}
 
@@ -23,6 +23,22 @@
 \end{figure}
 
 \end{frame}
+
+\begin{frame}{Quizz}
+Quel est le Payoff d'un FRA receveur de taux Fixe K ?\\
+\vspace{0.5cm}
+Le flux:
+\begin{itemize}
+\item a) $K - L(T_f,T_{1},T_{2})$ payé en $T_1$
+\item b) $\frac{K - L(t,T_{1},T_{2})}{1+\delta  L(t,T_{1},T_{2})}$ payé en $T_1$
+\item c) $\frac{K - L(T_f,T_{1},T_{2})}{1+\delta  L(T_f,T_{1},T_{2})}$ payé en $T_1$
+\item d) $\frac{K - L(T_f,T_{1},T_{2})}{1+\delta  L(t,T_{1},T_{2})}$ payé en $T_1$
+\end{itemize}
+\begin{figure}[h]
+\FIG{10cm}{figures/schema_fra.jpg}
+\end{figure}
+\end{frame}
+
 
 \begin{frame}{Quizz}
 Quel est le Payoff d'un FRA receveur de taux Fixe K ?\\
@@ -46,6 +62,19 @@ Aujourd'hui le LIBOR 3M vaut \textbf{0.22\%}, le 19 Mars 2014 le LIBOR 3M a augm
 \vspace{0.5cm}
 Entre le 29 Janvier et le 19 Mars,\\
 \begin{itemize}
+\item a) j'ai reçu 1 000 euros d'appels de marge.
+\item b) j'ai payé 1 150 euros d'appels de marge.
+\item c) j'ai payé 1 000 euros d'appels de marge.
+\item d) j'ai reçu 1 150 euros d'appels de marge.
+
+\end{itemize}
+\end{frame}
+\begin{frame}{Quizz}
+Le 29 Janvier 2014 j'achète un contrat futur Eurodollar (contrat en dollar sur LIBOR 3M) Mars 2014 à \textbf{99.84}.\\
+Aujourd'hui le LIBOR 3M vaut \textbf{0.22\%}, le 19 Mars 2014 le LIBOR 3M a augmenté de \textbf{40bp}.\\
+\vspace{0.5cm}
+Entre le 29 Janvier et le 19 Mars,\\
+\begin{itemize}
 \item a) j'ai reçu 1 000 euros d'appels de marge. \textbf{\color{red}FAUX}
 \item b) j'ai payé 1 150 euros d'appels de marge. \textbf{\color{green}VRAI!}
 \item c) j'ai payé 1 000 euros d'appels de marge. \textbf{\color{red}FAUX}
@@ -54,6 +83,20 @@ Entre le 29 Janvier et le 19 Mars,\\
 \end{itemize}
 \end{frame}
 
+\begin{frame}{Quizz}
+Soit un emprunt qui sur nominal $N$.\\ 
+On reçoit un nominal $N$ en $T_0$.\\
+On ne paie aucun intérêt tout au long de la vie de l'emprunt.\\
+On rembourse le nominal $N$ à l'échéance $T_n$.\\
+\vspace{0.5cm}
+La valeur de cet emprunt est égale à:
+\begin{itemize}
+\item a) la jambe fixe du swap de marché (pour cet échéancier).
+\item b) 0.
+\item c) la jambe variable du swap de marché (pour cet échéancier).
+\item d) 100.
+\end{itemize}
+\end{frame}
 
 \begin{frame}{Quizz}
 Soit un emprunt qui sur nominal $N$.\\ 
@@ -69,6 +112,20 @@ La valeur de cet emprunt est égale à:
 \item d) 100. \textbf{\color{red}FAUX}
 \end{itemize}
 \end{frame}
+
+\begin{frame}{Quizz}
+Je suis "long" (sous entendu long des obligations), c'est à dire que je gagne de l'argent quand les taux baissent,:
+\begin{itemize}
+\item a) si j'ai emprunté à taux fixe.
+\item b) si j'ai prêté à taux fixe.
+\item c) si j'ai emprunté à taux variable. 
+\item d) si j'ai prêté à taux variable.
+\item e) si j'ai contracté un swap où je paie le taux fixe.
+\item f) si j'ai contracté un swap où je reçois le taux fixe.
+\end{itemize}
+\end{frame}
+
+
 
 \begin{frame}{Quizz}
 Je suis "long" (sous entendu long des obligations), c'est à dire que je gagne de l'argent quand les taux baissent,:
@@ -407,8 +464,8 @@ $\frac{\partial^2 \textbf{PV}_V(t)}{\partial S^2}=2 \times \frac{\partial LVL}{\
 avec:\\
 \vspace{0.5cm}
 \begin{tabular}{c c}
-$\frac{\partial LVL}{\partial S}=-\sum_{i=1}^{n} \frac{i}{(1+R)^{i+2}}$&
-$\frac{\partial^2 LVL}{\partial S^2}=\sum_{i=1}^{n} \frac{i^2}{(1+R)^{i+2}}$
+$\frac{\partial LVL}{\partial S}=-\sum_{i=1}^{n} \frac{i}{(1+R)^{i+1}}$&
+$\frac{\partial^2 LVL}{\partial S^2}=\sum_{i=1}^{n} \frac{i(i+1)}{(1+R)^{i+2}}$
 \end{tabular}\\
 \vspace{0.5cm}
 Application numérique:\\
