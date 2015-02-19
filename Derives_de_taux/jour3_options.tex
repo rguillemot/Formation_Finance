@@ -170,7 +170,7 @@ X_t=\mathbb{E}[e^{-\int_0^t r_s ds}(S_t-K)_+]
 \]
 Si l'on passe sous la probabilité forward-neutre $Q^T$:
 \[
-X_t=\mathbb{E}^{Q^T}\left[\frac{(S_t-K)_+}{B(T,T)}\right]
+X_t=B(t,T)\mathbb{E}^{Q^T}\left[\frac{(S_t-K)_+}{B(T,T)}\right]
 \]
 On ne considère plus l'actif $S_T$ mais le forward $F_t=\frac{S_t}{B(t,T)}$  qui par construction est une martingale sous $Q^T$ (pas de drift dans la diffusion).\\
 $F_t$ est la valeur de S exprimée dans le numéraire $B(t,T)$.
@@ -360,6 +360,13 @@ Il produit un smile décroissant:
 Le taux forward est 5\%. La volatilité normale $\sigma$ est égale à 0,90\%. 
 \end{frame}
 
+\begin{frame}{Le modèle normal}
+\begin{figure}[h]
+\FIG{11cm}{figures/lognormalvsnormal.png}
+\end{figure}
+\end{frame}
+
+
 \begin{frame}{Le modèle Lognormal décalé}
 La dynamique du taux est la suivante:
 \[
@@ -416,5 +423,12 @@ Le modèle SABR est défini par quatre paramètres:
 \end{figure}
 On considère une option de maturité 1 an sur un taux sous-jacent de forward $F_0=5.00\%$. On part du jeu de paramètres SABR suivant: $\sigma_0=0.03$, $\alpha=0.60$, $\rho=-0.10$, $\beta=0.40$.
 \end{frame}
+
+\begin{frame}{Pricing d'une swaption}
+\begin{figure}[h]
+\FIG{6cm}{figures/SwaptionPrice.jpg}
+\end{figure}
+\end{frame}
+
 
 \end{document}
