@@ -10,7 +10,9 @@ DERIVES_DE_TAUX = \
 		Derives_de_taux/jour4_multi_curve.pdf \
 		Derives_de_taux/multi_courbe.pdf \
 		Derives_de_taux/jour4_multi_curve.pdf \
+		Derives_de_taux/jour4_post2008.pdf \
 		Derives_de_taux/evaluation.pdf \
+		Derives_de_taux/evaluation_qcm.pdf \
 		Forex_Credit_Change/jour1_forex.pdf \
 		Forex_Credit_Change/webex_forex.pdf \
 		Forex_Credit_Change/jour2_forex.pdf \
