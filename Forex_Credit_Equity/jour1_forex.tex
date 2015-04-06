@@ -350,12 +350,22 @@ F&=S^{USD/EUR}e^{(r^{USD}-r^{EUR}) \times T}
 \end{overprint}
 \end{frame}
 
+\begin{frame}{Quantile de la loi normale - Sens de la volatilité}
+Au bout d'un an un actif financer de volatilité $\sigma$ a plus d'\textbf{une} chance sur \textbf{deux} de s'être écartée de $\pm \sigma$ de sa valeur initiale.
+\begin{center}
+\begin{figure}[h]
+\FIG{1}{11cm}{figures/loinormale_quantile.png}
+\end{figure}
+\end{center}
+\end{frame}
+
+
 \begin{frame}{Option de change - Jargon}
 \Huge
 \begin{overprint}
-\onslide<1>\begin{center}EUR/USD=1.3889\fontsize{60}{70}\selectfont\textcolor{white}{0}\huge\end{center}
-\onslide<2>\begin{center}EUR/USD=1.3\fontsize{60}{70}\selectfont8\huge89\end{center}
-\onslide<3>\begin{center}EUR/USD=1.388\fontsize{60}{70}\selectfont9\huge\end{center}
+\onslide<1>\begin{center}EUR/USD=1.0878\fontsize{60}{70}\selectfont\textcolor{white}{0}\huge\end{center}
+\onslide<2>\begin{center}EUR/USD=1.0\fontsize{60}{70}\selectfont8\huge78\end{center}
+\onslide<3>\begin{center}EUR/USD=1.087\fontsize{60}{70}\selectfont8\huge\end{center}
 \vspace{0.5cm}
 \end{overprint}
 \large
@@ -379,8 +389,8 @@ Prix en dollars&\visible<2->{$p$}&\visible<2->{5.488 Mios USD}\\
 Prix en euros&\visible<3->{$\frac{p}{S}$}&\visible<3->{5.045 Mios EUR}\\
 Prix en \% de nominal dollar&\visible<4->{$\frac{p}{N \times K}$}& \visible<4->{5.0353\%}\\
 Prix en \% de nominal euro&\visible<5->{$\frac{p}{N \times S}$}& \visible<5->{5.0453\%}\\
-Prix en dollars pips per EUR&\visible<6->{$\frac{p}{N \times 1e^4}$}& \visible<6->{548.85 USD pips}\\
-Prix en euros pips per USD&\visible<7->{$\frac{p}{S \times N \times K \times 1e^4}$}& \visible<7->{462.87 EUR pips}\\
+Prix en dollars pips per EUR&\visible<6->{$\frac{p\times 1e^4}{N}$}& \visible<6->{548.85 USD pips}\\
+Prix en euros pips per USD&\visible<7->{$\frac{p\times 1e^4}{S \times N \times K}$}& \visible<7->{462.87 EUR pips}\\
 \hline
 \end{tabular}
 \end{frame}
@@ -430,4 +440,46 @@ Comment évolue le delta de change en fonction du strike ?
 \end{center}
 \end{figure}
 \end{frame}
+
+\begin{frame}
+\small
+\frametitle{\textbf{USDJPY} - Exercice}
+Refaire tous les calculs précédent avec ces nouvelles données.\\
+\vspace{0.5cm}
+As of 2 Avril 2015:
+\begin{center}
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Notation} & \textbf{Description} & \textbf{Formule} & \textbf{Valeur} \\
+\hline
+\hline
+$\delta$ & Maturité du forward & $T-(t+2D)$ & 1 an = 365 jours \\
+$R^{EUR}$ & Taux zéro coupon dollar. &  & 0.11\% \\
+$R^{USD}$ & Taux zéro coupon yen. &  & 0.45\% \\
+$S$ & Taux de change spot. &  & 119.76 \\
+$m$ & Marge de basis. &  & 0.39\% \\
+\hline
+\end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Besoin d'un client américain.}
+Un client américain doit payer son fournisseur français dans 1 an \textbf{\textcolor{red}{100 millions d'euros}}.\\ 
+\uncover<2->{Pour des raisons "stratégiques" il ne souhaite pas couvrir cette position de change à terme.\\}
+\vspace{0.5cm}
+\uncover<3->{Cependant il souhaite tout de même se protéger contre des mouvements trop importants du taux de change.\\
+Ainsi:\\
+\begin{itemize}
+\item Il veut payer au \textbf{maximum} \textbf{\textcolor{blue}{119 millions de dollars}}.
+\item A l'inverse il veut payer au \textbf{minimum} \textbf{\textcolor{blue}{99 millions de dollars}}.
+\end{itemize}}
+\vspace{0.5cm}
+\uncover<4->{\textbf{Comment statisfaire le besoin de notre client ?}}
+
+\vspace{0.5cm}
+\end{frame}
+
+
+
 \end{document}
