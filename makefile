@@ -16,6 +16,7 @@ DERIVES_DE_TAUX = \
 		Forex_Credit_Change/jour1_forex.pdf \
 		Forex_Credit_Change/webex_forex.pdf \
 		Forex_Credit_Change/jour2_forex.pdf \
+		Forex_Credit_Change/jour2_forex_quizz.pdf \
 		Forex_Credit_Change/jour3_credit.pdf
 
 %.pdf: %.tex

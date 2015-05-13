@@ -31,13 +31,43 @@
 \title[Produits dérivés actions,change et credit]{Produits dérivés de crédit}
 \author{Richard Guillemot}
 \institute{DIFIQ}
-\date{29 Avril 2014}
+\date{12 Mai 2015}
 
 \begin{document}
 
 \begin{frame}
 \titlepage
 \end{frame}
+
+\begin{frame}{Quizz}
+Supposons que l'on souhaite emprunter la somme de 120 000 euros pendant 10 ans à un taux de 1\%.\\
+
+\vspace{0.5cm}
+La mensualité fixe à payer est de:
+\begin{itemize}
+\item a) 950 euros
+\item b) 1000 euros
+\item c) 1050 euros
+\item d) 1100 euros
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Quizz}
+Supposons que l'on souhaite emprunter la somme de 120 000 euros pendant 10 ans à un taux de 1\%.\\
+
+\vspace{0.5cm}
+La mensualité fixe à payer est de:
+\begin{itemize}
+\item a) 950 euros \textbf{\color{red}{FAUX}} capital non remboursé
+\item b) 1000 euros \textbf{\color{red}{FAUX}} capital seul remboursé
+\item c) 1050 euros \textbf{\color{green}{VRAI}}
+\item d) 1100 euros \textbf{\color{red}{VRAI}} intérêts payés sur le capital de départ
+\end{itemize}
+
+\end{frame}
+
+
 
 \begin{frame}{Le Crédit}
 
@@ -362,13 +392,13 @@ Valeur de l'opération du point de vue du Vendeur:
 \underbrace{\vphantom{\sum_{i=1}^{N^V}} P^{Mkt}-100}_{\text{Echange Initial}}+\underbrace{\sum_{i=1}^{N^V}\delta^V_i\big[L(T^V_{i-1},T^V_i)+m\big]B(t,T_i)}_{\text{Jambe Variable}}-\underbrace{C\sum_{i=1}^{N^F}\delta^F_iB(t,T^F_i)}_{\text{Jambe Fixe}]}=0
 \]
 \onslide<2>\[
-\underbrace{\vphantom{\sum_{i=1}^{N^V}} P^{Mkt}-100}_{\text{Echange Initial}}+\underbrace{ 100-100 \times B(t,T) \sum_{i=1}^{N^V}\delta^V_ii m B(t,T_i)}_{\text{Jambe Variable}}-\underbrace{C\sum_{i=1}^{N^F}\delta^F_iB(t,T_i)}_{\text{Jambe Fixe}}=0
+\underbrace{\vphantom{\sum_{i=1}^{N^V}} P^{Mkt}-100}_{\text{Echange Initial}}+\underbrace{ 100-100 \times B(t,T)+ \sum_{i=1}^{N^V}\delta^V_ii m B(t,T_i)}_{\text{Jambe Variable}}-\underbrace{C\sum_{i=1}^{N^F}\delta^F_iB(t,T_i)}_{\text{Jambe Fixe}}=0
 \]
 \onslide<3>\[
 \underbrace{\vphantom{\sum_{i=1}^{N^V}} P^{Mkt}-\cancel{100}}_{\text{Echange Initial}}+\underbrace{ \cancel{100}-100 \times B(t,T) + \sum_{i=1}^{N^V}\delta^V_i m B(t,T_i)}_{\text{Jambe Variable}}-\underbrace{C\sum_{i=1}^{N^F}\delta^F_iB(t,T_i)}_{\text{Jambe Fixe}}=0
 \]
 \onslide<4->\[
-P^{Mkt}\underbrace{-100 \times B(t,T) + C \sum_{i=1}^{N^F} \delta^F_i B(t,T_i) }_{P^{Risky}}-\sum_{i=1}^{N^V} \delta^V_i m B(t,T_i)=0
+P^{Mkt}\underbrace{-100 \times B(t,T) + C \sum_{i=1}^{N^F} \delta^F_i B(t,T_i) }_{P^{Risk Free}}-\sum_{i=1}^{N^V} \delta^V_i m B(t,T_i)=0
 \]
 \end{overprint}
 \normalsize
@@ -521,6 +551,7 @@ Q(t)&=e^{-\lambda \times t}
 \end{align*}
 \end{frame}
 
+
 \begin{frame}{Exercice}
 Considérons un CDS \textbf{5 ans} qui démarre aujourd'hui et qui paie une prime \textbf{trimestrielle}.\\
 \vspace{0.5cm}
@@ -542,6 +573,14 @@ Pour un nominal de \textbf{10 millions d'euros}, quelles sont les valeurs:\\
 \item de la Jambe de coupon couru ?\\
 \end{itemize}
 \end{frame}
+
+\begin{frame}{Spread de crédit et intensité de défaut}
+\Huge
+\[
+\text{spread}\approx\lambda \times (1-Rec)
+\]
+\end{frame}
+
 
 \begin{frame}{CDS Big bang}
 Une réforme du marché des CDS a eu lieu en Avril 2009:\\
@@ -566,19 +605,19 @@ L'indice est coté pour différentes maturités (1 an, 2 ans, 3 ans, 4 ans, 5 an
 L'objectif est d'améliorer la liquidité du marché des CDS.
 \end{frame}
 
-\begin{frame}{CDX NA.IG 5Y Série 22}
+\begin{frame}{CDX NA.IG 5Y Série 24}
 \begin{center}
 \begin{figure}
-\FIG{1}{10cm}{figures/cdxnaig5yserie22.png}
+\FIG{1}{10cm}{figures/cdxnaig5yserie24.png}
 \end{figure}
 \end{center}
 \small
 \begin{tabular}{|l|l|l|l|}
 \hline
 \textbf{NA}&North America&\textbf{Maturité}&5 ans\\
-\textbf{IG}&Investment Grade&\textbf{Précédent Roll}&20 Mars 2014\\
-\textbf{Fréquence}&Trimestrielle&\textbf{Prochain Roll}&20 Septembre 2014\\
-\textbf{Coupon}&100bps&\textbf{CleanPrice}&101.642\%\\
+\textbf{IG}&Investment Grade&\textbf{Précédent Roll}&20 Mars 2015\\
+\textbf{Fréquence}&Trimestrielle&\textbf{Prochain Roll}&21 Septembre 2015\\
+\textbf{Coupon}&100bps&\textbf{CleanPrice}&101.81\%\\
 \hline
 \end{tabular}
 \begin{align*}
@@ -606,7 +645,7 @@ P^{Risky}&=C \times \sum_{i=1}^{n} B(t,T_i) \times Q(t,T_i) + 100 \times B(t,T_n
 \end{overprint}
 \onslide<4> On constate dans la pratique que ce prix est plus élévé que le prix de marché. On appelle la différence annualisée CDS basis:\\ 
 \[
-m=\frac{P^{Mkt}-P^{Risky}}{BPV^{Risk Free}}
+m=\frac{P^{Risky}-P^{Mkt}}{BPV^{Risk Free}}
 \]
 \end{frame}
 

@@ -1,0 +1,256 @@
+\documentclass{beamer}
+\usepackage[english,francais]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{multicol}
+\usepackage{bm}
+\usepackage{textcomp}
+
+\usepackage{graphicx}
+\graphicspath{{./Forex_Credit_Equity/}}
+
+\newcommand{\FIG}[3]{\includegraphics<#1>[width=#2]{#3}}
+
+\newcommand{\FIGSCALE}[3]{\includegraphics<#1>[resolution=72dpi]{#3}}
+
+\usetheme{Warsaw}
+\title[Produits dérivés actions,change et credit]{Produits dérivés de change}
+\author{Richard Guillemot}
+\institute{DIFIQ}
+\date{5 Mai 2015}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\small
+\frametitle{Données de marché EURUSD au 2 Avril 2015}
+\begin{center}
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Notation} & \textbf{Description} & \textbf{Formule} & \textbf{Valeur} \\
+\hline
+\hline
+$\delta$ & Maturité du forward & $T-(t+2D)$ & 1 an = 365 jours \\
+$R^{EUR}$ & Taux zéro coupon euro. &  & 0.01\% \\
+$R^{USD}$ & Taux zéro coupon dollar. &  & 0.45\% \\
+$S$ & Taux de change spot. &  & 1.08785 \\
+$m$ & Marge de basis. &  & 27 bps \\
+\hline
+\end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Quizz 7 - Opération au comptant.}
+Je vend au comptant 50 millions d'euros contre 54.4 millions de dollar: \\
+\vspace{0.5cm}
+a) je perds 690 euros. \visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
+b) je gagne 6 900 euros. \visible<2->{\textcolor{green}{\textbf{VRAI}}} \\
+c) je perds 69 000 euros. \visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
+d) je perds 690 000 euros. \visible<2->{\textcolor{red}{\textbf{FAUX}}} \\
+\vspace{0.5cm}
+\end{frame}
+
+\begin{frame}
+\frametitle{Quizz 7 - Opération au comptant.}
+\huge
+\[
+\begin{split}
+&\text{-50 millions \$}+\frac{\text{54.4 millions \$}}{1.08785}\\
+&=\text{6 894 \texteuro}\\
+\end{split}
+\]
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Quizz 8 - Opération au comptant.}
+Par la suite le cour de l'euro dollar augmente de 1 figure: \\
+\vspace{0.5cm}
+a) je gagne 455 euros. \visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
+b) je perds 4 555 euros. \visible<2->{\textcolor{red}{\textbf{FAUX}}} \\
+c) je gagne 45 550 euros. \visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
+d) je perds 455 500 euros. \visible<2->{\textcolor{green}{\textbf{VRAI}}} \\
+\vspace{0.5cm}
+\uncover<2->{Le nouveau cour de l'euro dollar est de 1.09875}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Quizz 8 - Opération au comptant.}
+\huge
+\[
+\begin{split}
+&\frac{\text{54.4 millions \$}}{1.09785}-\frac{\text{54.4 millions \$}}{1.08785}\\
+&=\text{-455 498 \texteuro}\\
+\end{split}
+\]
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Quizz 9 - Opération à terme.}
+Je vend à terme les 54.4 millions de dollars à un client. Je souhaite réaliser une marge de 50 000 euros. Quelle montant d'euros doit il donc me payer au terme de la transaction:\\
+\vspace{0.5cm}
+a) 49.110 millions d'euros. \visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
+b) 49.160 millions d'euros. \visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
+c) 49.210 millions d'euros. \visible<2->{\textcolor{green}{\textbf{VRAI}}}\\
+d) 49.260 millions d'euros.\visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
+\vspace{0.5cm}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Quizz 9 - Opération à terme.}
+\Large
+\[
+\frac{-54.5 \text{ millions } \$ \times 1.09785}{1+[0.01\%-0.27\%]}+\frac{\textbf{X \texteuro} }{1+0.45\%}=\frac{\text{50 000 \texteuro} }{1.09785}
+\]
+\end{frame}
+
+\begin{frame}
+\frametitle{Quizz 10 - Position de change.}
+Quelle est la position de change de l'opération de change à terme précédente:\\
+\vspace{0.5cm}
+a) Long de 54.4 millions \$ et long de 49.210 millions \texteuro. \visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
+b) Short de 54.4 millions \$  et short de 49.210 millions \texteuro.\visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
+c) Long de 54.156 millions \$ et short 49.339 millions \texteuro.\visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
+d) Short de 54.156 millions \$ et long de 49.339 millions \texteuro.\visible<2->{\textcolor{green}{\textbf{VRAI}}}\\
+\vspace{0.5cm}
+\end{frame}
+
+\begin{frame}
+\frametitle{Quizz 10 - Position de change.}
+\Large
+\[
+\begin{split}
+N^{USD}&=\frac{-54.4 \text{ millions \$}}{1+[0.45\%]}\\
+N^{EUR}&=\frac{+49.210 \text{ millions \texteuro}}{1+[0.01\%-0.27\%]}\\
+\end{split}
+\]
+\end{frame}
+
+\begin{frame}
+\small
+\frametitle{Question 11: Calculer le taux de change à terme USDJPY.}
+Données de marché USDJPY au 2 Avril 2015:\\
+\begin{center}
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Notation} & \textbf{Description} & \textbf{Formule} & \textbf{Valeur} \\
+\hline
+\hline
+$\delta$ & Maturité du forward & $T-(t+2D)$ & 1 an = 365 jours \\
+$R^{USD}$ & Taux zéro coupon dollar. &  & 0.45\% \\
+$R^{USD}$ & Taux zéro coupon yen. &  & 0.11\% \\
+$S$ & Taux de change spot. &  & 119.76 \\
+$m$ & Marge de basis. &  & 39 bps \\
+\hline
+\end{tabular}
+\end{center}
+\uncover<2->{Le taux de change à terme USDJPY est de 118.89}
+\end{frame}
+
+\begin{frame}
+\frametitle{Question 11: Calculer le taux de change à terme USDJPY.}
+\LARGE
+\[
+\begin{split}
+F^{USDJPY}&=119.76 \times \frac{1+[0.11\%-0.39\%]}{1+0.45\%}\\
+&=118.89\\
+\end{split}
+\]
+\end{frame}
+
+\begin{frame}
+\frametitle{Quizz 12: Options de change}
+On souhaite acheter à terme un montant en euro contre dollar à un taux prédéterminé.\\
+Si l'opération nous est défavorable on peut y renoncer.\\
+\vspace{0.5cm}
+Quel produit doit on traiter ?\\
+\vspace{0.5cm}
+a) On achète un call euro put dollar.\visible<2->{\textcolor{green}{\textbf{VRAI}}}\\
+b) On vend un call euro put dollar.\visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
+c) On achète un put euro call dollar.\visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
+d) On vend un put euro call dollar.\visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
+\vspace{0.5cm}
+\end{frame}
+
+\begin{frame}
+\frametitle{Quizz 12: Options de change}
+\begin{center}
+\FIG{1}{9cm}{figures/fxopt-quizz-1.png}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Quizz 13: Options de change}
+On souhaite vendre à terme un montant en euro contre dollar à un taux prédéterminé.\\
+Si l'opération nous est défavorable on peut y renoncer.\\
+\vspace{0.5cm}
+Quel produit doit on traiter ?\\
+\vspace{0.5cm}
+a) On achète un call euro put dollar.\visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
+b) On vend un call euro put dollar.\visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
+c) On achète un put euro call dollar.\visible<2->{\textcolor{green}{\textbf{VRAI}}}\\
+d) On vend un put euro call dollar.\visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
+\vspace{0.5cm}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Quizz 13: Options de change}
+\begin{center}
+\FIG{1}{9cm}{figures/fxopt-quizz-2.png}
+\end{center}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Quizz 14: Options de change}
+On souhaite acheter à terme un montant en euro contre dollar à un taux prédéterminé.\\
+Si l'opération est défavorable à notre contrepartie elle peut y renoncer.\\
+\vspace{0.5cm}
+Quel produit doit on traiter ?\\
+\vspace{0.5cm}
+a) On achète un call euro put dollar.\visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
+b) On vend un call euro put dollar.\visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
+c) On achète un put euro call dollar.\visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
+d) On vend un put euro call dollar.\visible<2->{\textcolor{green}{\textbf{VRAI}}}\\
+\vspace{0.5cm}
+\end{frame}
+
+\begin{frame}
+\frametitle{Quizz 14: Options de change}
+\begin{center}
+\FIG{1}{9cm}{figures/fxopt-quizz-3.png}
+\end{center}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Quizz 15: Options de change}
+On souhaite vendre à terme un montant en euro contre dollar à un taux prédéterminé.\\
+Si l'opération est défavorable à notre contrepartie elle peut y renoncer.\\
+\vspace{0.5cm}
+Quel produit doit on traiter ?\\
+\vspace{0.5cm}
+a) On achète un call euro put dollar.\visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
+b) On vend un call euro put dollar.\visible<2->{\textcolor{green}{\textbf{VRAI}}}\\
+c) On achète un put euro call dollar.\visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
+d) On vend un put euro call dollar.\visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
+\vspace{0.5cm}
+\end{frame}
+
+\begin{frame}
+\frametitle{Quizz 15: Options de change}
+\begin{center}
+\FIG{1}{9cm}{figures/fxopt-quizz-4.png}
+\end{center}
+\end{frame}
+
+
+\end{document}
