@@ -2,3 +2,15 @@ git add .
 git commit -m 'test'
 git push origin master
 git pull origin master
+
+Pour créer une nouvelle branche.
+
+git remote add https://github.com/rguillemot/Formation_Finance
+git fetch
+
+
+Il faut mettre en place ssh
+ssh-keygen -t rsa -b 4096 -C "richard_guillemot@yahoo.fr"
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_rsa
+cat ~/.ssh/id_rsa.pub
