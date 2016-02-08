@@ -12,7 +12,7 @@
 \title[Pdts dérivés de taux]{Principaux produits derivés de taux. \\ Formules de valorisation et de cotation}
 \author{Antonin Chaix - Richard Guillemot}
 \institute{Master IFMA}
-\date{6 Février 2015}
+\date{5 Février 2016}
 
 \setbeamertemplate{sidebar right}{}
 \setbeamertemplate{footline}{%
@@ -77,6 +77,84 @@ La mensualité fixe à payer est de:
 \end{frame}
 
 
+\begin{frame}{Obligation}
+\begin{center}
+\begin{figure}
+\FIG{9cm}{figures/bond.png}
+\end{figure}
+\end{center}
+\begin{overprint}
+La valeur actuelle de l'obligation\only<2->{, après simplification}:\\
+\onslide<1>\[
+P=\sum_{i=1}^{n} \frac{\delta C}{(1+\delta R)^{\frac{i}{\delta}}}+\frac{100}{(1+\delta R)^{\frac{n}{\delta}}}
+\]
+\onslide<2->\[
+P=\vphantom{\sum_{i=1}^{n}}\frac{C}{R}\big[100-\frac{100}{(1+\delta R)^{\frac{n}{\delta}}}\big]+\frac{100}{(1+\delta R)^{\frac{n}{\delta}}}
+\]
+\end{overprint}
+\vspace{0.5cm}
+$\mathbf{R}$ est le rendement (yield) de l'obligation.\\
+\vspace{0.5cm} 
+\onslide<3>Quand $R=C$ l'obligation est dite \textbf{au pair}:
+\[
+P=100
+\]
+\end{frame}
+\begin{frame}
+\frametitle<1-4>{En dessous vs. au dessus du pair}
+\frametitle<5-7>{Long versus Short}
+\begin{overprint}
+\onslide<2-4>Une obligation est:
+\begin{itemize}
+\item<3-4>\textbf{"en dessous du pair"}: $P<100$ et $R>C$.
+\item<4>\textbf{"au dessus du pair"}: $P>100$ et $R<C$.
+\end{itemize}
+\onslide<5-7>Un opérateur est:
+\begin{itemize}
+\item<6-7>\textcolor{red}{\textbf{"Long"}} sous entendu de l'obligation: il \textcolor{red}{\textbf{prête}} et anticipe une \textcolor{red}{\textbf{baisse}} des taux.
+\item<7>\textcolor{blue}{\textbf{"Short"}} sous entendu de l'obligation: il \textcolor{blue}{\textbf{emprunte}} et anticipe une \textcolor{blue}{\textbf{hausse}} des taux.
+\end{itemize}
+\end{overprint}
+\begin{center}
+\begin{figure}
+\FIG{4.5cm}{figures/prixvsrdt.png}
+\end{figure}
+\end{center}
+\end{frame}
+
+\begin{frame}{Coupon Couru - Clean Price - Dirty Price}
+\begin{center}
+\begin{figure}
+\FIG{9cm}{figures/accrual.png}
+\end{figure}
+\end{center}
+\[
+\text{Clean Price}=\text{Dirty Price}-\underbrace{\text{Acc} \times C}_{\text{Coupon Couru}}
+\]
+\begin{tabular}{|l|l|}
+\hline
+$t$&Date de valorisation\\
+$T_{i-1}$&Date de paiement du coupon précédent\\
+$T_{i}$&Date de paiement du coupon suivant\\
+Acc&$t-T_{i-1}$ sous forme de fraction d'années\\
+\hline
+\end{tabular}
+\end{frame}
+
+\begin{frame}{Evolution du prix d'une obligation au cours du temps.}
+On considère une obligation:
+\begin{itemize} 
+\item de maturité initiale 10 ans.\\
+\item de coupon 5\%.\\
+\item de fréquence annuelle.
+\end{itemize}
+\begin{center}
+\begin{figure}
+\FIG{11cm}{figures/bondprices.png}
+\end{figure}
+\end{center}
+\end{frame}
+
 \begin{frame}{Le taux monétaire, dépôt ou money market}
 
 Voici l'échéancier de l'EURIBOR 6M:
@@ -94,6 +172,23 @@ La période est caculée avec la convention Act 360:
 \delta = \frac{T_\text{end} - T_\text{start}} {360}
 \]
 \end{frame}
+
+
+\begin{frame}{L'EURIBOR}
+Fixing de l'EURIBOR en date du 29 Janvier 2016:
+\Large
+\begin{center}
+\begin{tabular}{|c|r|}
+  \hline
+  \textbf{EURIBOR 1M} & -0.232\% \\
+  \textbf{EURIBOR 3M} & -0.162\% \\
+  \textbf{\color{red}{EURIBOR 6M}} & -0.096\% \\
+  \textbf{EURIBOR 12M} & 0.08\%  \\
+  \hline
+\end{tabular}
+\end{center}
+\end{frame}
+
 
 \begin{frame}{Le Forward Rate Agreement (FRA)}
 Le FRA permet de garantir un taux futur.\\
@@ -122,10 +217,10 @@ Le contrat se base sur LIBOR 3M en dollar et EURIBOR 3M en euro aux dates IMM (3
   \hline
   \textbf{Futur} & \textbf{$T_{start}$} & \textbf{$T_{end}$} \\
   \hline
-  \textbf{MAR14} & 19 Mars 2014 & 18 Juin 2014 \\
-  \textbf{JUN14} & 18 Juin 2014 & 17 Septembre 2014 \\
-  \textbf{SEP14} & 17 Septembre 2014 & 17 Décembre 2014 \\
-  \textbf{DEC14} & 17 Décembre 2014 &  18 Mars 2015 \\
+  \textbf{MAR16} & 16 Mars 2016 & 15 Juin 2016 \\
+  \textbf{JUN16} & 15 Juin 2016 & 21 Septembre 2016 \\
+  \textbf{SEP16} & 21 Septembre 2016 & 15 Décembre 2016 \\
+  \textbf{DEC16} & 15 Décembre 2016 &  15 Mars 2017 \\
   \hline
 \end{tabular}
 \end{center}
@@ -209,21 +304,21 @@ Day Count Fixe&30/360&30 360\\
 \end{frame}
 
 \begin{frame}{Calage de la courbe des taux}
-Voici la courbe des taux interbancaires EURIBOR qui prévaut au 29/01/2014 (t la date de valeur ou asofdate):
+Voici la courbe des taux interbancaires EURIBOR qui prévaut au 29/01/2016 (t la date de valeur ou asofdate):
 
 \begin{center}
 \begin{tabular}{|c|r|r|c|r|r|}
   \hline
   & Plots & Quote & & Plots & Quote \\
   \hline
-  MM & 2D & 0.16\% & SWAP & 5Y & 1.08\%\\
-  MM & 1M & 0.24\% & SWAP & 7Y & 1.43\%\\
-  MM & 3M & 0.30\% & SWAP & 10Y & 1.95\%\\
-  MM & 6M & 0.40\% & SWAP & 12Y & 2.02\%\\
-  MM & 12M & 0.57\% & SWAP & 15Y & 2.13\%\\
-  SWAP & 2Y & 0.48\% & SWAP & 20Y & 2.29\%\\
-  SWAP & 3Y & 0.64\% & SWAP & 25Y & 2.43\%\\
-  SWAP & 4Y & 0.86\% & SWAP & 30Y & 2.57\%\\
+  MM & 2D & -0.23\% & SWAP & 5Y & 0.08\%\\
+  MM & 1M & -0.23\% & SWAP & 7Y & 0.33\%\\
+  MM & 3M & -0.16\% & SWAP & 10Y & 0.68\%\\
+  MM & 6M & -0.10\% & SWAP & 12Y & 0.87\%\\
+  MM & 12M & -0.09\% & SWAP & 15Y & 1.07\%\\
+  SWAP & 2Y & -0.11\% & SWAP & 20Y & 1.22\%\\
+  SWAP & 3Y & -0.12\% & SWAP & 25Y & 1.27\%\\
+  SWAP & 4Y & -0.03\% & SWAP & 30Y & 1.28\%\\
   \hline
 \end{tabular}
 \end{center}
@@ -249,15 +344,15 @@ $T$ est compris entre $T_{i-1}$ et $T_{i}$ 2 plots de la courbe.
 \begin{frame}{Calage de la courbe des taux}
 A titre d'exemple calculons les plots 2D et 2D+1M:\\
 \[
-B(t,2D)=\frac{1}{1+\frac{2}{360} \times 0.16\%}=0.999991
+B(t,2D)=\frac{1}{1+\frac{2}{360} \times 0.23\%}=1.000013
 \]
-\[r(t,2D)=-\frac{365}{2}*\ln(0.999991)=0.16\%
+\[r(t,2D)=-\frac{365}{2}*\ln(1.000013)=0.23\%
 \]
 Attention le taux 1M comme tous les autres taux monétaires (sauf le taux 2D) commence dans 2 jours !
 \[
-B(t,2D+1M)=B(t,2D)\frac{1}{1+\frac{1}{12} \times \frac{365}{360}  \times 0.24\%}=0.999788
+B(t,2D+1M)=B(t,2D)\frac{1}{1+\frac{1}{12} \times \frac{365}{360}  \times 0.23\%}=1.000207
 \]
-\[r(t,2D+1M)=-\frac{1}{\frac{2}{365}+\frac{1}{12}}*\ln(0.999788)=0.24\%
+\[r(t,2D+1M)=-\frac{1}{\frac{2}{365}+\frac{1}{12}}*\ln(1.000207)=-0.23\%
 \]
 \end{frame}
 
@@ -370,10 +465,10 @@ Le flux:
 \end{frame}
 
 \begin{frame}{Quizz}
-Le 29 Janvier 2014 j'achète un contrat futur Eurodollar (contrat en dollar sur LIBOR 3M) Mars 2014 à \textbf{99.84}.\\
-Aujourd'hui le LIBOR 3M vaut \textbf{0.22\%}, le 19 Mars 2014 le LIBOR 3M a augmenté de \textbf{40bp}.\\
+Le 29 Janvier 2015 j'achète un contrat futur Eurodollar (contrat en dollar sur LIBOR 3M) Mars 2015 à \textbf{99.84}.\\
+Aujourd'hui le LIBOR 3M vaut \textbf{0.22\%}, le 15 Mars 2015 le LIBOR 3M a augmenté de \textbf{40bp}.\\
 \vspace{0.5cm}
-Entre le 29 Janvier et le 19 Mars,\\
+Entre le 29 Janvier et le 15 Mars,\\
 \begin{itemize}
 \item a) j'ai reçu 1 000 euros d'appels de marge.
 \item b) j'ai payé 1 150 euros d'appels de marge.
