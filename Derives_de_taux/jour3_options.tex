@@ -13,7 +13,7 @@
 \title[Produits dérivés de taux]{Options de taux}
 \author{Antonin Chaix - Richard Guillemot}
 \institute{Master IFMA}
-\date{21 Février 2015}
+\date{19 Février 2016}
 
 \begin{document}
 
@@ -113,13 +113,13 @@ d) Une obligation à taux variable.\textbf{\color{red}FAUX}\\
 \end{frame}
 
 \begin{frame}{Taux Stochastiques}
-En l'absence d'opportunité d'arbitrage il existe une probabilité $Q$ où la valeur actualisée d'un actif financier est une martingale, c'est à dire si $X_t$ est la valeur d'un actif financier à la date $t$ est une $Q$-martingale:
+En l'absence d'opportunité d'arbitrage il existe une probabilité $Q$ où la valeur actualisée d'un actif financier est une martingale, c'est à dire que $M_t$, la valeur actualisée d'un actif financier à la date $t$, est une $Q$-martingale:
 \[
 	M_t = e^{-\int_0^t r_s ds}X_t
 \]
 Par conséquent la valeur actuelle de l'actif est:
 \[
-	X_t=\mathbb{E}^Q_t[\color{red} e^{-\int_0^T r_s} \color{black} X_T]
+	X_t=\mathbb{E}^Q_t[\color{red} e^{-\int_0^T r_sds} \color{black} X_T]
 \]
 Lorsque \color{red}\textbf{les taux sont stochastiques}\color{black}, on ne peut pas sortir le facteur d'actualisation de l'espérance!!!
 \end{frame}
@@ -155,7 +155,7 @@ qui correspond à 1 euro capitalisé jusqu'en t de façon continue.
 \vspace{0.5cm}\\
 \item La probabilité \textbf{forward-neutre} $Q^T$ est associée au numéraire:
 \[
-N_t=B(t,T)=\mathbb{E}^Q_t[e^{-\int_0^T r_s}]
+N_t=B(t,T)=\mathbb{E}^Q_t[e^{-\int_0^T r_s ds}]
 \]
 qui correspond à recevoir 1 euro en T.
 \end{itemize}
@@ -163,16 +163,16 @@ qui correspond à recevoir 1 euro en T.
 \end{frame}
 
 \begin{frame}{Exemple "classique" de changement de numéraire}
-Soit X un call sur un sous-jacent de valeur $S_t$ de maturité $T$. Il paie donc en $T$ le flux suivant $(S_t-K)_+$.\\
+Soit X un call sur un sous-jacent de valeur $S_t$ de maturité $T$. Il paie donc en $T$ le flux suivant $(S_T-K)_+$.\\
 Sa valeur est en $t$ est:
 \[
-X_t=\mathbb{E}[e^{-\int_0^t r_s ds}(S_t-K)_+]
+X_t=\mathbb{E}[e^{-\int_t^T r_s ds}(S_T-K)_+]
 \]
 Si l'on passe sous la probabilité forward-neutre $Q^T$:
 \[
-X_t=B(t,T)\mathbb{E}^{Q^T}\left[\frac{(S_t-K)_+}{B(T,T)}\right]
+X_t=B(t,T)\mathbb{E}^{Q^T}\left[\frac{(S_T-K)_+}{B(T,T)}\right]
 \]
-On ne considère plus l'actif $S_T$ mais le forward $F_t=\frac{S_t}{B(t,T)}$  qui par construction est une martingale sous $Q^T$ (pas de drift dans la diffusion).\\
+On ne considère plus l'actif $S_t$ mais le forward $F_t=\frac{S_t}{B(t,T)}$  qui par construction est une martingale sous $Q^T$ (pas de drift dans la diffusion).\\
 $F_t$ est la valeur de S exprimée dans le numéraire $B(t,T)$.
 \end{frame}
 \begin{frame}{Exemple "classique" de changement de numéraire}
