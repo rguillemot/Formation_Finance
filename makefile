@@ -14,6 +14,7 @@ DERIVES_DE_TAUX = \
 		Derives_de_taux/evaluation.pdf \
 		Derives_de_taux/evaluation_qcm.pdf \
 		Forex_Credit_Change/jour1_forex.pdf \
+		Forex_Credit_Change/jour1_forex_option.pdf \
 		Forex_Credit_Change/webex_forex.pdf \
 		Forex_Credit_Change/jour2_forex.pdf \
 		Forex_Credit_Change/jour2_forex_quizz.pdf \

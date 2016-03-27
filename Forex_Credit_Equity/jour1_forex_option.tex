@@ -1,0 +1,250 @@
+\documentclass{beamer}
+\usepackage[english,francais]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{multicol}
+\usepackage{bm}
+
+\usepackage{graphicx}
+\graphicspath{{./Forex_Credit_Equity/}}
+
+\newcommand{\FIG}[3]{\includegraphics<#1>[width=#2]{#3}}
+
+\newcommand{\FIGSCALE}[3]{\includegraphics<#1>[resolution=72dpi]{#3}}
+
+\usetheme{Warsaw}
+\title[Produits dérivés actions,change et credit]{Options de change}
+\author{Richard Guillemot}
+\institute{DIFIQ}
+\date{27 Mars 2016}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}{Option de change}
+Une \textbf{option de change} est un contrat asymétrique par lequel à une date future T:\\
+\vspace{0.5cm}
+\begin{overprint}
+\onslide<1>\begin{itemize}
+\item La contrepartie \textbf{vendeuse s'engage} à recevoir un montant \textcolor{red}{$N^1$ en devise 1} contre \textcolor{blue}{$N^2$ en devise 2}.
+\item La contrepartie \textbf{acheteuse peut à son gré} recevoir un nominal \textcolor{blue}{$N^2$ en devise 2} contre un nominal \textcolor{red}{$N^1$ en devise 1}.
+\end{itemize}
+\onslide<2>\begin{itemize}
+\item La contrepartie \textbf{vendeuse s'engage} à recevoir un montant \textcolor{red}{$N^{EUR}$ en euro} contre \textcolor{blue}{$N^{USD}$ en dollar}.
+\item La contrepartie \textbf{acheteuse peut à son gré} recevoir un nominal \textcolor{blue}{$N^{USD}$ en dollar} contre un nominal \textcolor{red}{$N^{EUR}$ en euro}.
+\end{itemize}
+\end{overprint}
+\end{frame}
+
+\begin{frame}{Option de change - Payoff}
+Quel est le payoff d'une option de change ?
+\vspace{0.5cm}
+\small
+\begin{tabular}{|c|c|c|}
+\hline
+&$\mathbf{S^{EUR/USD}}$&$\mathbf{S^{USD/EUR}}$\\
+\hline
+\textcolor{red}{\textbf{EUR}}&\visible<3->{\textcolor{red}{$\frac{(N^{EUR} \times S^{EUR/USD}-N^{USD})_+}{S^{EUR/USD}}$}}&\visible<4->{\textcolor{red}{$(N^{EUR}-N^{USD} \times S^{USD/EUR})_+$}} \\
+\textcolor{blue}{\textbf{USD}}& \visible<2->{\textcolor{blue}{$(N^{EUR} \times S^{EUR/USD}-N^{USD})_+$}} & \visible<5->{\textcolor{blue}{$\frac{(N^{EUR}-N^{USD} \times S^{USD/EUR})_+}{S^{USD/EUR}}$}}\\
+\hline
+\end{tabular}
+\begin{center}
+\textcolor{red}{100 Mios d'euros} call contre \textcolor{blue}{112 Mios de dollars} put.\\
+\end{center}
+\begin{figure}
+\begin{center}
+%\begin{overprint}
+\FIG{1}{9cm}{figures/fxopt-payoff-0.png}
+\FIG{2}{9cm}{figures/fxopt-payoff-1.png}
+\FIG{3}{9cm}{figures/fxopt-payoff-2.png}
+\FIG{4}{9cm}{figures/fxopt-payoff-3.png}
+\FIG{5}{9cm}{figures/fxopt-payoff-4.png}
+%\end{overprint}
+\end{center}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Option de change - Black \& Scholes }
+En contrepartie le vendeur reçoit de la part de l'acheteur une prime (\textbf{p})  que l'on peut calculer à l'aide de la formule de Black \& Scholes:\\
+\vspace{0.5cm}
+\begin{overprint}
+\onslide<1>\begin{center}
+$e^{-r^1 \times T} \times N^1 \times S \times \mathcal{N}(d_1)-e^{-r^2 \times T} \times N^2 \times \mathcal{N}(d_2)$
+\end{center}
+\onslide<2>\begin{center}
+$e^{-r^{EUR} \times T} \times N^{EUR} \times S^{EUR/USD} \times \mathcal{N}(d_1)-e^{-r^{USD} \times T} \times N^{USD} \times \mathcal{N}(d_2)$
+\end{center}
+\end{overprint}
+avec:\\
+\begin{overprint}
+\onslide<1>\[
+\begin{split}
+&\mathcal{N} : \text{fonction de répartition de la loi normale centrée réduite}\\
+&d_1=\frac{\ln\left( \frac{N^1}{N^2} S \right)+(r^2-r^1) \times T+\frac{1}{2}\sigma^2 T}{\sigma\sqrt{T}}\\
+&d_2=d_1-\sigma\sqrt{T}
+\end{split}
+\]
+\onslide<2>\[
+\begin{split}
+&\mathcal{N} : \text{fonction de répartition de la loi normale centrée réduite}\\
+&d_1=\frac{\ln\left( \frac{N^{EUR}}{N^{USD}} S^{EUR/USD} \right)+(r^{USD}-r^{EUR}) \times T+\frac{1}{2}\sigma^2 T}{\sigma\sqrt{T}}\\
+&d_2=d_1-\sigma\sqrt{T}
+\end{split}
+\]
+\end{overprint}
+\end{frame}
+
+\begin{frame}{Option de change - Symétrie}
+\begin{overprint}
+\onslide<1>On peut exprimer la prime (\textbf{p}) de plusieurs manières:\\
+\onslide<2>Comme un call sur EUR/USD:\\
+\onslide<3>Comme un put sur USD/EUR:\\
+\end{overprint}
+\vspace{0.5cm}
+\begin{overprint}
+\onslide<1>\begin{center}
+$e^{-r_{EUR} \times T} \times N^{EUR} \times S^{EUR/USD} \times \mathcal{N}(d_1)-e^{-r_{USD} \times T} \times N^{USD} \times \mathcal{N}(d_2)$
+\end{center}
+\onslide<2>\begin{center}
+$e^{-r_{USD} \times T} \times N^{EUR} \times \big[ F^{EUR/USD} \times \mathcal{N}(d_1)-K \times \mathcal{N}(d_2) \big]$
+\end{center}
+\onslide<3>\begin{center}
+$e^{-r_{EUR} \times T} \times N^{USD} \times \big[ \frac{1}{K} \times \mathcal{N}(-d_2)-F^{USD/EUR} \times \mathcal{N}(-d_1) \big]$
+\end{center}
+\end{overprint}
+avec:\\
+\begin{overprint}
+\onslide<1>\begin{align*}
+d_1&=\frac{\ln\left( \frac{N^{EUR}}{N^{USD}} S^{EUR/USD} \right)+(r_{EUR}-r_{USD}) \times T+\frac{1}{2}\sigma^2 T}{\sigma\sqrt{T}}\\
+d_2&=d_1-\sigma\sqrt{T}
+\end{align*}
+\onslide<2>\begin{align*}
+d_1&=\frac{\ln\left( \frac{F^{EUR/USD}}{K} \right) +\frac{1}{2}\sigma^2 T}{\sigma\sqrt{T}}\\
+d_2&=d_1-\sigma\sqrt{T}\\
+K&=\frac{N^{USD}}{N^{EUR}}\\
+F&=S^{EUR/USD}e^{(r^{USD}-r^{EUR}) \times T}
+\end{align*}
+\onslide<3>\begin{align*}
+d_1&=\frac{\ln\left( F^{USD/EUR} \times K \right) +\frac{1}{2}\sigma^2 T}{\sigma\sqrt{T}}\\
+d_2&=d_1-\sigma\sqrt{T}\\
+K&=\frac{N^{USD}}{N^{EUR}}\\
+F&=S^{USD/EUR}e^{(r^{EUR}-r^{USD}) \times T}
+\end{align*}
+\end{overprint}
+\end{frame}
+
+\begin{frame}{Quantile de la loi normale - Sens de la volatilité}
+Au bout d'un an un actif financer de volatilité $\sigma$ a plus d'\textbf{une} chance sur \textbf{deux} de s'être écartée de $\pm \sigma$ de sa valeur initiale.
+\begin{center}
+\begin{figure}[h]
+\FIG{1}{11cm}{figures/loinormale_quantile.png}
+\end{figure}
+\end{center}
+\end{frame}
+
+\begin{frame}{Option de change - Cotation de la prime - Exercice}
+On considère les mêmes données de marché que précédemment avec une volatilité $\sigma=12\%$ et on cote la prime d'une option de change de maturité 1 an qui reçoit \textcolor{red}{100 millions d'euros} contre \textcolor{blue}{112 millions de dollars}.\\
+\vspace{0.5cm}
+Les 6 modes de cotations:\\
+\vspace{0.5cm}
+
+\begin{tabular}{|l|c|l|}
+\hline
+Prix en dollars&\visible<2->{$p$}&\visible<2->{5.937 Mios USD}\\
+Prix en euros&\visible<3->{$\frac{p}{S}$}&\visible<3->{5.320 Mios EUR}\\
+Prix en \% de nominal dollar&\visible<4->{$\frac{p}{N \times K}$}& \visible<4->{5.3015\%}\\
+Prix en \% de nominal euro&\visible<5->{$\frac{p}{N \times S}$}& \visible<5->{5.3196\%}\\
+Prix en dollars pips per EUR&\visible<6->{$\frac{p\times 1e^4}{N}$}& \visible<6->{593.77 USD pips}\\
+Prix en euros pips per USD&\visible<7->{$\frac{p\times 1e^4}{S \times N \times K}$}& \visible<7->{474.96 EUR pips}\\
+\hline
+\end{tabular}
+\end{frame}
+
+\begin{frame}{Option de change - Delta de change}
+Le Delta de change $\delta$ est le pourcentage du nominal en devise 1 qu'il faut vendre pour couvrir la position de change.
+\[
+\delta=\frac{\partial p}{\partial S}=e^{-r^{EUR} \times T} \times \mathcal{N}(d_1)
+\]
+On peut exprimer de façon équivalente le delta de change en pourcentage du nominal $\delta^{reverse}$ en devise 2:
+\[
+\delta^{reverse}=-\frac{\delta \times S}{K}
+\]
+\\
+\visible<2>{\textcolor{red}{\textbf{Attention ces formules supposent que la prime est payée en dollars!!!}}}
+\end{frame}
+
+\begin{frame}{Option de change - Delta de change}
+Dans le cas où la prime est payée en euros il faut ajuster le delta du paiement de la prime.\\
+\vspace{0.5cm}
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+delta ccy&premium ccy&Formule&Delta\\
+\hline
+\% EUR & EUR & \visible<2->{$\delta-p^{EUR}$} &\visible<4->{50.79\%}\\
+\% EUR & USD & $\delta$ &\visible<3->{56.11\%}\\
+\% USD & EUR & \visible<2->{$-\frac{(\delta-p^{EUR})S}{K}$} &\visible<4->{-50.62\%}\\
+\% USD & USD & $-\frac{\delta}{K}$&\visible<3->{-55.92\%}\\
+\hline
+\end{tabular}
+\end{center}
+\visible<3->{La prime est égale à 5.5319\% du nominal EUR.}
+\end{frame}
+
+\begin{frame}{Option de change - Delta de change}
+Comment évolue le delta de change en fonction du strike ?
+\begin{figure}
+\begin{center}
+%\begin{overprint}
+\FIG{1}{11cm}{figures/fxopt-delta-0.png}
+\FIG{2}{11cm}{figures/fxopt-delta-1.png}
+\FIG{3}{11cm}{figures/fxopt-delta-2.png}
+\FIG{4}{11cm}{figures/fxopt-delta-3.png}
+\FIG{5}{11cm}{figures/fxopt-delta-4.png}
+%\end{overprint}
+\end{center}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\small
+\frametitle{\textbf{USDJPY} - Exercice}
+Refaire tous les calculs précédent avec ces nouvelles données.\\
+\vspace{0.5cm}
+As of 2 Avril 2015:
+\begin{center}
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Notation} & \textbf{Description} & \textbf{Formule} & \textbf{Valeur} \\
+\hline
+\hline
+$\delta$ & Maturité du forward & $T-(t+2D)$ & 1 an = 365 jours \\
+$R^{EUR}$ & Taux zéro coupon dollar. &  & 0.11\% \\
+$R^{USD}$ & Taux zéro coupon yen. &  & 0.45\% \\
+$S$ & Taux de change spot. &  & 119.76 \\
+$m$ & Marge de basis. &  & 0.39\% \\
+\hline
+\end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Besoin d'un client américain.}
+Un client américain doit payer son fournisseur français dans 1 an \textbf{\textcolor{red}{100 millions d'euros}}.\\ 
+\uncover<2->{Pour des raisons "stratégiques" il ne souhaite pas couvrir cette position de change à terme.\\}
+\vspace{0.5cm}
+\uncover<3->{Cependant il souhaite tout de même se protéger contre des mouvements trop importants du taux de change.\\
+Ainsi:\\
+\begin{itemize}
+\item Il veut payer au \textbf{maximum} \textbf{\textcolor{blue}{119 millions de dollars}}.
+\item A l'inverse il veut payer au \textbf{minimum} \textbf{\textcolor{blue}{99 millions de dollars}}.
+\end{itemize}}
+\vspace{0.5cm}
+\uncover<4->{\textbf{Comment statisfaire le besoin de notre client ?}}
+
+\vspace{0.5cm}
+\end{frame}
+
+\end{document}

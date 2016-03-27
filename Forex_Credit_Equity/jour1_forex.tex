@@ -15,7 +15,7 @@
 \title[Produits dérivés actions,change et credit]{Produits dérivés de change}
 \author{Richard Guillemot}
 \institute{DIFIQ}
-\date{10 Avril 2015}
+\date{27 Mars 2016}
 
 \begin{document}
 
@@ -24,14 +24,14 @@
 \end{frame}
 
 \begin{frame}
-\frametitle{Taux de change \textbf{"Spot"} (as of 2 Avril 2015)}
+\frametitle{Taux de change \textbf{"Spot"} (as of 24 March 2016)}
 \Huge
 \begin{center}
-\textbf{\textcolor<3>{red}{EUR}/\textcolor<4>{blue}{USD}}=1.08785
+\textbf{\textcolor<3>{red}{EUR}/\textcolor<4>{blue}{USD}}=1.1162
 \end{center}
 \huge
 \begin{center}
-\onslide<2->{1 \textcolor<3>{red}{euro} vaut 1.08785 \textcolor<4>{blue}{dollar}.}
+\onslide<2->{1 \textcolor<3>{red}{euro} vaut 1.1162 \textcolor<4>{blue}{dollar}.}
 \end{center}
 \large
 \vspace{0.5cm}
@@ -39,6 +39,22 @@
 \item[]<3-> \textbf{\textcolor<3>{red}{EUR (euro)}} est la \textcolor<3>{red}{devise étrangère ou devise 1}.
 \item[]<4-> \textbf{\textcolor<4>{blue}{USD (dollar)}} est la \textcolor<4>{blue}{devise domestique ou devise 2}.
 \end{itemize}
+\end{frame}
+
+\begin{frame}{Taux de change - Jargon}
+\Huge
+\begin{overprint}
+\onslide<1>\begin{center}EUR/USD=1.1162\fontsize{60}{70}\selectfont\textcolor{white}{0}\huge\end{center}
+\onslide<2>\begin{center}EUR/USD=1.1\fontsize{60}{70}\selectfont1\huge62\end{center}
+\onslide<3>\begin{center}EUR/USD=1.116\fontsize{60}{70}\selectfont2\huge\end{center}
+\vspace{0.5cm}
+\end{overprint}
+\large
+\begin{overprint}
+\onslide<1>On considère 5 chiffres significatifs dans un taux de change.
+\onslide<2>Le 3\up{ème} chiffre en partant de la gauche est appelé \textbf{"Big Figure"}.
+\onslide<3>Le 5\up{ème} chiffre en partant de la gauche est appelé \textbf{"pips"}.
+\end{overprint}
 \end{frame}
 
 \begin{frame}
@@ -55,19 +71,19 @@
 
 \begin{frame}
 \frametitle{Taux de change \& Taux d'intérêts}
-As of 2 Avril 2015:
+As of 24 Mars 2016:
 \begin{center}
 \begin{tabular}{|l|l|l|l|l|}
 \hline
 \textbf{FX} & 	&  & \textbf{IR} & \textbf{BS} \\
 \hline
 \hline
-EURUSD & 1.0879 & EUR & 0.01\% & -0.27\%  \\
-GBPUSD & 1.4829 & USD & 0.45\% & \\
-USDCHF & 0.9581 & GBP & 0.61\% & -0.05\% \\
-USDJPY & 119.76 & CHF & -0.88\% & -0.40\% \\
-USDCNY & 6.1396 & JPY & 0.11\% & -0.39\% \\
-	&	& CNY & 	& 3.83\% \\
+EURUSD & 1.1162 & EUR & -0.27\% & -0.29\%  \\
+GBPUSD & 1.4142 & USD & 0.81\% & \\
+USDCHF & 0.9767 & GBP & 0.61\% & -0.14\% \\
+USDJPY & 112.64 & CHF & -0.84\% & -0.26\% \\
+USDCNY & 6.5125 & JPY & -0.08\% & -0.56\% \\
+	&	& CNY & 	& 3.78\% \\
 \hline		
 \end{tabular}
 \end{center}
@@ -129,7 +145,7 @@ USDCNY & 6.1396 & JPY & 0.11\% & -0.39\% \\
 \begin{frame}
 \small
 \frametitle{Taux de change \textbf{"Forward"} - Récapitulatif}
-As of 2 Avril 2015:
+As of 24 March 2016:
 \begin{center}
 \begin{tabular}{|l|l|l|l|}
 \hline
@@ -137,30 +153,96 @@ As of 2 Avril 2015:
 \hline
 \hline
 $\delta$ & \visible<2->{Maturité du forward} & \visible<2->{$T-(t+2D)$} & \visible<2->{1 an = 365 jours} \\
-$R^{EUR}$ & \visible<3->{Taux zéro coupon euro.} &  & \visible<3->{0.01\%} \\
-$R^{USD}$ & \visible<4->{Taux zéro coupon dollar.} &  & \visible<4->{0.45\%} \\
-$S$ & \visible<5->{Taux de change spot.} &  & \visible<5->{1.08785} \\
+$R^{EUR}$ & \visible<3->{Taux euro.} &  & \visible<3->{-0.27\%} \\
+$R^{USD}$ & \visible<4->{Taux dollar.} &  & \visible<4->{0.81\%} \\
+$S$ & \visible<5->{Taux de change spot.} &  & \visible<5->{1.1162} \\
 $X$ & \visible<6->{Forward de change.} &  \visible<6->{$S\frac{1+\delta R^{USD}}{1+\delta R^{EUR}}$} & \visible<6->{??} \\
 \hline
 \end{tabular}
 \end{center}
 \[
-\uncover<7->{X=} \uncover<8->{1.0878\times \frac{1+ 0.45\%}{1+0.01\%}\uncover<9->{=1.09264}} 
+\uncover<7->{X=} \uncover<8->{1.1162\times \frac{1+ 0.81\%}{1-0.27\%}\uncover<9->{=1.1283}} 
 \]
-\onslide<10->{Soit \textbf{47.86} points de base d'écart positif par rapport au taux spot.}
+\onslide<10->{Soit \textbf{121} points de base d'écart positif par rapport au taux spot.}
 \end{frame}
 
 \begin{frame}
 \frametitle{Quizz}
 Si on vend 100 millons euro dans 1 an au taux spot au lieu d'utiliser le taux foward précedemment calculé:\\
 \vspace{0.5cm}
-a) On perd 442 kEUR \uncover<2>{\textcolor{green}{\textbf{VRAI}}}\\
-b) On gagne 44,2 kEUR \uncover<2>{\textcolor{red}{\textbf{FAUX}}}\\
-c) On perd 4.42 millions d'euros. \uncover<2>{\textcolor{red}{\textbf{FAUX}}}\\
-d) On gagne 442 kEUR. \uncover<2>{\textcolor{red}{\textbf{FAUX}}}\\
+a) On perd 1077 kEUR \uncover<2>{\textcolor{green}{\textbf{VRAI}}}\\
+b) On gagne 107,7 kEUR \uncover<2>{\textcolor{red}{\textbf{FAUX}}}\\
+c) On perd 10.77 millions d'euros. \uncover<2>{\textcolor{red}{\textbf{FAUX}}}\\
+d) On gagne 107,7 kEUR. \uncover<2>{\textcolor{red}{\textbf{FAUX}}}\\
 \vspace{0.5cm}
-\uncover<2>{On emprunte à 0.45\% en dollars et on prête à 0.01\% en euros !!!}
+\uncover<2>{On emprunte à 0.81\% en dollars et on prête à -0.27\% en euros !!!}
 \end{frame}
+
+\begin{frame}{Le taux monétaire, dépôt ou money market}
+
+Voici l'échéancier de l'EURIBOR 6M:
+\begin{figure}[h]
+\vspace{2mm}
+\FIG{1}{7cm}{figures/schema_euribor.jpg} 
+\vspace{1mm}
+\end{figure}
+Le taux monétaire est défini comme:
+\[
+R=L(t,T_\text{start}, T_\text{end})=\frac{1}{\delta}\left(\frac{B(t,T_\text{start})}{B(t,T_\text{end})}-1\right)
+\]
+La période est caculée avec la convention Act 360:
+\[
+\delta = \frac{T_\text{end} - T_\text{start}} {360}
+\]
+\end{frame}
+
+\begin{frame}{Réplication d'un emprunt futur}
+\begin{overprint}
+\begin{center}
+\begin{figure}[h]
+\FIG{1}{3in}{figures/fwd_replic1.png}
+\FIG{2}{3in}{figures/fwd_replic2.png}
+\FIG{3-}{3in}{figures/fwd_replic3.png}
+\end{figure}
+\end{center}
+\onslide<1> Soit un emprunt à taux fixe qui démarre dans le futur. Nous allons le répliquer par 2 emprunts qui démarrent aujourd'hui.
+\onslide<2> On prête aujourd'hui $B(t,T_{start})$ qui sera remboursé avec les intérêts en $T_{start}$ par un flux de 1.
+\onslide<3> On emprunte aujourd'hui $(1+\delta K)B(t,T_{end})$ qui nous sera remboursé avec les intérêts en $T_{end}$ par un flux de $1+\delta K$.
+\onslide<4> Il n'y a maintenant plus de flux futurs nous allons donc calculer le taux fixe $K^*$ qui égalise les flux aujourd'hui :
+\[
+K^*=R(t,T_{start}, T_{end})=\frac{1}{\delta}\left(\frac{B(t,T_{start})}{B(t,T_{end})}-1\right)
+\]
+\end{overprint}
+\end{frame}
+
+\begin{frame}{Obligation à taux variable}
+\begin{overprint}
+\begin{center}
+\begin{figure}[h]
+\FIG{1-}{11cm}{figures/bond_variable.png}
+\end{figure}
+\end{center}
+\onslide<1>On calcule la valeur de l'obligation à taux variable:\\
+\[
+P = \sum_{i=1}^{n}\delta_i\times R(T_{i-1},T_{i})\times  B(t,T_i)+B(t,T_{n})
+\]
+\onslide<2>On estime la valeur actuelle du taux variable en utilisant le taux forward.\\
+\[
+P = \sum_{i=1}^{n}\delta_i\times \frac{1}{\delta_i}\left(\frac{B(t,T_{i-1})}{B(t,T_i)}-1\right)   \times  B(t,T_i)+B(t,T_{n})
+\]
+\onslide<3>\[
+P = \sum_{i=1}^{n} \left(B(t,T_{i-1})-B(t,T_i)\right)+B(t,T_{n})
+\]
+\onslide<4-5>\[
+P = 1-\only<4>{B(t,T_n)+B(t,T_n)}\only<5>{\cancel{B(t,T_n)}+\cancel{B(t,T_n)}}
+\]
+\onslide<6>\[
+P = 1
+\]
+\textbf{La valeur d'une obligation à taux variable (sans marge) est insensible au niveau des taux (les jours de paiement de ses coupons).}
+\end{overprint}
+\end{frame}
+
 
 \begin{frame}
 \frametitle{Le swap de devises ou Cross-Currency Swap}
@@ -190,10 +272,10 @@ d) On gagne 442 kEUR. \uncover<2>{\textcolor{red}{\textbf{FAUX}}}\\
 	X=S\frac{1+\delta R^{USD}}{1+\delta (R^{EUR}-\textbf{m})}
 \]
 \Large
-As of 2 Avril 2015:
+As of 24 March 2016:
 \huge
 \begin{center}
-$m=27$ bps
+$m=29$ bps
 \end{center}
 \end{frame}
 
@@ -227,10 +309,10 @@ Position de change&&$(N^{EUR},N^{USD})$\\
 
 \begin{frame}
 \frametitle{Exercice}
-On reprend les données du premier exemple la marge de basis m est égale à 27 points de base:\\
+On reprend les données du premier exemple la marge de basis m est égale à 29 points de base:\\
 \begin{itemize}
-\item[-] \textbf{Opération 1}: Une banque francaise doit recevoir de son client \textcolor{blue}{109 millions de dollars} contre \textcolor{red}{100 millions d'euros} dans 1 an.
-\item[-] \textbf{Opération 2}: Sa filliale américaine doit recevoir de son client \textcolor{red}{92 millions d'euros} contre \textcolor{blue}{100 millions de dollars} dans 1 an.
+\item[-] \textbf{Opération 1}: Une banque francaise doit recevoir de son client \textcolor{blue}{113 millions de dollars} contre \textcolor{red}{100 millions d'euros} dans 1 an.
+\item[-] \textbf{Opération 2}: Sa filliale américaine doit recevoir de son client \textcolor{red}{89 millions d'euros} contre \textcolor{blue}{100 millions de dollars} dans 1 an.
 \end{itemize}
 Pour chacune des 2 opérations et pour le portefeuille total de la banque:\\
 \begin{enumerate}
@@ -248,23 +330,23 @@ Pour chacune des 2 opérations et pour le portefeuille total de la banque:\\
 &\textbf{Cas 1}&\textbf{Cas 2}&\textbf{TOTAL}& \\
 \hline
 \hline
-\textbf{PNL EUR} &-513&728&215&kEUR\\
-\textbf{PNL USD} &-558&792&234&kUSD\\
+\textbf{PNL EUR} &-142&728&491&kEUR\\
+\textbf{PNL USD} &-158&706&546&kUSD\\
 \hline
 \hline
-\textbf{Delta FX} &-100.26&92.24&-8.02&Mios EUR\\
-\textbf{Sensi taux EUR} &10.03&-9.22&0.80&kEUR/bp\\
-\textbf{Sensi taux USD} &-10.85&9.95&-0.90&kUSD/bp\\
-\textbf{Sensi basis} &-10.03&9.22&-0.80&kEUR/bp\\
+\textbf{Delta FX} &-100.56&89.50&-11.06&Mios EUR\\
+\textbf{Sensi taux EUR} &10.05&-8.85&1.11&kEUR/bp\\
+\textbf{Sensi taux USD} &-11.21&9.92&-1.29&kUSD/bp\\
+\textbf{Sensi basis} &-10.05&8.85&-1.11&kEUR/bp\\
 \hline
 \hline
-\textbf{NEUR} &-100.261&92.240&-8.021&Mios EUR/bp\\
-\textbf{NUSD} &108.512&-99.552&8.960&Mios USD/bp\\
+\textbf{NEUR} &-100.56&89.50&-11.07&Mios EUR/bp\\
+\textbf{NUSD} &112.09&-99.20&12.90&Mios USD/bp\\
 \hline
 \end{tabular}
 \\
 \vspace{0.5cm}
-Pour se couvrir, \uncover<2>{il faut vendre 8.960 millions de dollars contre 8.021 millions d'euros.}
+Pour se couvrir, \uncover<2>{il faut vendre 12.90 millions de dollars.}
 \end{frame}
 
 \begin{frame}{Option de change}
@@ -281,234 +363,5 @@ Une \textbf{option de change} est un contrat asymétrique par lequel à une date
 \end{itemize}
 \end{overprint}
 \end{frame}
-
-\begin{frame}{Option de change - Payoff}
-Quel est le payoff d'une option de change ?
-\vspace{0.5cm}
-\small
-\begin{tabular}{|c|c|c|}
-\hline
-&$\mathbf{S^{EUR/USD}}$&$\mathbf{S^{USD/EUR}}$\\
-\hline
-\textcolor{red}{\textbf{EUR}}&\visible<3->{\textcolor{red}{$\frac{(N^{EUR} \times S^{EUR/USD}-N^{USD})_+}{S^{EUR/USD}}$}}&\visible<4->{\textcolor{red}{$(N^{EUR}-N^{USD} \times S^{USD/EUR})_+$}} \\
-\textcolor{blue}{\textbf{USD}}& \visible<2->{\textcolor{blue}{$(N^{EUR} \times S^{EUR/USD}-N^{USD})_+$}} & \visible<5->{\textcolor{blue}{$\frac{(N^{EUR}-N^{USD} \times S^{USD/EUR})_+}{S^{USD/EUR}}$}}\\
-\hline
-\end{tabular}
-\begin{center}
-\textcolor{red}{100 Mios d'euros} call contre \textcolor{blue}{109 Mios de dollars} put.\\
-\end{center}
-\begin{figure}
-\begin{center}
-%\begin{overprint}
-\FIG{1}{9cm}{figures/fxopt-payoff-0.png}
-\FIG{2}{9cm}{figures/fxopt-payoff-1.png}
-\FIG{3}{9cm}{figures/fxopt-payoff-2.png}
-\FIG{4}{9cm}{figures/fxopt-payoff-3.png}
-\FIG{5}{9cm}{figures/fxopt-payoff-4.png}
-%\end{overprint}
-\end{center}
-\end{figure}
-\end{frame}
-
-\begin{frame}{Option de change - Black \& Scholes }
-En contrepartie le vendeur reçoit de la part de l'acheteur une prime (\textbf{p})  que l'on peut calculer à l'aide de la formule de Black \& Scholes:\\
-\vspace{0.5cm}
-\begin{overprint}
-\onslide<1>\begin{center}
-$e^{-r^1 \times T} \times N^1 \times S \times \mathcal{N}(d_1)-e^{-r^2 \times T} \times N^2 \times \mathcal{N}(d_2)$
-\end{center}
-\onslide<2>\begin{center}
-$e^{-r^{EUR} \times T} \times N^{EUR} \times S^{EUR/USD} \times \mathcal{N}(d_1)-e^{-r^{USD} \times T} \times N^{USD} \times \mathcal{N}(d_2)$
-\end{center}
-\end{overprint}
-avec:\\
-\begin{overprint}
-\onslide<1>\[
-\begin{split}
-&\mathcal{N} : \text{fonction de répartition de la loi normale centrée réduite}\\
-&d_1=\frac{\ln\left( \frac{N^1}{N^2} S \right)+(r^2-r^1) \times T+\frac{1}{2}\sigma^2 T}{\sigma\sqrt{T}}\\
-&d_2=d_1-\sigma\sqrt{T}
-\end{split}
-\]
-\onslide<2>\[
-\begin{split}
-&\mathcal{N} : \text{fonction de répartition de la loi normale centrée réduite}\\
-&d_1=\frac{\ln\left( \frac{N^{EUR}}{N^{USD}} S^{EUR/USD} \right)+(r^{USD}-r^{EUR}) \times T+\frac{1}{2}\sigma^2 T}{\sigma\sqrt{T}}\\
-&d_2=d_1-\sigma\sqrt{T}
-\end{split}
-\]
-\end{overprint}
-\end{frame}
-
-\begin{frame}{Option de change - Symétrie}
-\begin{overprint}
-\onslide<1>On peut exprimer la prime (\textbf{p}) de plusieurs manières:\\
-\onslide<2>Comme un call sur EUR/USD:\\
-\onslide<3>Comme un put sur USD/EUR:\\
-\end{overprint}
-\vspace{0.5cm}
-\begin{overprint}
-\onslide<1>\begin{center}
-$e^{-r_{EUR} \times T} \times N^{EUR} \times S^{EUR/USD} \times \mathcal{N}(d_1)-e^{-r_{USD} \times T} \times N^{USD} \times \mathcal{N}(d_2)$
-\end{center}
-\onslide<2>\begin{center}
-$e^{-r_{USD} \times T} \times N^{EUR} \times \big[ F^{EUR/USD} \times \mathcal{N}(d_1)-K \times \mathcal{N}(d_2) \big]$
-\end{center}
-\onslide<3>\begin{center}
-$e^{-r_{EUR} \times T} \times N^{USD} \times \big[ \frac{1}{K} \times \mathcal{N}(-d_2)-F^{USD/EUR} \times \mathcal{N}(-d_1) \big]$
-\end{center}
-\end{overprint}
-avec:\\
-\begin{overprint}
-\onslide<1>\begin{align*}
-d_1&=\frac{\ln\left( \frac{N^{EUR}}{N^{USD}} S^{EUR/USD} \right)+(r_{EUR}-r_{USD}) \times T+\frac{1}{2}\sigma^2 T}{\sigma\sqrt{T}}\\
-d_2&=d_1-\sigma\sqrt{T}
-\end{align*}
-\onslide<2>\begin{align*}
-d_1&=\frac{\ln\left( \frac{F^{EUR/USD}}{K} \right) +\frac{1}{2}\sigma^2 T}{\sigma\sqrt{T}}\\
-d_2&=d_1-\sigma\sqrt{T}\\
-K&=\frac{N^{USD}}{N^{EUR}}\\
-F&=S^{EUR/USD}e^{(r^{USD}-r^{EUR}) \times T}
-\end{align*}
-\onslide<3>\begin{align*}
-d_1&=\frac{\ln\left( F^{USD/EUR} \times K \right) +\frac{1}{2}\sigma^2 T}{\sigma\sqrt{T}}\\
-d_2&=d_1-\sigma\sqrt{T}\\
-K&=\frac{N^{USD}}{N^{EUR}}\\
-F&=S^{USD/EUR}e^{(r^{EUR}-r^{USD}) \times T}
-\end{align*}
-\end{overprint}
-\end{frame}
-
-\begin{frame}{Quantile de la loi normale - Sens de la volatilité}
-Au bout d'un an un actif financer de volatilité $\sigma$ a plus d'\textbf{une} chance sur \textbf{deux} de s'être écartée de $\pm \sigma$ de sa valeur initiale.
-\begin{center}
-\begin{figure}[h]
-\FIG{1}{11cm}{figures/loinormale_quantile.png}
-\end{figure}
-\end{center}
-\end{frame}
-
-
-\begin{frame}{Option de change - Jargon}
-\Huge
-\begin{overprint}
-\onslide<1>\begin{center}EUR/USD=1.0878\fontsize{60}{70}\selectfont\textcolor{white}{0}\huge\end{center}
-\onslide<2>\begin{center}EUR/USD=1.0\fontsize{60}{70}\selectfont8\huge78\end{center}
-\onslide<3>\begin{center}EUR/USD=1.087\fontsize{60}{70}\selectfont8\huge\end{center}
-\vspace{0.5cm}
-\end{overprint}
-\large
-\begin{overprint}
-\onslide<1>On considère 5 chiffres significatifs dans un taux de change.
-\onslide<2>Le 3\up{ème} chiffre en partant de la gauche est appelé \textbf{"Big Figure"}.
-\onslide<3>Le 5\up{ème} chiffre en partant de la gauche est appelé \textbf{"pips"}.
-\end{overprint}
-\end{frame}
-
-
-\begin{frame}{Option de change - Cotation de la prime - Exercice}
-On considère les mêmes données de marché que précédemment avec une volatilité $\sigma=12\%$ et on cote la prime d'une option de change de maturité 1 an qui reçoit \textcolor{red}{100 millions d'euros} contre \textcolor{blue}{109 millions de dollars}.\\
-\vspace{0.5cm}
-Les 6 modes de cotations:\\
-\vspace{0.5cm}
-
-\begin{tabular}{|l|c|l|}
-\hline
-Prix en dollars&\visible<2->{$p$}&\visible<2->{5.488 Mios USD}\\
-Prix en euros&\visible<3->{$\frac{p}{S}$}&\visible<3->{5.045 Mios EUR}\\
-Prix en \% de nominal dollar&\visible<4->{$\frac{p}{N \times K}$}& \visible<4->{5.0353\%}\\
-Prix en \% de nominal euro&\visible<5->{$\frac{p}{N \times S}$}& \visible<5->{5.0453\%}\\
-Prix en dollars pips per EUR&\visible<6->{$\frac{p\times 1e^4}{N}$}& \visible<6->{548.85 USD pips}\\
-Prix en euros pips per USD&\visible<7->{$\frac{p\times 1e^4}{S \times N \times K}$}& \visible<7->{462.87 EUR pips}\\
-\hline
-\end{tabular}
-\end{frame}
-
-\begin{frame}{Option de change - Delta de change}
-Le Delta de change $\delta$ est le pourcentage du nominal en devise 1 qu'il faut vendre pour couvrir la position de change.
-\[
-\delta=\frac{\partial p}{\partial S}=e^{-r^{EUR} \times T} \times \mathcal{N}(d_1)
-\]
-On peut exprimer de façon équivalente le delta de change en pourcentage du nominal $\delta^{reverse}$ en devise 2:
-\[
-\delta^{reverse}=-\frac{\delta \times S}{K}
-\]
-\\
-\visible<2>{\textcolor{red}{\textbf{Attention ces formules supposent que la prime est payée en dollars!!!}}}
-\end{frame}
-
-\begin{frame}{Option de change - Delta de change}
-Dans le cas où la prime est payée en euros il faut ajuster le delta du paiement de la prime.\\
-\vspace{0.5cm}
-\begin{center}
-\begin{tabular}{|c|c|c|c|}
-\hline
-delta ccy&premium ccy&Formule&Delta\\
-\hline
-\% EUR & EUR & \visible<2->{$\delta-p^{EUR}$} &\visible<4->{49.19\%}\\
-\% EUR & USD & $\delta$ &\visible<3->{54.23\%}\\
-\% USD & EUR & \visible<2->{$-\frac{(\delta-p^{EUR})S}{K}$} &\visible<4->{-49.09\%}\\
-\% USD & USD & $-\frac{\delta}{K}$&\visible<3->{-54.12\%}\\
-\hline
-\end{tabular}
-\end{center}
-\visible<3->{La prime est égale à 5.0452\% du nominal EUR.}
-\end{frame}
-
-\begin{frame}{Option de change - Delta de change}
-Comment évolue le delta de change en fonction du strike ?
-\begin{figure}
-\begin{center}
-%\begin{overprint}
-\FIG{1}{11cm}{figures/fxopt-delta-0.png}
-\FIG{2}{11cm}{figures/fxopt-delta-1.png}
-\FIG{3}{11cm}{figures/fxopt-delta-2.png}
-\FIG{4}{11cm}{figures/fxopt-delta-3.png}
-\FIG{5}{11cm}{figures/fxopt-delta-4.png}
-%\end{overprint}
-\end{center}
-\end{figure}
-\end{frame}
-
-\begin{frame}
-\small
-\frametitle{\textbf{USDJPY} - Exercice}
-Refaire tous les calculs précédent avec ces nouvelles données.\\
-\vspace{0.5cm}
-As of 2 Avril 2015:
-\begin{center}
-\begin{tabular}{|l|l|l|l|}
-\hline
-\textbf{Notation} & \textbf{Description} & \textbf{Formule} & \textbf{Valeur} \\
-\hline
-\hline
-$\delta$ & Maturité du forward & $T-(t+2D)$ & 1 an = 365 jours \\
-$R^{EUR}$ & Taux zéro coupon dollar. &  & 0.11\% \\
-$R^{USD}$ & Taux zéro coupon yen. &  & 0.45\% \\
-$S$ & Taux de change spot. &  & 119.76 \\
-$m$ & Marge de basis. &  & 0.39\% \\
-\hline
-\end{tabular}
-\end{center}
-\end{frame}
-
-\begin{frame}
-\frametitle{Besoin d'un client américain.}
-Un client américain doit payer son fournisseur français dans 1 an \textbf{\textcolor{red}{100 millions d'euros}}.\\ 
-\uncover<2->{Pour des raisons "stratégiques" il ne souhaite pas couvrir cette position de change à terme.\\}
-\vspace{0.5cm}
-\uncover<3->{Cependant il souhaite tout de même se protéger contre des mouvements trop importants du taux de change.\\
-Ainsi:\\
-\begin{itemize}
-\item Il veut payer au \textbf{maximum} \textbf{\textcolor{blue}{119 millions de dollars}}.
-\item A l'inverse il veut payer au \textbf{minimum} \textbf{\textcolor{blue}{99 millions de dollars}}.
-\end{itemize}}
-\vspace{0.5cm}
-\uncover<4->{\textbf{Comment statisfaire le besoin de notre client ?}}
-
-\vspace{0.5cm}
-\end{frame}
-
-
 
 \end{document}
