@@ -3,6 +3,22 @@
 \usepackage[utf8]{inputenc}
 \usepackage{multicol}
 \usepackage{bm}
+\usepackage{tikz}
+\usepackage{bbm}
+\usepackage{cancel}
+\usetikzlibrary{shapes,matrix,positioning,fit,decorations.pathmorphing,calc}
+
+\tikzset{cancel/.style={
+        cross out,
+        draw,
+        red,
+        ultra thick,
+        fit=#1,
+        },
+    wave/.style={
+        decorate,decoration={snake,post length=0.1cm, pre length=0.1cm,amplitude=1mm,
+        segment length=0.5cm},thick}
+}
 
 \usepackage{graphicx}
 \graphicspath{{./Forex_Credit_Equity/}}
@@ -12,7 +28,7 @@
 \newcommand{\FIGSCALE}[3]{\includegraphics<#1>[resolution=72dpi]{#3}}
 
 \usetheme{Warsaw}
-\title[Produits dérivés actions,change et credit]{Produits dérivés de change}
+\title[Produits dérivés de change et de credit]{Produits dérivés de change}
 \author{Richard Guillemot}
 \institute{DIFIQ}
 \date{27 Mars 2016}
@@ -347,21 +363,6 @@ Pour chacune des 2 opérations et pour le portefeuille total de la banque:\\
 \\
 \vspace{0.5cm}
 Pour se couvrir, \uncover<2>{il faut vendre 12.90 millions de dollars.}
-\end{frame}
-
-\begin{frame}{Option de change}
-Une \textbf{option de change} est un contrat asymétrique par lequel à une date future T:\\
-\vspace{0.5cm}
-\begin{overprint}
-\onslide<1>\begin{itemize}
-\item La contrepartie \textbf{vendeuse s'engage} à recevoir un montant \textcolor{red}{$N^1$ en devise 1} contre \textcolor{blue}{$N^2$ en devise 2}.
-\item La contrepartie \textbf{acheteuse peut à son gré} recevoir un nominal \textcolor{blue}{$N^2$ en devise 2} contre un nominal \textcolor{red}{$N^1$ en devise 1}.
-\end{itemize}
-\onslide<2>\begin{itemize}
-\item La contrepartie \textbf{vendeuse s'engage} à recevoir un montant \textcolor{red}{$N^{EUR}$ en euro} contre \textcolor{blue}{$N^{USD}$ en dollar}.
-\item La contrepartie \textbf{acheteuse peut à son gré} recevoir un nominal \textcolor{blue}{$N^{USD}$ en dollar} contre un nominal \textcolor{red}{$N^{EUR}$ en euro}.
-\end{itemize}
-\end{overprint}
 \end{frame}
 
 \end{document}

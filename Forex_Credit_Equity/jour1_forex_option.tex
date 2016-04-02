@@ -12,7 +12,7 @@
 \newcommand{\FIGSCALE}[3]{\includegraphics<#1>[resolution=72dpi]{#3}}
 
 \usetheme{Warsaw}
-\title[Produits dérivés actions,change et credit]{Options de change}
+\title[Produits dérivés de change et de credit]{Options de change}
 \author{Richard Guillemot}
 \institute{DIFIQ}
 \date{27 Mars 2016}
@@ -156,8 +156,8 @@ Prix en dollars&\visible<2->{$p$}&\visible<2->{5.937 Mios USD}\\
 Prix en euros&\visible<3->{$\frac{p}{S}$}&\visible<3->{5.320 Mios EUR}\\
 Prix en \% de nominal dollar&\visible<4->{$\frac{p}{N \times K}$}& \visible<4->{5.3015\%}\\
 Prix en \% de nominal euro&\visible<5->{$\frac{p}{N \times S}$}& \visible<5->{5.3196\%}\\
-Prix en dollars pips per EUR&\visible<6->{$\frac{p\times 1e^4}{N}$}& \visible<6->{593.77 USD pips}\\
-Prix en euros pips per USD&\visible<7->{$\frac{p\times 1e^4}{S \times N \times K}$}& \visible<7->{474.96 EUR pips}\\
+Prix en dollars pips per EUR&\visible<6->{$\frac{p\times 1e^{-4}}{N}$}& \visible<6->{593.77 USD pips}\\
+Prix en euros pips per USD&\visible<7->{$\frac{p\times 1e^{-4}}{S \times N \times K}$}& \visible<7->{474.96 EUR pips}\\
 \hline
 \end{tabular}
 \end{frame}
@@ -186,7 +186,7 @@ delta ccy&premium ccy&Formule&Delta\\
 \% EUR & EUR & \visible<2->{$\delta-p^{EUR}$} &\visible<4->{50.79\%}\\
 \% EUR & USD & $\delta$ &\visible<3->{56.11\%}\\
 \% USD & EUR & \visible<2->{$-\frac{(\delta-p^{EUR})S}{K}$} &\visible<4->{-50.62\%}\\
-\% USD & USD & $-\frac{\delta}{K}$&\visible<3->{-55.92\%}\\
+\% USD & USD & $-\frac{\delta S}{K}$&\visible<3->{-55.92\%}\\
 \hline
 \end{tabular}
 \end{center}
