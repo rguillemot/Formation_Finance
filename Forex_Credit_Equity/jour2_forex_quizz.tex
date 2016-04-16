@@ -16,7 +16,7 @@
 \title[Produits dérivés de change et de credit]{Produits dérivés de change}
 \author{Richard Guillemot}
 \institute{DIFIQ}
-\date{5 Mai 2015}
+\date{12 Avril 2016}
 
 \begin{document}
 
@@ -25,8 +25,29 @@
 \end{frame}
 
 \begin{frame}
+\frametitle{Quizz 1 et 2 - Taux de change}
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{FX} & 2 Avril 2015 & 24 Mars 2016  \\
+\hline
+\hline
+EURUSD & 1.0879 & 1.1162  \\
+GBPUSD &  1.4829 & 1.4142  \\
+USDCHF & 0.9581 & 0.9767  \\
+USDJPY & 119.76 & 112.64  \\
+USDCNY & 6.1396 & 6.5125  \\
+\hline		
+\end{tabular}
+\end{center}
+\vspace{0.5cm}
+Quelles sont les devises qui se sont appréciées contre le dollars ?\\
+Quelles sont les devises qui se sont appréciées contre l'euro ?\\
+\end{frame}
+
+\begin{frame}
 \small
-\frametitle{Données de marché EURUSD au 2 Avril 2015}
+\frametitle{Données de marché EURUSD  24 Mars 2016}
 \begin{center}
 \begin{tabular}{|l|l|l|l|}
 \hline
@@ -34,23 +55,50 @@
 \hline
 \hline
 $\delta$ & Maturité du forward & $T-(t+2D)$ & 1 an = 365 jours \\
-$R^{EUR}$ & Taux zéro coupon euro. &  & 0.01\% \\
-$R^{USD}$ & Taux zéro coupon dollar. &  & 0.45\% \\
-$S$ & Taux de change spot. &  & 1.08785 \\
-$m$ & Marge de basis. &  & 27 bps \\
+$R^{EUR}$ & Taux zéro coupon euro. &  & -0.027\% \\
+$R^{USD}$ & Taux zéro coupon dollar. &  & 0.81\% \\
+$S$ & Taux de change spot. &  & 1.1162 \\
+$m$ & Marge de basis. &  & 29 bps \\
 \hline
 \end{tabular}
 \end{center}
 \end{frame}
 
 \begin{frame}
-\frametitle{Quizz 7 - Opération au comptant.}
-Je vend au comptant 50 millions d'euros contre 54.4 millions de dollar: \\
+\frametitle{Quizz 4 - Carry Trade.}
+Une opération classique de carry trade consiste à emprunter en euro et à prêter en dollar.\\ 
+A partir de quel niveau de taux de change euro dollari, au terme de cette opérationi, cette opération est profitable ?\\
+\[
+\begin{split}
+&\text{1 millions \texteuro} \times \Big[0.27\%+0.81\%+[\frac{1.1182}{\text{??}}-1]\Big]\\
+&\geq\text{0 \texteuro}\\
+\end{split}
+\]
+\visible<2->{\[
+\text{EURUSD}\geq 1.1283
+\]}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Quizz 5 \& 6 - Forex basis ou marge de cross currency swap.}
+A quel taux emprunte en euro une banque américaine qui se finance en dollar ?\\
+\center \visible<2->{$-0.27\%-0.29\%=0.56\%$}\\
 \vspace{0.5cm}
-a) je perds 690 euros. \visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
-b) je gagne 6 900 euros. \visible<2->{\textcolor{green}{\textbf{VRAI}}} \\
-c) je perds 69 000 euros. \visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
-d) je perds 690 000 euros. \visible<2->{\textcolor{red}{\textbf{FAUX}}} \\
+A quel taux emprunte en dollar une banque européenne qui se finance en euro ?\\  
+\center \visible<2->{$0.81\%+0.29\%=1.10\%$}\\
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Quizz 7 - Opération au comptant.}
+Je vend au comptant 50 millions d'euros contre 55.815 millions de dollar: \\
+\vspace{0.5cm}
+a) je perds 448 euros. \visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
+b) je gagne 4 480 euros. \visible<2->{\textcolor{green}{\textbf{VRAI}}} \\
+c) je perds 44 800 euros. \visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
+d) je perds 448 000 euros. \visible<2->{\textcolor{red}{\textbf{FAUX}}} \\
 \vspace{0.5cm}
 \end{frame}
 
@@ -59,8 +107,8 @@ d) je perds 690 000 euros. \visible<2->{\textcolor{red}{\textbf{FAUX}}} \\
 \huge
 \[
 \begin{split}
-&\text{-50 millions \$}+\frac{\text{54.4 millions \$}}{1.08785}\\
-&=\text{6 894 \texteuro}\\
+&\text{-50 millions \$}+\frac{\text{55.815 millions \$}}{1.1162}\\
+&=\text{4 479 \texteuro}\\
 \end{split}
 \]
 \end{frame}
@@ -70,12 +118,12 @@ d) je perds 690 000 euros. \visible<2->{\textcolor{red}{\textbf{FAUX}}} \\
 \frametitle{Quizz 8 - Opération au comptant.}
 Par la suite le cour de l'euro dollar augmente de 1 figure: \\
 \vspace{0.5cm}
-a) je gagne 455 euros. \visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
-b) je perds 4 555 euros. \visible<2->{\textcolor{red}{\textbf{FAUX}}} \\
-c) je gagne 45 550 euros. \visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
-d) je perds 455 500 euros. \visible<2->{\textcolor{green}{\textbf{VRAI}}} \\
+a) je gagne 439 euros. \visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
+b) je perds 4 395 euros. \visible<2->{\textcolor{red}{\textbf{FAUX}}} \\
+c) je gagne 43 950 euros. \visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
+d) je perds 439 500 euros. \visible<2->{\textcolor{green}{\textbf{VRAI}}} \\
 \vspace{0.5cm}
-\uncover<2->{Le nouveau cour de l'euro dollar est de 1.09875}
+\uncover<2->{Le nouveau cour de l'euro dollar est de 1.1262}
 \end{frame}
 
 
@@ -84,8 +132,8 @@ d) je perds 455 500 euros. \visible<2->{\textcolor{green}{\textbf{VRAI}}} \\
 \huge
 \[
 \begin{split}
-&\frac{\text{54.4 millions \$}}{1.09785}-\frac{\text{54.4 millions \$}}{1.08785}\\
-&=\text{-455 498 \texteuro}\\
+&\frac{\text{55.815 millions \$}}{1.1162}-\frac{\text{55.815 millions \$}}{1.1262}\\
+&=\text{-439 531 \texteuro}\\
 \end{split}
 \]
 \end{frame}
@@ -93,12 +141,12 @@ d) je perds 455 500 euros. \visible<2->{\textcolor{green}{\textbf{VRAI}}} \\
 
 \begin{frame}
 \frametitle{Quizz 9 - Opération à terme.}
-Je vend à terme les 54.4 millions de dollars à un client. Je souhaite réaliser une marge de 50 000 euros. Quelle montant d'euros doit il donc me payer au terme de la transaction:\\
+Je vend à terme les 55.815 millions de dollars à un client. Je souhaite réaliser une marge de 50 000 euros. Quelle montant d'euros doit il donc me payer au terme de la transaction:\\
 \vspace{0.5cm}
-a) 49.110 millions d'euros. \visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
-b) 49.160 millions d'euros. \visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
-c) 49.210 millions d'euros. \visible<2->{\textcolor{green}{\textbf{VRAI}}}\\
-d) 49.260 millions d'euros.\visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
+a) 49.275 millions d'euros. \visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
+b) 49.325 millions d'euros. \visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
+c) 49.375 millions d'euros. \visible<2->{\textcolor{green}{\textbf{VRAI}}}\\
+d) 49.425 millions d'euros.\visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
 \vspace{0.5cm}
 \end{frame}
 
@@ -107,7 +155,7 @@ d) 49.260 millions d'euros.\visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
 \frametitle{Quizz 9 - Opération à terme.}
 \Large
 \[
-\frac{\textbf{X} \text{\texteuro}}{1+0.01\%-0.27\%}-\frac{54.4 \text{ millions } \$}{[1+0.45\%] \times 1.09785}=50 000 \text{\texteuro}
+\frac{\textbf{X} \text{\texteuro}}{1-0.27\%-0.29\%}-\frac{55.815 \text{ millions } \$}{[1+0.81\%] \times 1.1162}=50 000 \text{\texteuro}
 \]
 \end{frame}
 
@@ -115,10 +163,10 @@ d) 49.260 millions d'euros.\visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
 \frametitle{Quizz 10 - Position de change.}
 Quelle est la position de change de l'opération de change à terme précédente:\\
 \vspace{0.5cm}
-a) Long de 54.4 millions \$ et long de 49.210 millions \texteuro. \visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
-b) Short de 54.4 millions \$  et short de 49.210 millions \texteuro.\visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
-c) Long de 54.156 millions \$ et short 49.339 millions \texteuro.\visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
-d) Short de 54.156 millions \$ et long de 49.339 millions \texteuro.\visible<2->{\textcolor{green}{\textbf{VRAI}}}\\
+a) Long de 55.815 millions \$ et long de 49.375 millions \texteuro. \visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
+b) Short de 55.815 millions \$  et long de 49.375 millions \texteuro.\visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
+c) Long de 55.366 millions \$ et short 49.653 millions \texteuro.\visible<2->{\textcolor{red}{\textbf{FAUX}}}\\
+d) Short de 55.366 millions \$ et long de 49.653 millions \texteuro.\visible<2->{\textcolor{green}{\textbf{VRAI}}}\\
 \vspace{0.5cm}
 \end{frame}
 
@@ -127,16 +175,28 @@ d) Short de 54.156 millions \$ et long de 49.339 millions \texteuro.\visible<2->
 \Large
 \[
 \begin{split}
-N^{USD}&=\frac{-54.4 \text{ millions \$}}{1+[0.45\%]}\\
-N^{EUR}&=\frac{+49.210 \text{ millions \texteuro}}{1+[0.01\%-0.27\%]}\\
+N^{USD}&=\frac{-55.815 \text{ millions \$}}{1+[0.81\%]}\\
+N^{EUR}&=\frac{+49.375 \text{ millions \texteuro}}{1+[-0.27\%-0.29\%]}\\
 \end{split}
 \]
 \end{frame}
 
 \begin{frame}
+\frametitle{Quizz 10 bis}
+Si on vend 100 millons euro dans 1 an au taux spot au lieu d'utiliser le taux foward précedemment calculé:\\
+\vspace{0.5cm}
+a) On perd 1.37 millios d'euros \uncover<2>{\textcolor{green}{\textbf{VRAI}}}\\
+b) On gagne 137,7 kEUR \uncover<2>{\textcolor{red}{\textbf{FAUX}}}\\
+c) On perd 13.7 millions d'euros. \uncover<2>{\textcolor{red}{\textbf{FAUX}}}\\
+d) On gagne 137 kEUR. \uncover<2>{\textcolor{red}{\textbf{FAUX}}}\\
+\vspace{0.5cm}
+\uncover<2>{On emprunte à 0.81\% en dollars et on prête à -0.27\%  -0.29\% en euros !!!}
+\end{frame}
+
+\begin{frame}
 \small
 \frametitle{Question 11: Calculer le taux de change à terme USDJPY.}
-Données de marché USDJPY au 2 Avril 2015:\\
+Données de marché USDJPY au 24 Mars 2016:\\
 \begin{center}
 \begin{tabular}{|l|l|l|l|}
 \hline
@@ -144,14 +204,14 @@ Données de marché USDJPY au 2 Avril 2015:\\
 \hline
 \hline
 $\delta$ & Maturité du forward & $T-(t+2D)$ & 1 an = 365 jours \\
-$R^{USD}$ & Taux zéro coupon dollar. &  & 0.45\% \\
-$R^{USD}$ & Taux zéro coupon yen. &  & 0.11\% \\
-$S$ & Taux de change spot. &  & 119.76 \\
-$m$ & Marge de basis. &  & 39 bps \\
+$R^{USD}$ & Taux zéro coupon dollar. &  & 0.81\% \\
+$R^{USD}$ & Taux zéro coupon yen. &  & -0.08\% \\
+$S$ & Taux de change spot. &  & 112.64 \\
+$m$ & Marge de basis. &  & 56 bps \\
 \hline
 \end{tabular}
 \end{center}
-\uncover<2->{Le taux de change à terme USDJPY est de 118.89}
+\uncover<2->{Le taux de change à terme USDJPY est de 111.02}
 \end{frame}
 
 \begin{frame}
@@ -159,13 +219,13 @@ $m$ & Marge de basis. &  & 39 bps \\
 \LARGE
 \[
 \begin{split}
-F^{USDJPY}&=119.76 \times \frac{1+[0.11\%-0.39\%]}{1+0.45\%}\\
-&=118.89\\
+F^{USDJPY}&=112.64 \times \frac{1+[-0.08\%-0.56\%]}{1+0.81\%}\\
+&=111.02\\
 \end{split}
 \]
 \end{frame}
 
-\begin{frame}
+\begin{frame}<handout:0>
 \frametitle{Quizz 12: Options de change}
 On souhaite acheter à terme un montant en euro contre dollar à un taux prédéterminé.\\
 Si l'opération nous est défavorable on peut y renoncer.\\
@@ -179,14 +239,14 @@ d) On vend un put euro call dollar.\visible<2->{\textcolor{red}{\textbf{FAUX}}}\
 \vspace{0.5cm}
 \end{frame}
 
-\begin{frame}
+\begin{frame}<handout:0>
 \frametitle{Quizz 12: Options de change}
 \begin{center}
 \FIG{1}{9cm}{figures/fxopt-quizz-1.png}
 \end{center}
 \end{frame}
 
-\begin{frame}
+\begin{frame}<handout:0>
 \frametitle{Quizz 13: Options de change}
 On souhaite vendre à terme un montant en euro contre dollar à un taux prédéterminé.\\
 Si l'opération nous est défavorable on peut y renoncer.\\
@@ -201,7 +261,7 @@ d) On vend un put euro call dollar.\visible<2->{\textcolor{red}{\textbf{FAUX}}}\
 \end{frame}
 
 
-\begin{frame}
+\begin{frame}<handout:0>
 \frametitle{Quizz 13: Options de change}
 \begin{center}
 \FIG{1}{9cm}{figures/fxopt-quizz-2.png}
@@ -209,7 +269,7 @@ d) On vend un put euro call dollar.\visible<2->{\textcolor{red}{\textbf{FAUX}}}\
 \end{frame}
 
 
-\begin{frame}
+\begin{frame}<handout:0>
 \frametitle{Quizz 14: Options de change}
 On souhaite acheter à terme un montant en euro contre dollar à un taux prédéterminé.\\
 Si l'opération est défavorable à notre contrepartie elle peut y renoncer.\\
@@ -223,7 +283,7 @@ d) On vend un put euro call dollar.\visible<2->{\textcolor{green}{\textbf{VRAI}}
 \vspace{0.5cm}
 \end{frame}
 
-\begin{frame}
+\begin{frame}<handout:0>
 \frametitle{Quizz 14: Options de change}
 \begin{center}
 \FIG{1}{9cm}{figures/fxopt-quizz-3.png}
@@ -231,7 +291,7 @@ d) On vend un put euro call dollar.\visible<2->{\textcolor{green}{\textbf{VRAI}}
 \end{frame}
 
 
-\begin{frame}
+\begin{frame}<handout:0>
 \frametitle{Quizz 15: Options de change}
 On souhaite vendre à terme un montant en euro contre dollar à un taux prédéterminé.\\
 Si l'opération est défavorable à notre contrepartie elle peut y renoncer.\\
@@ -245,7 +305,7 @@ d) On vend un put euro call dollar.\visible<2->{\textcolor{red}{\textbf{FAUX}}}\
 \vspace{0.5cm}
 \end{frame}
 
-\begin{frame}
+\begin{frame}<handout:0>
 \frametitle{Quizz 15: Options de change}
 \begin{center}
 \FIG{1}{9cm}{figures/fxopt-quizz-4.png}
