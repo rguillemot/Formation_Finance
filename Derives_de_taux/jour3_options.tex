@@ -119,7 +119,7 @@ En l'absence d'opportunité d'arbitrage il existe une probabilité $Q$ où la va
 \]
 Par conséquent la valeur actuelle de l'actif est:
 \[
-	X_t=\mathbb{E}^Q_t[\color{red} e^{-\int_0^T r_sds} \color{black} X_T]
+	X_t=\mathbb{E}^Q_t[\color{red} e^{-\int_t^T r_sds} \color{black} X_T]
 \]
 Lorsque \color{red}\textbf{les taux sont stochastiques}\color{black}, on ne peut pas sortir le facteur d'actualisation de l'espérance!!!
 \end{frame}
@@ -155,7 +155,7 @@ qui correspond à 1 euro capitalisé jusqu'en t de façon continue.
 \vspace{0.5cm}\\
 \item La probabilité \textbf{forward-neutre} $Q^T$ est associée au numéraire:
 \[
-N_t=B(t,T)=\mathbb{E}^Q_t[e^{-\int_0^T r_s ds}]
+N_t=B(t,T)=\mathbb{E}^Q_t[e^{-\int_t^T r_s ds}]
 \]
 qui correspond à recevoir 1 euro en T.
 \end{itemize}
